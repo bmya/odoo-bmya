@@ -1,0 +1,67 @@
+document class nuevo.csv,nombre
+29,Factura de Inicio
+30,factura
+32,factura de venta bienes y servicios no afectos o exentos de IVA 35: Boleta
+33,Factura Electrónica
+34,Factura No Afecta o Exenta Electrónica
+35,Boleta
+38,Boleta exenta
+39,Boleta Electrónica
+40,Liquidación Factura
+41,Boleta Exenta Electrónica
+43,Liquidación-Factura Electrónica
+45,factura de compra
+46,Factura de Compra Electrónica
+50,Guía de Despacho
+52,Guía de Despacho Electrónica
+55,nota de débito
+56,Nota de Débito Electrónica
+60,nota de crédito
+61,Nota de Crédito Electrónica
+70,Boleta de Honorarios
+71,Boleta de Honorarios Electrónica
+101,Factura de exportación
+102,Factura de venta exenta a zona franca primaria (Res. Ex. N° 601 de 07.05.82)
+103,Liquidación
+104,Nota de débito de exportación
+105,Boleta liquidación (Res. Ex. N° 1423 del 23.12.76) Sólo en el resumen
+106,Nota de Crédito de exportación
+108,SRF Solicitud Registro de Factura
+109,Factura a turista (Res. Ex. N° 6428 de 06.12.93)
+110,Factura de Exportación Electrónica
+111,Nota de Débito de Exportación Electrónica
+112,Nota de Crédito de Exportación Electrónica
+500,Ajuste aumento Tipo de Cambio (código 500)
+501,Ajuste disminución Tipo de Cambio (código 501)
+801,Orden de Compra
+802,Nota de pedido
+803,Contrato
+804,Resolución
+805,Proceso ChileCompra
+806,Ficha ChileCompra
+807,DUS
+808,B/L (Conocimiento de embarque)
+809,AWB (Air Way Bill)
+810,MIC/DTA
+811,Carta de Porte
+812,Resolución del SNA donde califica Servicios de Exportación
+813,Pasaporte
+814,Certificado de Depósito Bolsa Prod. Chile.
+815,Vale de Prenda Bolsa Prod. Chile
+901,Factura de ventas a empresas del territorio preferencial ( Res. Ex. N°1057, del 25.04.85)
+902,Conocimiento de Embarque (Marítimo o aéreo)
+903,Documento único de Salida (DUS)
+904,Factura de Traspaso
+909,Facturas Venta Módulo ZF
+910,Solicitud Traslado Zona Franca (Z)
+911,Declaración de Ingreso a Zona Franca Primaria.
+914,Declaración de Ingreso Importación (DIN)
+919,Resumen ventas de nacionales pasajes sin Factura Sólo en el resumen
+920,Otros registros no documentados Aumenta débito Sólo en el resumen
+922,Otros registros. Disminuye débito. Sólo en el resumen
+924,Resumen ventas de pasajes internacionales sin Factura (Sólo en el resumen)
+76167053-0
+65347407
+
+
+content='auto, autos, vehiculo, vehiculos, vehículo, vehículos, moto, motos, chileauto, chileautos, chile, Chile
