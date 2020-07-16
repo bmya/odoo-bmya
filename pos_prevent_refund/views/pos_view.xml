@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_pos_form_prevent_refund">
+            <field name="name">pos_prevent_refund.button.refund</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header/button[@name='refund']" position="attributes">
+                    <attribute name="groups">pos_prevent_refund.group_pos_supervisor</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

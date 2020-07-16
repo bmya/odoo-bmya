@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2015  BMyA SA / Blanco Martin & Asociados
-#    (http://blancomartin.cl)
-#    All Rights Reserved.o
+#    Copyright (C) 2015  BMyA SA  (http://blancomartin.cl)
+#    All Rights Reserved.
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,26 +19,23 @@
 #
 ##############################################################################
 {
-    'name': 'Product Hide Tabs',
-    'version': '8.0.0.1.0',
-    'category': 'Products',
-    'sequence': 14,
-    'summary': 'Invoicing, Commercial, Partners',
-    'description': """
-Product Hide Tabs
-=================
-This is a security feature, in order to hide sale/inventory tabs in product
-form view, for all user groups except for stock manager.
-    """,
-    'author':  'Blanco Martin & Asociados',
+    "name": """POS Prevent Refund""",
+    'version': '8.0.1.0',
+    'category': 'Debug',
+    'sequence': 12,
+    'author':  'Blanco Martín & Asociados',
     'website': 'http://blancomartin.cl',
-    'images': [
-    ],
+    'license': 'AGPL-3',
+    'summary': '',
+    'description': '''
+POS Prevent Refund
+''',
     'depends': [
-        'stock',
+        'point_of_sale',
     ],
     'data': [
-        'views/product_view.xml',
+        'views/pos_view.xml',
+        'security/pos_prevent_refund_security.xml',
     ],
     'installable': True,
     'auto_install': False,
