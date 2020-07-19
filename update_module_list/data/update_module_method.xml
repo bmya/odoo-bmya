@@ -1,8 +1,6 @@
 <odoo>
-    <data noupdate="1">
-        <function
-            id="id_update_module"
-            model="base.module.update"
-            name="update_module"/>
-    </data>
+    <function
+        id="id_update_module"
+        model="base.module.update"
+        name="update_module"/>
 </odoo>
