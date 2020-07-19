@@ -1,6 +1,3 @@
 <odoo>
-    <function
-        id="id_update_module"
-        model="base.module.update"
-        name="update_module"/>
+    <function id="id_update_module" model="base.module.update" name="update_module"/>
 </odoo>
