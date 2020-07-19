@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <function id="id_update_module" model="base.module.update" name="update_module"/>
+    <data noupdate="1">
+        <function id="id_update_module" model="base.module.update" name="update_module"/>
+    </data>
 </odoo>
