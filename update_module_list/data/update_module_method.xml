@@ -1,0 +1,3 @@
+<odoo>
+    <function model="base.module.update" name="update_module"/>
+</odoo>
