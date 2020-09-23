@@ -21,6 +21,13 @@
                 <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
                 <attribute name="force_save">1</attribute>
             </field>
+            <xpath expr="//notebook/page/field[@name='child_ids']/form/sheet/group/group/div/div/field[@name='street2']" position="after">
+                <field name="city_id" domain="[('country_id', '=', country_id)]" class="oe_edit_only"
+                    placeholder="Comuna" style="width: 100%" options='{"no_create": True}'/>
+                <field name="real_city"
+                       attrs="{'readonly': [('country_id', '=', %(base.cl)d)], 'invisible': [('state_id', '!=', %(base.state_cl_13)d)]}"
+                       foce_save="1"/>
+            </xpath>
         </field>
     </record>
 
@@ -71,4 +78,8 @@
             </field>
         </field>
     </record>
+
+
+
+
 </odoo>
