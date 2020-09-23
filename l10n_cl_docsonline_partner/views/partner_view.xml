@@ -20,6 +20,15 @@
                 </field>
             </field>
         </record>
+        <record id="action_vat_search" model="ir.ui.view">
+            <field name="name">action_vat_search</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="vat"/>
+                </search>
+            </field>
+        </record>
     </data>
 </odoo>
 
