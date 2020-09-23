@@ -20,15 +20,18 @@
                 </field>
             </field>
         </record>
-        <record id="action_vat_search" model="ir.ui.view">
-            <field name="name">action_vat_search</field>
+
+        <record id="view_search_vat" model="ir.ui.view">
+            <field name="name">view_search_vat</field>
             <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
             <field name="arch" type="xml">
-                <search>
-                    <field name="vat"/>
-                </search>
+                <field name="name" position="after">
+                    <field string="RUT" name="vat"/>
+                </field>
             </field>
         </record>
+
     </data>
 </odoo>
 
