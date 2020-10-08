@@ -55,7 +55,7 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_partner_address_form_short_states_city_inherit">
+    <!--<record model="ir.ui.view" id="view_partner_address_form_short_states_city_inherit">
         <field name='name'>res.partner.address.form.states.city.inherit</field>
         <field name='model'>res.partner</field>
         <field name="inherit_id" ref="base.view_partner_short_form"/>
@@ -77,7 +77,7 @@
                 <attribute name="force_save">1</attribute>
             </field>
         </field>
-    </record>
+    </record>-->
 
 
 
