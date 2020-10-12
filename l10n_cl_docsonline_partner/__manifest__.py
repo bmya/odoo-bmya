@@ -12,6 +12,7 @@
         'l10n_cl_edi',
     ],
     'data': [
+        'security/ir.model.access.csv',
         'views/partner_view.xml',
         'data/ir.config_parameter.xml',
         'wizard/data_docsonline_view.xml',
