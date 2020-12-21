@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- this header can be used on any Chilean report -->
+    <template id="external_layout_bmya">
+        <style>
+            br{
+            line-height: 90%;
+            }
+        </style>
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id.sudo()"/>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"/>
+        </t>
+
+        <t t-if="company.external_report_layout == 'background'">
+            <t t-call="purchase_order_report.external_layout_background_bmya">
+                <t t-raw="0"/>
+            </t>
+        </t>
+        <t t-if="company.external_report_layout == 'boxed'">
+            <t t-call="purchase_order_report.external_layout_boxed_bmya">
+                <t t-raw="0"/>
+            </t>
+        </t>
+        <t t-if="company.external_report_layout == 'clean'">
+            <t t-call="purchase_order_report.external_layout_clean_bmya">
+                <t t-raw="0"/>
+            </t>
+        </t>
+        <t t-if="company.external_report_layout in (False, 'standard')">
+            <t t-call="purchase_order_report.external_layout_standard_bmya">
+                <t t-raw="0"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="custom_header_bmya">
+        <div class="header">
+            <div class="row">
+                <div class="col-xs-7">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <img height="120px;" t-if="company.logo"
+                                 t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" class="pull-left"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <span name="company_address" style="font-size: smaller" class="mt0 text-right"
+                                  t-field="company.activity_description"/>
+                            <br/>
+                            <span name="company_address2" style="font-size: smaller">
+                                <span t-field="company.street"/>
+                                <span t-field="company.street2"/>
+                                -<span t-field="company.city_id.name"/>,
+                                <span t-field="company.city"/>
+                                <br/>
+                                Teléfono
+                                <span t-field="company.phone"/>
+                                -
+                                <span t-field="company.email"/>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-5">
+                    <div class="row">
+                        <div class="col-xs-12 text-center"
+                             style="border-style: solid; border-width: thin; padding-left: 0px; padding-top:10px; padding:bottom: 10px;">
+                            <h4>RUT:
+                                <span t-esc="company.main_id_number"/>
+                            </h4>
+                            <div name="doc_data">
+                                <h4 name="doc_type">
+                                    <t t-esc="document_type"/>
+                                </h4>
+                                <h4 name="doc_number">
+                                    <t t-esc="document_number"/>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table class="table table-sm o_main_table">
+                                <thead>
+                                    <tr>
+                                        <th>Lugar</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Santiago, Chile</td>
+                                        <td>
+                                            <span t-field="o.date_order"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="custom_footer_bmya">
+        <div class="footer">
+
+            <div class="text-right" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4"/>
+                <div name="financial_infos"/>
+                <div class="text-muted">
+                    Pag:
+                    <span class="page"/>
+                    /
+                    <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_purchaseorder_document_bmya">
+        <t t-call="purchase_order_report.external_layout_bmya">
+            <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+            <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                <t t-if="o.state not in ['draft','sent']">
+                    <t t-set="document_type" t-value="'ORDEN DE COMPRA'"/>
+                </t>
+                <t t-if="o.state in ['draft','sent']">
+                    <t t-set="document_type" t-value="'SOLICITUD DE COTIZACION'"/>
+                </t>
+            </t>
+            <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                <t t-set="document_type" t-value="'FACTURA PROFORMA'"/>
+            </t>
+            <t t-set="document_number" t-value="o.name"/>
+            <br/>
+            <br/>
+            <br/>
+
+            <div class="page">
+                <table class="table table-sm o_main_table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span style="font-size: xx-small;">Proveedor:</span>
+                                <br/>
+                                <span t-field="o.partner_id"/>
+                            </th>
+                            <th>
+                                <span style="font-size: xx-small;">RUT:</span>
+                                <br/>
+                                <span t-field="o.partner_id.main_id_number"/>
+                            </th>
+                            <th>
+                                <span style="font-size: xx-small;">Proyecto:</span>
+                                <br/>
+                                <span t-field="o.analytic_line_id.name"/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <span style="font-size: xx-small;">Dirección:</span>
+                                <br/>
+                                <span t-field="o.partner_id.street"/>
+                            </th>
+                            <th>
+                                <span style="font-size: xx-small;">Comuna:</span>
+                                <br/>
+                                <span t-field="o.partner_id.city_id"/>
+                            </th>
+                            <th>
+                                <span style="font-size: xx-small;">Teléfono/Fax:</span>
+                                <br/>
+                                <span t-field="o.partner_id.phone"/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <span style="font-size: xx-small;">AT: Sr(a):</span>
+                                <br/>
+                                <span t-field="o.purchase_contact_id.name"/>
+                            </th>
+                            <th>
+                                <span style="font-size: xx-small;">Email:</span>
+                                <br/>
+                                <span t-field="o.purchase_contact_id.email"/>
+                            </th>
+                            <th>
+                                <span style="font-size: xx-small;">Realizado por:</span>
+                                <br/>
+                            </th>
+                            <!-- footer <th>
+                                <span style="font-size: xx-small;">Forma de Pago:</span>
+                                <br/>
+                                <span t-field="o.payment_term_id"/>
+                            </th>-->
+                            <!-- esto lo ponemos en cada item <th>
+                                <span style="vertical-align: top;font-size: xx-small;">Centro(s) de Costo:</span>
+                                <br/>
+                                <span t-esc="o.order_line.filtered(lambda x: x.account_analytic_id).mapped('account_analytic_id.name')"/>
+                            </th>-->
+                        </tr>
+                    </thead>
+                </table>
+
+
+                <!--<table class="table table-sm o_main_table">
+                    <thead>
+                        <tr>
+                            <th rowspan="3" class="text-center"
+                                style="vertical-align: top;width: 7%; font-size: xx-small;">Entrega
+                            </th>
+                            <th colspan="3" style="width: 93%;">
+                                Horario
+                                <br/>
+                                08:00 A 17:30 HS.
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" style="width: 93%;">
+                                <span style="font-size: xx-small;">Dirección:</span>
+                                <br/>
+                                <span t-field="o.picking_type_id.warehouse_id.partner_id.street"/>
+                                <t t-if="o.picking_type_id.warehouse_id.partner_id.street2">
+                                    <span t-field="o.picking_type_id.warehouse_id.partner_id.street2"/>
+                                </t>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="width: 31%;">
+                                <span style="font-size: xx-small;">Comuna:</span>
+                                <br/>
+                                <span t-field="o.picking_type_id.warehouse_id.partner_id.city_id.name"/>
+                            </th>
+                            <th style="width: 31%;">
+                                <span style="font-size: xx-small;">Ciudad:</span>
+                                <br/>
+                                <span t-field="o.picking_type_id.warehouse_id.partner_id.city"/>
+                            </th>
+                            <th name="scheduled_date" style="width: 31%;">
+                                <span style="font-size: xx-small;">Entrega Prevista:</span>
+                                <br/>
+                                <span t-esc="o.order_line.mapped('date_planned')[0]"/>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>-->
+
+                <div class="oe_structure"/>
+
+                <table class="table table-sm o_main_table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>Pos.</strong>
+                            </th>
+                            <th>
+                                <strong>Código</strong>
+                            </th>
+                            <th>
+                                <strong>Descripción del Artículo</strong>
+                            </th>
+                            <!--<th><strong>Impuestos</strong></th>-->
+                            <!--<th class="text-center"><strong>Fecha req.</strong></th>-->
+                            <th class="text-right">
+                                <strong>Cant</strong>
+                            </th>
+                            <t t-if="document_type=='ORDEN DE COMPRA'">
+                                <th class="text-right">
+                                    <strong>Precio Unitario</strong>
+                                </th>
+                                <th class="text-right">
+                                    <strong>Total</strong>
+                                </th>
+                                <th class="text-right">
+                                    <strong>Fecha Entr</strong>
+                                </th>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="pos" t-value="1"/>
+                        <tr t-foreach="o.order_line" t-as="line">
+                            <td>
+                                <span t-esc="pos"/>
+                            </td>
+                            <td>
+                                <span t-field="line.product_id.default_code"/>
+                            </td>
+                            <td>
+                                <span t-field="line.name"/>
+                            </td>
+                            <!--<td>
+                                <span t-esc="', '.join(map(lambda x: x.name, line.taxes_id))"/>
+                            </td>-->
+                            <td class="text-right">
+                                <span t-esc="int(line.product_qty)"/>
+                                <!--<span t-field="line.product_uom.name" groups="uom.group_uom"/>-->
+                            </td>
+                            <t t-if="document_type=='ORDEN DE COMPRA'">
+                                <td class="text-right">
+                                    <span t-field="line.price_unit"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.price_subtotal"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;xºº&quot;: o.currency_id}"/>
+                                </td>
+                                <td class="text-center">
+                                    <span t-field="line.date_planned"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <div id="total" class="row justify-content-end">
+                    <div name="approve" class="col-xs-8">
+                        <p>Responsable de Adquisiciones:</p>
+                        <br/>
+                        <span t-field="o.create_uid"/>
+                    </div>
+                    <div class="col-xs-4">
+                        <t t-if="document_type=='ORDEN DE COMPRA'">
+                            <table class="table table-sm">
+                                <tr class="border-black">
+                                    <td>
+                                        <strong>Subtotal</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-field="o.amount_untaxed"
+                                              t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Impuestos</td>
+                                    <td class="text-right">
+                                        <span t-field="o.amount_tax"
+                                              t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                    </td>
+                                </tr>
+                                <tr class="border-black o_total">
+                                    <td>
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-field="o.amount_total"
+                                              t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </t>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="oe_structure">
+                    <table class="table table-sm o_main_table">
+                        <tbody>
+                            <tr>
+                                <td class="text-left" style="vertical-align: top; width: 7%; font-size: xx-small;">
+                                    <!--<div class="col-xs-6"
+                                         style="border-style: solid; border-width: thin; padding-left: 0px; padding-top:0px; padding:bottom: 0px; padding-right: 0px;">-->
+                                    <p>
+                                        PARA LA CANCELACIÓN, SERÁ REQUISITO INDISPENSABLE REMITIR LA FACTURA DENTRO DEL MES
+                                        DE SU EMISIÓN, SEÑALANDO EL NÚMERO DE ORDEN DE COMPRA, LA HES O HEM POR CADA FACTURA
+                                        QUE CONTENGA LA ORDEN DE COMPRA Y ADJUNTAR LA GUÍA DE DESPACHO.
+                                    </p>
+                                    <!--</div>-->
+                                    <!--<br />-->
+                                </td>
+                                <td class="text-left" style="vertical-align: top; width: 7%; font-size: xx-small;">
+                                    OBSERVACIONES
+                                    <br/>
+                                    <p t-field="o.notes"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td/>
+                                <td colspan="2" class="text-left"
+                                    style="vertical-align: top; width: 7%; font-size: xx-small;">
+                                    <span style="font-size: xx-small;">CONDICIONES COMERCIALES:</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="vertical-align: top; width: 7%; font-size: xx-small;">
+                                    Material Puesto en:
+                                    <br/>
+                                    <span t-field="o.delivery_address"/>
+                                </td>
+                                <td class="text-left" style="vertical-align: top; width: 7%; font-size: xx-small;">
+                                    Forma de Pago:
+                                    <br/>
+                                    <span t-field="o.payment_term_id"/>,
+                                    <span t-field="o.payment_term_id.note"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--<t t-if="document_type=='ORDEN DE COMPRA'">
+                    <h4>FAVOR ADJUNTAR A FACTURA COPIA DE ESTA ORDEN DE COMPRA</h4>
+                </t>-->
+            </div>
+        </t>
+    </template>
+
+    <template id="new_purchase_order_report" inherit_id="purchase.report_purchaseorder">
+        <t t-call="purchase.report_purchaseorder_document" t-lang="o.partner_id.lang" position="replace">
+            <t t-call="purchase_order_report.report_purchaseorder_document_bmya" t-lang="o.partner_id.lang"/>
+        </t>
+    </template>
+
+    <template id="external_layout_background_bmya">
+        <t t-call="purchase_order_report.custom_header_bmya"/>
+        <div class="article o_report_layout_background">
+            <t t-raw="0"/>
+        </div>
+        <t t-call="purchase_order_report.custom_footer_bmya"/>
+    </template>
+
+    <template id="external_layout_boxed_bmya">
+        <t t-call="purchase_order_report.custom_header_bmya"/>
+        <div class="article o_report_layout_boxed">
+            <t t-raw="0"/>
+        </div>
+        <t t-call="purchase_order_report.custom_footer_bmya"/>
+    </template>
+
+    <template id="external_layout_clean_bmya">
+        <t t-call="purchase_order_report.custom_header_bmya"/>
+        <div class="article o_report_layout_clean">
+            <t t-raw="0"/>
+        </div>
+        <t t-call="purchase_order_report.custom_footer_bmya"/>
+    </template>
+
+    <template id="external_layout_standard_bmya">
+        <t t-call="purchase_order_report.custom_header_bmya"/>
+        <div class="article o_report_layout_standard">
+            <t t-raw="0"/>
+        </div>
+        <t t-call="purchase_order_report.custom_footer_bmya"/>
+    </template>
+
+</odoo>

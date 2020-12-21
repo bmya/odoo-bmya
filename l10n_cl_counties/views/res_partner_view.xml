@@ -20,6 +20,7 @@
             <field name="state_id" position="attributes">
                 <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
                 <attribute name="force_save">1</attribute>
+                <attribute name="domain">[('country_id', '=', country_id), ('type', '=', 'normal'), ('id', '!=', id)]</attribute>
             </field>
             <xpath expr="//notebook/page/field[@name='child_ids']/form/sheet/group/group/div/div/field[@name='street2']" position="after">
                 <field name="city_id" domain="[('country_id', '=', country_id)]" class="oe_edit_only"
