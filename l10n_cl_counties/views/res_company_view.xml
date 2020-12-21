@@ -13,8 +13,8 @@
                 <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
             </field>
             <field name="state_id" position="attributes">
-                <attribute name="domain">[('country_id', '=', country_id), ('type', '=', 'normal'), ('id', '!=', id)]</attribute>
                 <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
+                <!--<attribute name="domain">[('country_id', '=', country_id), ('type', '=', 'normal'), ('id', '!=', id)]</attribute>-->
             </field>
         </field>
     </record>

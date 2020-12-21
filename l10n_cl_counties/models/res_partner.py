@@ -10,12 +10,9 @@ class ResPartner(models.Model):
         except:
             return False
 
-    country_id = fields.Many2one(
-        "res.country",
-        default=_default_country)
-    state_id = fields.Many2one(
-        "res.country.state", 'Ubication',
-        domain="[('country_id', '=', country_id), ('type', '=', 'normal'), ('id', '!=', id)]", readonly=True)
+    country_id = fields.Many2one("res.country", default=_default_country)
+    state_id = fields.Many2one("res.country.state", 'Ubication',
+                               domain="[('country_id', '=', country_id), ('type', '=', 'normal'), ('id', '!=', id)]", readonly=True)
     real_city = fields.Char('City')
 
     @api.onchange('city_id', 'city', 'state_id')
