@@ -6,21 +6,15 @@
         <field name="model">res.company</field>
         <field name="arch" type="xml">
             <field name="street2" position="after">
-                <field name="city_id" domain="[('country_id', '=', country_id)]"
-                       attrs="{'readonly': False}" force_save="1"
-                       placeholder="Comuna" style="width: 100%" options='{"no_create": True}'/>
-                <field name="real_city"
-                       attrs="{'readonly': [('country_id', '=', %(base.cl)d)], 'invisible': [('state_id', '!=', %(base.state_cl_13)d)]}"
-                       force_save="1"/>
+                <field name="city_id" domain="[('country_id', '=', country_id)]" attrs="{'readonly': False}" placeholder="Comuna" style="width: 100%" options='{"no_create": True}'/>
+                <field name="real_city"  attrs="{'readonly': [('country_id', '=', %(base.cl)d)], 'invisible': [('state_id', '!=', %(base.state_cl_13)d)]}" />
             </field>
             <field name="city" position="attributes">
                 <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
-                <attribute name="force_save">1</attribute>
             </field>
             <field name="state_id" position="attributes">
                 <attribute name="domain">[('country_id', '=', country_id), ('type', '=', 'normal'), ('id', '!=', id)]</attribute>
                 <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
-                <attribute name="force_save">1</attribute>
             </field>
         </field>
     </record>
