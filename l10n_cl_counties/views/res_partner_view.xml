@@ -7,27 +7,20 @@
         <field name='type'>form</field>
         <field name='arch' type='xml'>
             <field name="street2" position="after">
-                <field name="city_id" domain="[('country_id', '=', country_id)]" class="oe_edit_only"
+                <field name="city_id" domain="[('country_id', '=', country_id)]"
                     placeholder="Comuna" style="width: 100%" options='{"no_create": True}'/>
-                <field name="real_city"
-                       attrs="{'readonly': [('country_id', '=', %(base.cl)d)], 'invisible': [('state_id', '!=', %(base.state_cl_13)d)]}"
-                       foce_save="1"/>
+                <field name="real_city" attrs="{'readonly': [('country_id', '=', %(base.cl)d)], 'invisible': [('state_id', '!=', %(base.state_cl_13)d)]}"/><br />
             </field>
             <field name="city" position="attributes">
-                <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
-                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'invisible': [('country_id', '=', %(base.cl)d)]}</attribute>
             </field>
             <field name="state_id" position="attributes">
                 <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
-                <attribute name="force_save">1</attribute>
-                <attribute name="domain">[('country_id', '=', country_id), ('type', '=', 'normal'), ('id', '!=', id)]</attribute>
             </field>
             <xpath expr="//notebook/page/field[@name='child_ids']/form/sheet/group/group/div/div/field[@name='street2']" position="after">
-                <field name="city_id" domain="[('country_id', '=', country_id)]" class="oe_edit_only"
+                <field name="city_id" domain="[('country_id', '=', country_id)]"
                     placeholder="Comuna" style="width: 100%" options='{"no_create": True}'/>
-                <field name="real_city"
-                       attrs="{'readonly': [('country_id', '=', %(base.cl)d)], 'invisible': [('state_id', '!=', %(base.state_cl_13)d)]}"
-                       foce_save="1"/>
+                <field name="real_city" attrs="{'readonly': [('country_id', '=', %(base.cl)d)], 'invisible': [('state_id', '!=', %(base.state_cl_13)d)]}"/><br />
             </xpath>
         </field>
     </record>
@@ -39,48 +32,16 @@
         <field name='type'>form</field>
         <field name='arch' type='xml'>
             <field name="street2" position="after">
-                <field name="city_id" domain="[('country_id', '=', country_id)]" class="oe_edit_only"
-                    placeholder="Comuna" style="width: 100%" options='{"no_create": True}'/>
-                <field name="real_city"
-                       attrs="{'readonly': [('country_id', '=', %(base.cl)d)], 'invisible': [('state_id', '!=', %(base.state_cl_13)d)]}"
-                       foce_save="1"/>
+                <field name="city_id" domain="[('country_id', '=', country_id)]" placeholder="Comuna" style="width: 100%" options='{"no_create": True}'/>
+                <field name="real_city" attrs="{'readonly': [('country_id', '=', %(base.cl)d)], 'invisible': [('state_id', '!=', %(base.state_cl_13)d)]}"/><br />
             </field>
             <field name="city" position="attributes">
-                <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
-                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'invisible': [('country_id', '=', %(base.cl)d)]}</attribute>
             </field>
             <field name="state_id" position="attributes">
                 <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
-                <attribute name="force_save">1</attribute>
             </field>
         </field>
     </record>
-
-    <!--<record model="ir.ui.view" id="view_partner_address_form_short_states_city_inherit">
-        <field name='name'>res.partner.address.form.states.city.inherit</field>
-        <field name='model'>res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_short_form"/>
-        <field name='type'>form</field>
-        <field name='arch' type='xml'>
-            <field name="street2" position="after">
-                <field name="city_id" domain="[('country_id', '=', country_id)]" class="oe_edit_only"
-                    placeholder="Comuna" style="width: 100%" options='{"no_create": True}'/>
-                <field name="real_city"
-                       attrs="{'readonly': [('country_id', '=', %(base.cl)d)], 'invisible': [('state_id', '!=', %(base.state_cl_13)d)]}"
-                       foce_save="1"/>
-            </field>
-            <field name="city" position="attributes">
-                <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
-                <attribute name="force_save">1</attribute>
-            </field>
-            <field name="state_id" position="attributes">
-                <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
-                <attribute name="force_save">1</attribute>
-            </field>
-        </field>
-    </record>-->
-
-
-
 
 </odoo>
