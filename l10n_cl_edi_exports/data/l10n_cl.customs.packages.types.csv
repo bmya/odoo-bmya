@@ -1,0 +1,58 @@
+id,code,name,description
+1_powder,1,Powder,Solid bulk. Small particles (powder)
+2_grains,2,Grains,Solid bulk. Grain particles (grains)
+3_nodules,3,Nodules,Solid bulk. Big particles (nodules)
+4_liquid,4,Liquid,Liquid bulk
+5_gas,5,Gas,Gas buld
+11_tube,11,Tube,Tubes
+12_cylinder,12,Cylinder,Cylinders
+13_roll,13,Roll,Rolls
+16_bar,16,Bar,Bars
+17_ingote,17,Ingote,Ingotes
+18_frustum,18,Frustum,Frustrum or trunks
+21_case,21,Case,Case
+22_carton box,22,Carton box,Carton box
+23_bale,23,Bale,Bales
+24_trunk,24,Trunk,Trunks
+26_frame,26,Frame,Frame
+27_tray,27,Tray,Trays
+28_woodenbox,28,WoodenBox,Boxes made of wood
+29_tinbox,29,TinBox,Tin boxes
+30_notwoodenbox,30,NotWoodenBox,Not wooden boxes
+31_gasbottle,31,GasBottle,Gas bottle
+32_bottle,32,Bottle,Bottle
+33_cage,33,Cage,Cages
+34_jerrycan,34,Jerrycan,Jerrycan
+35_jab,35,Jab,Jabs
+36_basket,36,Basket,Baskets
+37_keg,37,Keg,Kegs
+38_tun,38,Tun,Tuns
+39_pipes,39,Pipes,Pipes
+41_jar,41,Jar,Jars
+42_flask,42,Flask,Flasks
+43_carboy,43,Carboy,Carboys
+44_barrel,44,Barrel,Barrells
+45_drum,45,Drum,Drums
+46_keg,46,Keg,Kegs
+47_tin,47,Tin,Tins
+51_cube,51,Cube,Cubes
+61_package,61,Package,Package
+62_sac,62,Sac,Sacs
+63_baggage,63,Baggage,Baggage units
+64_bag,64,Bag,Bag
+65_bullet,65,Bullet,Bullet
+66_net,66,Net,Net
+75_refcontainer,75,RefContainer,Refrigerated containers
+77_pond,77,Pond,Ponds 
+78_non-refcontainer,78,Non-refContainer,Non-refrigerated containers
+80_pallet,80,Pallet,Pallets
+81_board,81,Board,Boards
+82_sheet,82,Sheet,Sheets
+83_reel,83,Reel,Reels
+85_automotive,85,Automotive,Automotive units
+88_machinery,88,Machinery,Machinery
+89_plate,89,Plate,Plate
+90_tied,90,Tied,Tied
+91_coil,91,Coil,Coils
+92_other,92,Other,Other type
+99_w/opackage,99,W/Opackage,Without package
