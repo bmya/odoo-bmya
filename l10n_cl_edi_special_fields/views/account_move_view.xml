@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_invoice_form" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="name">account.move.special.fields.form</field>
+        <field name="inherit_id" ref="l10n_cl_edi.view_invoice_form" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="invoice_partner_id"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
