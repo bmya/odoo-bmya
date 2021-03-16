@@ -5,7 +5,7 @@
             <Receptor position="replace">
                 <Receptor>
                     <RUTRecep t-esc="'55555555-5' if move.partner_id._l10n_cl_is_foreign() else format_vat(move.commercial_partner_id.vat)"/>
-                    <RznSocRecep t-esc="format_length(move.partner_invoice_id.name, 100)"/>
+                    <RznSocRecep t-esc="format_length(move.partner_invoice_id.name or '' + '(' + move.partner_invoice_id.commercial_partner_id or '' + ')', 100)"/>
                     <Extranjero t-if="move.partner_id._l10n_cl_is_foreign()">
                         <NumId t-esc="move.partner_id.vat"/>
                         <IdAdicRecep t-esc="format_length(move.partner_id.country_id.name or move.commercial_partner_id.country_id.name, 20)"/>
@@ -22,13 +22,19 @@
                 move.partner_invoice_id.l10n_cl_company_xml_identification or move.partner_id.commercial_partner_id.l10n_cl_company_xml_identification, 60)"/>
             </CdgVendedor>
             <RUTRecep t-esc="'55555555-5' if move.partner_id._l10n_cl_is_foreign() else format_vat(move.commercial_partner_id.vat)" position="after">
-                <CdgIntRecep t-if="not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="format_length(
-                move.partner_id.l10n_cl_partner_xml_identification or
-                move.partner_id.commercial_partner_id.l10n_cl_partner_xml_identification, 20)"/>
+                    <CdgIntRecep t-if="not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="format_length(
+                        move.partner_id.l10n_cl_partner_xml_identification or
+                        move.partner_id.commercial_partner_id.l10n_cl_partner_xml_identification, 20)"/>
             </RUTRecep>
             <CmnaRecep t-esc="move._l10n_cl_get_comuna_recep()" position="after">
-                <CiudadPostal t-if="not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="format_length(move.partner_id.zip or move.partner_id.commercial_partner_id.zip, 20)"/>
+                    <CiudadPostal t-if="not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="format_length(move.partner_invoice_id.zip or '', 20)"/>
             </CmnaRecep>
+        </template>
+
+        <template id="dd_subtemplate" inherit_id="l10n_cl_edi.dd_template">
+            <RSR position="replace">
+                    <RSR t-esc="format_length(move.partner_invoice_id.name or '' + '(' + move.partner_invoice_id.commercial_partner_id or '' + ')', 40)"/>
+            </RSR>
         </template>
     </data>
 </odoo>
