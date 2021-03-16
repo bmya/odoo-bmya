@@ -6,8 +6,8 @@
         <field name="name">account.move.special.fields.form</field>
         <field name="inherit_id" ref="l10n_cl_edi.view_invoice_form" />
         <field name="arch" type="xml">
-            <field name="partner_id" position="after">
-                <field name="invoice_partner_id"/>
+            <field name="partner_shipping_id" position="before">
+                <field name="partner_invoice_id"/>
             </field>
         </field>
     </record>
