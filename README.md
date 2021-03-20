@@ -15,14 +15,6 @@ Los siguientes son módulos que se han refactorizado o incorporado nuevos para e
 |addon                           |version    |summary|
 |--------------------------------|-----------|-------|
 
-## Installation
- 
-### Dependencies
-
-    sudo pip install -r requirements.txt
-
-If you don't have Pip, find it here: http://pypi.python.org/pypi/pip
-
 ## Contributing
 We follow these guidelines and advice:
 
