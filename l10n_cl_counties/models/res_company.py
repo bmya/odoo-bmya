@@ -9,7 +9,7 @@ class ResCompany(models.Model):
                                  default=lambda self: self.env.ref('base.cl'))
     state_id = fields.Many2one("res.country.state", related='partner_id.state_id', string='Ubication',
         domain="[('country_id', '=', country_id), ('type', '=', 'normal'), ('id', '!=', id)]")
-    real_city = fields.Char(related='partner_id.real_city', string='City')
+    real_city = fields.Char(related='partner_id.real_city', string='City.')
 
     @api.onchange('city_id', 'city', 'state_id')
     def _change_city_province(self):

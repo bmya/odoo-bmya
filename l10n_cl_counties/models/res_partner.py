@@ -16,7 +16,7 @@ class ResPartner(models.Model):
     state_id = fields.Many2one(
         "res.country.state", 'Ubication',
         domain="[('country_id', '=', country_id), ('type', '=', 'normal'), ('id', '!=', id)]", readonly=True)
-    real_city = fields.Char('City')
+    real_city = fields.Char('City.')
 
     @api.onchange('city_id', 'city', 'state_id')
     def _change_city_province(self):
