@@ -6,8 +6,6 @@ class AccountMove(models.Model):
 
     partner_invoice_id = fields.Many2one(
         'res.partner', string='Dirección de Facturación',
-        readonly=True, required=True,
-        states={'draft': [('readonly', False)]},
         domain="['|', ('company_id', '=', False), ('company_id', '=', company_id), ('parent_id', '=', partner_id)]", )
 
     @api.onchange('partner_id')
