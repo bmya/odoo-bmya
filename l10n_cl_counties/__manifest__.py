@@ -6,6 +6,7 @@
     "website": "http://blancomartin.cl",
     "category": "Localization/Geopolitical Distribution",
     "depends": [
+        "l10n_cl",
         "base_address_city",
     ],
     "data": [

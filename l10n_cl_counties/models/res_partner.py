@@ -15,6 +15,14 @@ class ResPartner(models.Model):
         string='Ubication', domain="[('country_id', '=', country_id), ('type', '=', 'normal')]")
     real_city = fields.Char(compute='_change_real_city_province', string='City.')
     city = fields.Char(compute='_change_city_province', string='City', store=True, readonly=False)
+    country_code = fields.Char(related='country_id.code', string='Country ID')
+    company_country_code = fields.Char(compute='_get_company_country_code', string='Country ID')
+
+    @api.depends('country_id', 'company_id')
+    def _get_company_country_code(self):
+        for record in self:
+            if record.company_id.country_id.code == 'CL' or self.env.company.country_id.code == 'CL':
+                record.company_country_code = 'CL'
 
     @api.depends('country_id', 'state_id', 'city_id')
     def _change_real_city_province(self):

@@ -7,16 +7,19 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <field name="name" position="after">
+
                     <button name="press_to_update" type="object" class="btn-link"
                             help="Actualizar desde DocumentosOnline"
-                            attrs="{'invisible': [('vat', '=', False)]}">
+                            attrs="{'invisible': [('vat', '=', False), ('country_code', '!=', 'CL'), ('company_country_code', '!=', 'CL')]}">
                         <i title="Actualizar" role="img" aria-label="Actualizar" class="fa fa-address-card"/>
                     </button>
+
                     <button name="call_wizard" type="object" class="btn-link"
                             help="Buscar en DocumentosOnline"
-                            attrs="{'invisible': [('vat', '!=', False)]}">
+                            attrs="{'invisible': [('vat', '!=', False), ('country_code', '!=', 'CL'), ('company_country_code', '!=', 'CL')]}">
                         <i title="Buscar" role="img" aria-label="Buscar" class="fa fa-address-card-o"/>
                     </button>
+
                 </field>
             </field>
         </record>
@@ -26,9 +29,11 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_res_partner_filter"/>
             <field name="arch" type="xml">
+
                 <field name="name" position="after">
                     <field string="RUT" name="vat"/>
                 </field>
+
             </field>
         </record>
 

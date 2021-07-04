@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record model="ir.ui.view" id="view_partner_form_states_city_inherit">
         <field name='name'>res.partner.form.states.city.inherit</field>
         <field name='model'>res.partner</field>
@@ -40,6 +41,21 @@
             </field>
             <field name="state_id" position="attributes">
                 <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">res.partner.placeholders.l10n_cl.form</field>
+        <field name="inherit_id" ref="l10n_cl.view_move_form"/>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <field name="l10n_cl_sii_taxpayer_type" position="before">
+                <field name="country_code" invisible="1"/>
+                <field name="company_country_code" invisible="1"/>
+            </field>
+            <field name="l10n_cl_sii_taxpayer_type" position="attributes">
+                <attribute name="attrs">{'readonly': [('parent_id', '!=', False)], 'invisible': [('country_code', '!=', 'CL'), ('company_country_code', '!=', 'CL')]}</attribute>
             </field>
         </field>
     </record>

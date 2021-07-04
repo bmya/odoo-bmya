@@ -10,6 +10,7 @@
     'summary': '',
     'depends': [
         'l10n_cl_edi',
+        'l10n_cl_counties',
     ],
     'data': [
         'security/ir.model.access.csv',
