@@ -6,7 +6,7 @@
     'sequence': 12,
     'author':  'Blanco Martín & Asociados',
     'website': 'http://blancomartin.cl',
-    'license': 'AGPL-3',
+    'license': 'LGPL-3',
     'summary': '',
     'depends': [
         'l10n_cl_edi',
