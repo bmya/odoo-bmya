@@ -8,8 +8,8 @@
             <xpath expr="//notebook/page[@id='other_tab']/group/group/field[@name='fiscal_position_id']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="//group/field[@name='invoice_vendor_bill_id']" position="after">
-                <field name="fiscal_position_id"/>
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="fiscal_position_id" invisible="0"/>
             </xpath>
         </field>
     </record>
