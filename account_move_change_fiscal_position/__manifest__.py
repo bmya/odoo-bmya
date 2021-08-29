@@ -1,6 +1,6 @@
 {
     'name': 'Recalc Taxes with Fiscal Position',
-    'version': '1.0.1',
+    'version': '1.0',
     'category': 'Invoicing',
     'description': """
 Fixes the need of taxes recalculation when fiscal position is changed.

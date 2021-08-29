@@ -23,6 +23,8 @@ class ResPartner(models.Model):
         for record in self:
             if record.company_id.country_id.code == 'CL' or self.env.company.country_id.code == 'CL':
                 record.company_country_code = 'CL'
+            else:
+                record.company_country_code = ''
 
     @api.depends('country_id', 'state_id', 'city_id')
     def _change_real_city_province(self):
