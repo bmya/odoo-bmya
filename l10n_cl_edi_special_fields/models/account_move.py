@@ -21,5 +21,5 @@ class AccountMove(models.Model):
 
     def _l10n_cl_get_comuna_recep(self):
         if self.partner_invoice_id.state_id.name:
-            return self._format_length(self.partner_invoice_id.state_id.name)
+            return self._format_length(self.partner_invoice_id.state_id.name, 20)
         return super()._l10n_cl_get_comuna_recep()
