@@ -13,6 +13,9 @@ class AccountMove(models.Model):
     def _onchange_partner(self):
         self.partner_invoice_id = self.partner_id
 
+    def _format_length(self, text, text_len):
+        return text and text[:text_len] or ''
+
     def _default_invoice_partner(self):
         return self.partner_id
 
