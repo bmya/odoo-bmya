@@ -4,6 +4,7 @@
 {
     'name': 'Chile - Expenses Fix',
     'version': "1.0",
+    'license': 'LGPL-3',
     'description': """
 Chilean expenses fix. When installing hr_expense application it fixes the Journal Type to allow registration of
 expenses in miscellaneous Journals.
