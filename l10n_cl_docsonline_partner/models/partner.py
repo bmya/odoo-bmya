@@ -186,20 +186,6 @@ class PartnerDataSII(models.Model):
                 _logger.info(partner_odoo_data)
                 wizard_obj_data.create(partner_odoo_data)
 
-        """
-        partner_list = [
-            {
-                'name': 'nombre 1',
-                'vat': '76201224-3'
-            },
-            {
-                'name': 'nombre 2',
-                'vat': '76201517-K'
-            },
-        ]
-        for lines in partner_list:
-            wizard_obj_data.create(lines)
-        """
         response = {
             'type': 'ir.actions.act_window',
             'name': _('Select a partner from a list'),
@@ -225,7 +211,7 @@ class PartnerDataSII(models.Model):
                     return
             except:
                 return
-        self.l10n_cl_sii_taxpayer_type = '1'  # default
+        self.l10n_cl_sii_taxpayer_type = '1'
         self.l10n_latam_identification_type_id = self.env.ref('l10n_cl.it_RUT')
         try:
             rut = str(int(self.vat.replace('.', '').replace('-', '')[:-1]))
