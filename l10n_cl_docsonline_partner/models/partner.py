@@ -242,7 +242,7 @@ class PartnerDataSII(models.Model):
             raise UserError('Docsonline: Se produjo un error en la consulta')
         if 'error' in partner_values:
             _logger.warning('DocsOnline error: %s' % partner_values['error'])
-            raise UserError('No pudo obtener datos de www.documentosonline.cl: %s' % partner_values.get('error'))
+            raise UserError('No se encontró información en la base de datos del SII: %s' % partner_values.get('error'))
         _logger.info('rut input: %s, pv: %s, rut %s' % (rut_input, partner_values, rut))
         if rut not in partner_values:
             raise UserError('Datos no encontrados. Intente con búsqueda en www.documentosonline.cl')
