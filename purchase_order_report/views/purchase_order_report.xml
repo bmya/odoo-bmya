@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <span name="company_address" style="font-size: smaller" class="mt0 text-right"
-                                  t-field="company.activity_description"/>
+                                  t-field="company.l10n_cl_activity_description"/>
                             <br/>
                             <span name="company_address2" style="font-size: smaller">
                                 <span t-field="company.street"/>
