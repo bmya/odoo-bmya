@@ -53,12 +53,12 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <span name="company_address" style="font-size: smaller" class="mt0 text-right"
-                                  t-field="company.activity_description"/>
+                                  t-field="company.l10n_cl_activity_description"/>
                             <br/>
                             <span name="company_address2" style="font-size: smaller">
                                 <span t-field="company.street"/>
                                 <span t-field="company.street2"/>
-                                -<span t-field="company.city_id.name"/>,
+                                -<span t-field="company.city"/>,
                                 <span t-field="company.city"/>
                                 <br/>
                                 Teléfono
@@ -417,11 +417,11 @@
         </t>
     </template>
 
-    <template id="new_sale_order_report" inherit_id="sale.report_saleorder">
+    <!--<template id="new_sale_order_report" inherit_id="sale.report_saleorder">
         <t t-call="sale.report_saleorder_document" t-lang="o.partner_id.lang" position="replace">
             <t t-call="sale_order_report.report_saleorder_document_bmya" t-lang="o.partner_id.lang"/>
         </t>
-    </template>
+    </template>-->
 
     <template id="external_layout_background_bmya">
         <t t-call="sale_order_report.custom_header_bmya"/>
