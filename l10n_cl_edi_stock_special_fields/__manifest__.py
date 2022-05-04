@@ -12,7 +12,8 @@ Agrega Campos Especiales en el modelo stock
     'website': 'http://blancomartin.cl',
     'depends': [
         'l10n_cl_edi_stock',
-        'delivery'
+        'delivery',
+        'fleet'
     ],
     'data': [
         'views/stock_picking.xml'
