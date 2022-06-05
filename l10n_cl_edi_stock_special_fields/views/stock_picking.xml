@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_especial_field_form_inherit" model="ir.ui.view">
+        <field name="name">stock_picking_especial_field.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='carrier_id']" position="after">
+                <field name="vehicle" attrs="{'required':[('transport_type','=', '2')], 'invisible':[('transport_type','!=','2')]}"/>
+                <field name="chofer" attrs="{'required':[('transport_type','=', '2')], 'invisible':[('transport_type','!=','2')]}"/>
+                 <field name="patente" attrs="{'required':[('transport_type','in', ['2'])]}"/>
+            </xpath>
+            <xpath expr="//field[@name='move_type']" position="after">
+                <field name="transport_type"/>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="contact_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
