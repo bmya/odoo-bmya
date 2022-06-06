@@ -9,7 +9,7 @@ from itertools import compress
 
 import requests
 from odoo import _, api, fields, models
-from odoo.exceptions import Warning as UserError
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 tax_resp_category = {'1': '1',  '2': '2', 'ND': '1'}
