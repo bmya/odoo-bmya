@@ -16,7 +16,7 @@ class ResPartner(models.Model):
     real_city = fields.Char(compute='_change_real_city_province', string='City.')
     city = fields.Char(compute='_change_city_province', string='City', store=True, readonly=False)
     country_code = fields.Char(related='country_id.code', string='Country ID')
-    company_country_code = fields.Char(compute='_get_company_country_code', string='Country ID')
+    company_country_code = fields.Char(compute='_get_company_country_code', string='Country-ID')
 
     @api.depends('country_id', 'company_id')
     def _get_company_country_code(self):
