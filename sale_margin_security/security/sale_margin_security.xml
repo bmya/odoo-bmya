@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_margin_security.group_sale_margin_view" model="res.groups">
+        <field name="name">Salesman allow to see margins</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>

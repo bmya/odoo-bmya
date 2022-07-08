@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sale_margin_sale_order" model="ir.ui.view">
+            <field name="name">sale.order.margin.security</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_margin.sale_margin_sale_order"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='margin']" position="attributes">
+                    <attribute name="groups">sale_margin_security.group_sale_margin_view</attribute>
+                </xpath>
+                <xpath expr="//field[@name='margin']" position="attributes">
+                    <attribute name="groups">sale_margin_security.group_sale_margin_view</attribute>
+                </xpath>
+                <xpath expr="//field[@name='margin_percent']" position="attributes">
+                    <attribute name="groups">sale_margin_security.group_sale_margin_view</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

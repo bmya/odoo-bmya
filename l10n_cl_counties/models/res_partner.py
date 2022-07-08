@@ -28,21 +28,24 @@ class ResPartner(models.Model):
 
     @api.depends('country_id', 'state_id', 'city_id')
     def _change_real_city_province(self):
-        if self.country_id != self.env.ref('base.cl'):
-            self.real_city = False
-        if self.state_id == self.env.ref('base.state_cl_13'):
-            self.real_city = 'Santiago'
-        else:
-            self.real_city = self.city_id.name
+        for record in self:
+            if record.country_id != record.env.ref('base.cl'):
+                record.real_city = False
+            if record.state_id == record.env.ref('base.state_cl_13'):
+                record.real_city = 'Santiago'
+            else:
+                record.real_city = record.city_id.name
 
     @api.depends('country_id', 'state_id', 'city_id')
     def _change_city_province(self):
-        if self.country_id != self.env.ref('base.cl'):
-            return
-        self.city = self.city_id.name
+        for record in self:
+            if record.country_id != record.env.ref('base.cl'):
+                return
+            record.city = record.city_id.name
 
     @api.depends('country_id', 'city_id')
     def _change_state_province(self):
-        if self.country_id != self.env.ref('base.cl'):
-            return
-        self.state_id = self.city_id.state_id.parent_id
+        for record in self:
+            if record.country_id != record.env.ref('base.cl'):
+                return
+            record.state_id = record.city_id.state_id.parent_id
