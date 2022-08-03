@@ -10,7 +10,7 @@
             'base64'
         ]
     },
-    'license': 'LGPL-3',
+    'license': 'OPL-1',
     'price': 48.00,
     'currency': 'EUR',
     'test': [],

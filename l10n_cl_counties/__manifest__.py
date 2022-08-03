@@ -2,7 +2,7 @@
     "name": "Chile Localization Regions, Cities and Counties",
     "version": "1.2.0",
     "author": "Blanco Martín & Asociados",
-    "license": "LGPL-3",
+    'license': "LGPL-3",
     "website": "http://blancomartin.cl",
     "category": "Localization/Geopolitical Distribution",
     "depends": [
