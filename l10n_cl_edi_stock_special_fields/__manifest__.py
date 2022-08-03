@@ -2,7 +2,7 @@
     "name": """Chile - Stock Special Fields """,
     'version': '15.0.0',
     'category': 'Localization/Chile',
-    "license": "OEEL-1",
+    'license': "OPL-1",
     'sequence': 12,
     'author':  'Blanco Martín & Asociados',
     'description': """
