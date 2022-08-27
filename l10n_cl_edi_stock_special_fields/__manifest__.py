@@ -1,6 +1,6 @@
 {
     "name": """Chile - Stock Special Fields """,
-    'version': '15.0.0',
+    'version': '15.0.1',
     'category': 'Localization/Chile',
     "license": "OEEL-1",
     'sequence': 12,
@@ -16,6 +16,7 @@ Agrega Campos Especiales en el modelo stock
         'fleet'
     ],
     'data': [
+        'views/res_partner_view.xml',
         'views/stock_picking.xml'
     ],
     'installable': True,

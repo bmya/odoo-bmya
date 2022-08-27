@@ -18,13 +18,12 @@ class StockPicking(models.Model):
         'fleet.vehicle',
         string="Vehículo",
         readonly=False,
-        states={'done': [('readonly', True)]},
     )
     chofer = fields.Many2one(
         'res.partner',
         string="Chofer",
         readonly=False,
-        states={'done': [('readonly', True)]},
+        domain=[('is_driver', '=', True)],
     )
     patente = fields.Char(
         string="Patente",
