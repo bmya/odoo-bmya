@@ -23,7 +23,6 @@ class StockPicking(models.Model):
         'res.partner',
         string="Chofer",
         readonly=False,
-        domain=[('is_driver', '=', True)],
     )
     patente = fields.Char(
         string="Patente",
