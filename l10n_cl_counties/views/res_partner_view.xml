@@ -23,6 +23,9 @@
                     placeholder="Comuna" style="width: 100%" options='{"no_create": True}'/>
                 <field name="real_city" attrs="{'readonly': [('country_id', '=', %(base.cl)d)], 'invisible': [('state_id', '!=', %(base.state_cl_13)d)]}"/><br />
             </xpath>
+            <xpath expr="//field[@name='child_ids']/form//field[@name='state_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('country_id', '=', %(base.cl)d)]}</attribute>
+            </xpath>
         </field>
     </record>
 
