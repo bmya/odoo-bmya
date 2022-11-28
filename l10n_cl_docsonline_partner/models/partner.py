@@ -102,7 +102,6 @@ class PartnerDataSII(models.Model):
         if len(activities_list1) > 0:
             activities_list = activities_list1
         # partner_odoo_data['partner_activities_ids'] = [(6, 0, activities_list)]
-        _logger.info('partner_odoo_data %s' % partner_odoo_data)
         list_partner_data.append(partner_odoo_data)
         return list_partner_data
 
@@ -235,7 +234,6 @@ class PartnerDataSII(models.Model):
         if r.status_code != 200:
             _logger.info('Error al obtener datos del contribuyente: ')
             raise UserError('DocsOnline: %s' % r)
-        _logger.info('Data: %s' % r.text)
         try:
             partner_values = json.loads(r.text)['result']
         except KeyError:
@@ -243,11 +241,9 @@ class PartnerDataSII(models.Model):
         if 'error' in partner_values:
             _logger.warning('DocsOnline error: %s' % partner_values['error'])
             raise UserError('No pudo obtener datos de www.documentosonline.cl: %s' % partner_values.get('error'))
-        _logger.info('rut input: %s, pv: %s, rut %s' % (rut_input, partner_values, rut))
         if rut not in partner_values:
             raise UserError('Datos no encontrados. Intente con búsqueda en www.documentosonline.cl')
         partner_odoo_data = self._process_dol_data(partner_values[rut], rut)[0]
-        _logger.info('partner_odoo_data %s' % partner_odoo_data)
         for k in controlled_fields:
             if getattr(self, k):
                 try:

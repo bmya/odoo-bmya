@@ -15,7 +15,7 @@
                     </div>
                     <footer>
                         <button string="Confirm Overwrite" name="pick_partner" type="object" class="oe_highlight" />
-                        of
+                        or
                         <button string="Confirm Without Overwrite Name or Address" name="pick_partner_protect" type="object"/>
                         or
                         <button string="Cancel" class="oe_link" special="cancel"/>
