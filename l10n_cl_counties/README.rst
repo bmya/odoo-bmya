@@ -9,12 +9,12 @@ l10n_cl_counties
 
 New module for Chilean locations
 --------------------------------
-Odoo 13.0, in its base implementation, has incorporated the 16 regions of Chile, which can be selected through the
-"State" field. The "City" field has been reserved to place the "comunas" (counties) information in it, for simplicity
-and taking into account that the value it acquires from the communes, despite being mandatory in the Electronic
-invoicing is not a field that has to contain a value controlled by the SII. However, aware of the importance of
-communes in the geopolitical specification of Chile, we have modified this new version of our module,
-(which exists since version 8.0) to maintain full compatibility with the new Odoo 13.0 implementation.
+Since version 13.0, Odoo has incorporated the 16 regions of Chile in its base implementation, which can be selected
+through the "State" field. The "City" field has been reserved to place the "comunas" (counties) information in it, for
+simplicity and taking into account that the value it acquires from the communes, despite being mandatory in the
+Electronic invoicing is not a field that has to contain a value controlled by the SII. However, aware of the importance
+of communes in the geopolitical specification of Chile, we have modified this new version of our module, (which exists
+since version 8.0) to maintain full compatibility with the Odoo 13.0 and later implementations.
 
 It contains:
 - 346 communes (counties), from Aysén to Zapallar.
@@ -26,13 +26,13 @@ invoice implementation of Odoo.
 
 Nuevo Módulo para Ubicaciones Geográficas en Chile
 --------------------------------------------------
-Odoo 13.0, en su implementación base, ha incorporado las 16 regiones de Chile, las cuales pueden ser seleccionadas
-mediante el campo "Estado" y se ha reservado el campo "Ciudad" para colocar en éste la información de las comunas,
-por simplicidad y tomando en cuenta que el valor que adquiere de las comunas, a pesar de ser obligatorio en la
-facturación electrónica, no es un campo que tenga que contener un valor controlado por el SII.
-Sin embargo, Concientes de lo importante que son las comunas en la especificación geopolítica de Chile, hemos modificado
-esta nueva versión de nuestro módulo, (el cual existe desde la versión 8.0) para que mantenga total compatibilidad con
-la nueva modalidad de implementación de Odoo 13.0
+Desde la versión 13.0, en su implementación base Odoo ha incorporado las 16 regiones de Chile, las cuales pueden ser
+seleccionadas mediante el campo "Estado" y se ha reservado el campo "Ciudad" para colocar en éste la información de las
+comunas, por simplicidad y tomando en cuenta que el valor que adquiere de las comunas, a pesar de ser obligatorio en la
+facturación electrónica, no es un campo que tenga que contener un valor controlado por el SII. Sin embargo, Concientes
+de lo importante que son las comunas en la especificación geopolítica de Chile, hemos modificado esta nueva versión de
+nuestro módulo, (el cual existe desde la versión 8.0) para que mantenga total compatibilidad con la modalidad de
+implementación de Odoo 13.0 y versiones posteriores.
 
 Contiene:
 - 346 comunas, desde Aysén hasta Zapallar
