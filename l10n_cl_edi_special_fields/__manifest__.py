@@ -17,7 +17,6 @@ Agrega Campos Especiales a los XML
     ],
     'data': [
         'views/partner_view.xml',
-        'views/account_move_view.xml',
         'template/dte_template.xml',
     ],
     'installable': True,
