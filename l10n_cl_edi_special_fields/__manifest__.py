@@ -2,7 +2,7 @@
     "name": """Chile - Legacy Special Fields """,
     'version': '2.0.',
     'category': 'Localization/Chile',
-    'license': 'OPL-1',
+    'license': 'LGPL-3',
     'icon': '/l10n_cl_partner_extra_xml_identification/static/description/icon.png',
     'sequence': 12,
     'author':  'Blanco Martín & Asociados',
