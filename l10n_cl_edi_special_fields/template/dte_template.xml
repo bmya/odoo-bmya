@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<odoo>
+    <data>
+        <template id="dte_subtemplate" inherit_id="l10n_cl_partner_extra_xml_identification.dte_subtemplate">
+            <Receptor position="replace">
+                <Receptor>
+                    <RUTRecep t-esc="'55555555-5' if move.partner_id._l10n_cl_is_foreign() else format_vat(move.commercial_partner_id.vat)"/>
+                    <RznSocRecep t-esc="format_length((move.partner_invoice_id.name or '') + ' - ' + move.partner_invoice_id.commercial_partner_id.name or '', 100)"/>
+                    <Extranjero t-if="move.partner_id._l10n_cl_is_foreign()">
+                        <NumId t-esc="move.partner_id.vat"/>
+                        <IdAdicRecep t-esc="format_length(move.partner_id.country_id.name or move.commercial_partner_id.country_id.name, 20)"/>
+                    </Extranjero>
+                    <GiroRecep t-if="not move.partner_id._l10n_cl_is_foreign() and not move.l10n_latam_document_type_id._is_doc_type_export() and not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="format_length(move.partner_id.l10n_cl_activity_description, 40)"/>
+                    <Contacto t-esc="format_length(move.partner_invoice_id.phone, 80)"/>
+                    <CorreoRecep t-if="(move.partner_invoice_id.email or move.commercial_partner_id.l10n_cl_dte_email or move.partner_id.email or move.partner_id.l10n_cl_dte_email) and not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="move.commercial_partner_id.l10n_cl_dte_email or move.partner_id.l10n_cl_dte_email or move.commercial_partner_id.email or move.partner_id.email"/>
+                    <DirRecep t-esc="format_length(move.partner_invoice_id.street or move.commercial_partner_id.street or '' + ' ' + move.partner_invoice_id.street2 or move.commercial_partner_id.street2 or '', 70)"/>
+                    <CmnaRecep t-esc="move._l10n_cl_get_comuna_recep()"/>
+                </Receptor>
+            </Receptor>
+            <CdgVendedor t-if="not move.l10n_latam_document_type_id._is_doc_type_voucher() and move.user_id" t-esc="format_length(move.user_id.name, 60)" position="replace">
+                <CdgVendedor t-if="not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="format_length(
+                move.partner_invoice_id.l10n_cl_company_xml_identification or move.partner_id.commercial_partner_id.l10n_cl_company_xml_identification, 60)"/>
+            </CdgVendedor>
+            <CmnaRecep t-esc="move._l10n_cl_get_comuna_recep()" position="after">
+                    <CiudadPostal t-if="not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="format_length(move.partner_invoice_id.zip or '', 20)"/>
+            </CmnaRecep>
+        </template>
+
+        <template id="dd_subtemplate" inherit_id="l10n_cl_edi.dd_template">
+            <RSR position="replace">
+                    <RSR t-esc="format_length((move.partner_invoice_id.name or '') + ' - ' + move.partner_invoice_id.commercial_partner_id.name or '', 40)"/>
+            </RSR>
+        </template>
+    </data>
+</odoo>
