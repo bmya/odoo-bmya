@@ -8,9 +8,9 @@ class AccountMove(models.Model):
     def _onchange_fiscal_position(self):
         self.ensure_one()
         # only line with taxes are adjusted
-        for line in self.invoice_line_ids.filtered(lambda l: not l.display_type and l.tax_ids):
+        for line in self.invoice_line_ids.filtered(lambda l: l.display_type == 'product' and l.tax_ids):
             if line.product_id:
-                account_id = line._get_computed_account()
+                account_id = line.account_id
                 product_id = line.with_company(self.company_id).product_id
                 product_tax_ids = product_id.taxes_id.filtered(lambda tax: tax.company_id == self.company_id)
                 if self.move_type in ['in_invoice', 'in_refund']:
@@ -28,5 +28,3 @@ class AccountMove(models.Model):
                     tax_ids = self.fiscal_position_id.map_tax(tax_ids)
                 line.tax_ids = [[6, 0, tax_ids.ids]]
                 line.account_id = account_id.id
-        self._recompute_tax_lines()
-        self._recompute_dynamic_lines(recompute_tax_base_amount=True)
