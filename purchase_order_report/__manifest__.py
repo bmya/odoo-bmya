@@ -17,5 +17,4 @@
     'data': [
         'views/purchase_order_report.xml',
     ],
-    'installable': False,
 }
