@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # from __future__ import print_function
-from openerp import models, fields, api
-from datetime import datetime
-from openerp.tools.translate import _
-from openerp.exceptions import Warning as UserError
 import logging
+from datetime import datetime
+
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
+
 _logger = logging.getLogger(__name__)
 
 try:
@@ -22,15 +23,10 @@ except ImportError:
 class StockMove(models.Model):
     _inherit = 'stock.picking'
 
-    move_record_id = fields.Many2one(
-        'stock.xls.move', 'Move Record File', index=True, ondelete='restrict')
     product_uom_qty = fields.Float("Quantity On Hand")
     filename = fields.Char('File Name')
-    move_file = fields.Binary(
-        string='Move Records File', filters='*.xls', required=False,
-        readonly=True, track_visibility='onchange',
-        states={'draft': [('readonly', False)]},
-        store=True, help='Upload the XLS Move File in this holder')
+    move_file = fields.Binary(string='Move Records File', required=False, readonly=True,
+                              states={'draft': [('readonly', False)]}, store=True, help='Upload the XLS Move File in this holder')
 
     def get_product_from_sku(self, sku):
         """
@@ -76,22 +72,21 @@ Should be: {}'.format(datos_title, title_available)))
             excel_line = {
                 'product_id': product_id.id,
                 'name': product_id.product_tmpl_id.name,
+                'description_picking': row_data['NAME'] or product_id.product_tmpl_id.name,
                 'move_description': row_data['DESCRIPTION'],
                 'product_uom_qty': float(row_data['QTY']),  # added to try to bypass serial number
-                'reserver_availability': float(row_data['QTY']),  # added to try to bypass serial number
                 'quantity_done': float(row_data['QTY']),
                 'product_uom': product_id.uom_id.id,
                 'location_id': self.location_id.id,
                 'location_dest_id': self.location_dest_id.id,
-                'date_expected': datetime.now(),
+                'date_deadline': datetime.now(),
                 'state': 'draft',
             }
             excel_lines.append((0, 0, excel_line))
-
         return excel_lines
 
     @api.onchange('move_file')
-    def _compute_lines(self):
+    def _onchange_lines(self):
         if self.move_file and self.picking_type_code == "internal":
             move_lines = self.read_excel(self.move_file)
-            self.move_lines = move_lines
+            self.move_ids_without_package = move_lines
