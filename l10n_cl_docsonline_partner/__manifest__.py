@@ -11,6 +11,7 @@
     'depends': [
         'l10n_cl_edi',
         'l10n_cl_counties',
+        'sales_team',
     ],
     'data': [
         'security/ir.model.access.csv',
