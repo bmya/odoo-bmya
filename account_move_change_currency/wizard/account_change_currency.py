@@ -28,6 +28,7 @@ class AccountChangeCurrency(models.TransientModel):
     currency_rate_readonly = fields.Float(
         related='currency_rate',
         readonly=True,
+        string='Currency Rate RO',
         digits=lambda self: self.env['decimal.precision'].precision_get('Currency')
     )
 
