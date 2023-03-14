@@ -6,7 +6,7 @@
     'summary': """
         This module adapts the purchase order to chilean format
     """,
-    'version': '1.0.0',
+    'version': '2.0',
     'license': 'LGPL-3',
     'author': 'Blanco Martin & Asociados',
     'website': 'https://www.bmya.cl',
