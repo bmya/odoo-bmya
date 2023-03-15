@@ -10,19 +10,12 @@
                 <field name="move_file" filename="filename" attrs="{'invisible':[('picking_type_code', '!=', 'internal')]}" required="False"/>
                 <field name="filename" invisible="1"/>
             </field>
-            <!--<xpath expr="//notebook/page/field[@name='pack_operation_product_ids']/tree/field[@name='product_id']" position="after">
-                <field name="move_description"/>
-            </xpath>-->
-            <!--<xpath expr="//sheet/notebook/page/field[@name='move_lines']/tree/field[@name='product_uom']" position="before">
-                <field name="move_description"/>
-            </xpath>
-            -->
         </field>
     </record>
     <record id="view_description_picking_form" model="ir.ui.view">
         <field name="name">view.description.picking.form</field>
         <field name="model">stock.move</field>
-        <field name="inherit_id" ref="stock.view_move_picking_form"/>
+        <field name="inherit_id" ref="stock.view_move_form"/>
         <field name="arch" type="xml">
             <field name="product_id" position="after">
                 <field name="move_description"/>
@@ -32,7 +25,7 @@
         <record id="view_description_picking_tree" model="ir.ui.view">
         <field name="name">view.description.picking.tree</field>
         <field name="model">stock.move</field>
-        <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+        <field name="inherit_id" ref="stock.view_move_tree"/>
         <field name="arch" type="xml">
             <field name="product_id" position="after">
                 <field name="move_description"/>
