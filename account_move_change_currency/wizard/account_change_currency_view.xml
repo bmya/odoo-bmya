@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
         <record id="view_account_change_currency" model="ir.ui.view">
             <field name="name">Change Currency</field>
@@ -26,12 +26,12 @@
             <field name="inherit_id" ref="view_account_change_currency"/>
             <field name="arch" type="xml">
                 <field name="currency_rate" position="after">
-                    <t groups="group_restrict_change_currency_exchange">
+                    <t groups="account_move_change_currency.group_restrict_change_currency_exchange">
                         <field name="currency_rate_readonly"/>
                     </t>
                 </field>
                 <field name="currency_rate" position="attributes">
-                    <t groups="group_restrict_change_currency_exchange">
+                    <t groups="account_move_change_currency.group_restrict_change_currency_exchange">
                         <attribute name="invisible">1</attribute>
                     </t>
                 </field>
@@ -47,4 +47,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>
