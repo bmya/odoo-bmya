@@ -69,10 +69,10 @@ class AccountChangeCurrency(models.TransientModel):
                 else:
                     message = _("|| Original quotation in {0}. Rate: {0} {2} per {1}.").format(
                         move.currency_id.name, self.currency_id.name, round(self.inverse_currency_rate, 4))
-            if '||' in move_form.narration:
+            if '||' in str(move_form.narration):
                 move_form.narration = move_form.narration[:move_form.narration.find('||')] + message
             else:
-                move_form.narration = '%s %s' % (move_form.narration, message)
+                move_form.narration = '%s %s' % (move_form.narration or '', message)
             move_form.currency_id = self.currency_id
             move_form.save()
 
