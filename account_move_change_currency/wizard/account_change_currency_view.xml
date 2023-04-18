@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_change_currency" model="ir.ui.view">
+            <field name="name">Change Currency</field>
+            <field name="model">account.change.currency</field>
+            <field name="arch" type="xml">
+                <form string="Invoice Currency">
+                    <group string="This wizard will change the currency of the invoice">
+                        <field name="currency_id"/>
+                        <field name="currency_rate" attrs="{'invisible': [('currency_rate', '&lt;=', 1.0)]}" groups="!account_move_change_currency.group_restrict_change_currency_exchange"/>
+                        <field name="currency_rate" attrs="{'invisible': [('currency_rate', '&lt;=', 1.0)]}" readonly="1" groups="account_move_change_currency.group_restrict_change_currency_exchange" force_save="1"/>
+                        <field name="inverse_currency_rate" attrs="{'invisible': [('inverse_currency_rate', '&lt;=', 1.0)]}" groups="!account_move_change_currency.group_restrict_change_currency_exchange"/>
+                        <field name="inverse_currency_rate" attrs="{'invisible': [('inverse_currency_rate', '&lt;=', 1.0)]}" readonly="1" groups="account_move_change_currency.group_restrict_change_currency_exchange" force_save="1"/>
+                    </group>
+                    <footer>
+                        <button name="change_currency" string="Change Currency" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_account_change_currency">
+            <field name="name">Change Currency</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.change.currency</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
