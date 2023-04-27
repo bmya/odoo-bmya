@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 # Copyright (c) 2019 - Blanco Martín & Asociados. https://www.bmya.cl
 {
     'name': 'Chile - Expenses Fix',
@@ -10,7 +8,7 @@ Chilean expenses fix. When installing hr_expense application it fixes the Journa
 expenses in miscellaneous Journals.
     """,
     'author': 'Blanco Martín & Asociados',
-    'website': 'https://www.odoo.com/documentation/14.0/applications/finance/accounting/fiscal_localizations/localizations/chile.html',
+    'website': 'http://blancomartin.cl',
     'category': 'Accounting/Localizations/Account Charts',
     'depends': [
         'hr_expense',
@@ -18,5 +16,5 @@ expenses in miscellaneous Journals.
     ],
     'active': True,
     'auto_install': True,
-    'installable': False,
+    'installable': True,
 }
