@@ -2,7 +2,7 @@
     "name": "Chile Localization SII Regional Offices",
     "version": "2.0.0",
     "author": "Blanco Martín & Asociados",
-    'license': "OPL-1",
+    'license': "LGPL-3",
     "website": "http://blancomartin.cl",
     "category": "Localization/Geopolitical Distribution",
     "depends": [

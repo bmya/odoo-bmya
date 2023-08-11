@@ -6,7 +6,7 @@
 Fixes the need of taxes recalculation when fiscal position is changed.
 Also, moves the fiscal position selector to main view of the invoice
     """,
-    'author': 'Blanco Martin & Asociados',
+    'author': 'Blanco Martín & Asociados',
     'website': 'http://blancomartin.cl',
     'license': 'LGPL-3',
     'depends': [

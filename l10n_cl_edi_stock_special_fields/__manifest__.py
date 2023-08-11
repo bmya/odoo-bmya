@@ -2,7 +2,7 @@
     "name": """Chile - Stock Special Fields """,
     'version': '1.0',
     'category': 'Localization/Chile',
-    'license': "OPL-1",
+    'license': "LGPL-3",
     'sequence': 12,
     'author':  'Blanco Martín & Asociados',
     'description': """

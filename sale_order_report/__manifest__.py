@@ -8,7 +8,7 @@
     """,
     'version': '2.0',
     'license': 'LGPL-3',
-    'author': 'Blanco Martin & Asociados',
+    'author': 'Blanco Martín & Asociados',
     'website': 'https://www.bmya.cl',
     'depends': [
         'sale',
