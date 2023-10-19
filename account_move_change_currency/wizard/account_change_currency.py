@@ -18,16 +18,18 @@ class AccountChangeCurrency(models.TransientModel):
         'res.currency',
         string='Change to',
         required=True,
-        help="Select a currency to apply on the invoice"
+        help="Select a currency to apply on the invoice",
     )
     currency_rate = fields.Float(
         'Currency Rate',
         required=True,
-        help="Select a currency to apply on the invoice"
+        digits=(16, 10),
+        help="Select a currency to apply on the invoice",
     )
     inverse_currency_rate = fields.Float(
         'Inverse Currency Rate',
-        help="1 / Currency Rate"
+        digits=(16, 10),
+        help="1 / Currency Rate",
     )
 
     def _get_move(self):
