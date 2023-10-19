@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 02:13+0000\n"
-"PO-Revision-Date: 2021-12-09 02:13+0000\n"
+"POT-Creation-Date: 2023-04-18 03:52+0000\n"
+"PO-Revision-Date: 2023-04-18 03:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_move_change_currency
-#: model_terms:ir.ui.view,arch_db:account_move_change_currency.invoice_form
-msgid " Change"
+#: model:ir.model.fields,help:account_move_change_currency.field_account_change_currency__inverse_currency_rate
+msgid "1 / Currency Rate"
 msgstr ""
 
 #. module: account_move_change_currency
@@ -28,8 +28,19 @@ msgstr ""
 #. module: account_move_change_currency
 #: model:ir.actions.act_window,name:account_move_change_currency.action_account_change_currency
 #: model:ir.model,name:account_move_change_currency.model_account_change_currency
+#: model_terms:ir.ui.view,arch_db:account_move_change_currency.invoice_form
 #: model_terms:ir.ui.view,arch_db:account_move_change_currency.view_account_change_currency
 msgid "Change Currency"
+msgstr ""
+
+#. module: account_move_change_currency
+#: model_terms:ir.ui.view,arch_db:account_move_change_currency.invoice_form
+msgid "Change currency and update prices"
+msgstr ""
+
+#. module: account_move_change_currency
+#: model_terms:ir.ui.view,arch_db:account_move_change_currency.invoice_form
+msgid "Change currency without updating prices"
 msgstr ""
 
 #. module: account_move_change_currency
@@ -48,8 +59,14 @@ msgid "Created on"
 msgstr ""
 
 #. module: account_move_change_currency
+#. odoo-python
+#: code:addons/account_move_change_currency/wizard/account_change_currency.py:0
+#, python-format
+msgid "Currency"
+msgstr ""
+
+#. module: account_move_change_currency
 #: model:ir.model.fields,field_description:account_move_change_currency.field_account_change_currency__currency_rate
-#: model:ir.model.fields,field_description:account_move_change_currency.field_account_change_currency__currency_rate_readonly
 msgid "Currency Rate"
 msgstr ""
 
@@ -89,6 +106,7 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: account_move_change_currency
+#. odoo-python
 #: code:addons/account_move_change_currency/wizard/account_change_currency.py:0
 #, python-format
 msgid "No Invoice on context as \"active_id\""
@@ -102,7 +120,6 @@ msgstr ""
 #. module: account_move_change_currency
 #: model:ir.model.fields,help:account_move_change_currency.field_account_change_currency__currency_id
 #: model:ir.model.fields,help:account_move_change_currency.field_account_change_currency__currency_rate
-#: model:ir.model.fields,help:account_move_change_currency.field_account_change_currency__currency_rate_readonly
 msgid "Select a currency to apply on the invoice"
 msgstr ""
 
@@ -112,18 +129,27 @@ msgid "This wizard will change the currency of the invoice"
 msgstr ""
 
 #. module: account_move_change_currency
+#. odoo-python
+#: code:addons/account_move_change_currency/wizard/account_change_currency.py:0
+#, python-format
+msgid "Untaxed amount"
+msgstr ""
+
+#. module: account_move_change_currency
 #: model_terms:ir.ui.view,arch_db:account_move_change_currency.view_account_change_currency
 msgid "or"
 msgstr ""
 
 #. module: account_move_change_currency
+#. odoo-python
 #: code:addons/account_move_change_currency/wizard/account_change_currency.py:0
 #, python-format
-msgid "|| Original quotation in {0}. Rate: {0} {2} per {1}."
+msgid "|| Quotation previously in {0}. Rate: {0} {2} per {1}."
 msgstr ""
 
 #. module: account_move_change_currency
+#. odoo-python
 #: code:addons/account_move_change_currency/wizard/account_change_currency.py:0
 #, python-format
-msgid "|| Original quotation in {0}. Rate: {1} {2} per {0}."
+msgid "|| Quotation previously in {0}. Rate: {1} {2} per {0}."
 msgstr ""
