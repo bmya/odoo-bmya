@@ -1,6 +1,6 @@
 {
     "name": """Chile - Special Fields """,
-    'version': '1.0.',
+    'version': '1.0.1',
     'category': 'Localization/Chile',
     'license': 'OPL-1',
     'sequence': 12,
@@ -14,6 +14,7 @@ Agrega Campos Especiales a los XML
     'website': 'http://blancomartin.cl',
     'depends': [
         'l10n_cl_edi',
+        'sale',
     ],
     'data': [
         'views/partner_view.xml',
