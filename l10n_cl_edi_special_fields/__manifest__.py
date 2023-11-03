@@ -14,6 +14,7 @@ Agrega Campos Especiales a los XML
     'website': 'http://blancomartin.cl',
     'depends': [
         'l10n_cl_edi',
+        'sale',
     ],
     'data': [
         'views/partner_view.xml',
