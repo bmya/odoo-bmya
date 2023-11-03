@@ -1,6 +1,6 @@
 {
     "name": """Chile - Legacy Special Fields """,
-    'version': '16.0.2.4.0',
+    'version': '16.0.3.4.0',
     'category': 'Localization/Chile',
     'license': 'LGPL-3',
     'icon': '/l10n_cl_partner_extra_xml_identification/static/description/icon.png',
