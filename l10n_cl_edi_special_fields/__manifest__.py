@@ -1,6 +1,6 @@
 {
     "name": """Chile - Special Fields """,
-    'version': '1.0.1',
+    'version': '1.0.2',
     'category': 'Localization/Chile',
     'license': 'OPL-1',
     'sequence': 12,
