@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record forcecreate="True" id="ir_cron_invoie_to_move" model="ir.cron">
+        <field name="name">Migrate: Account Check / payment</field>
+        <field name="model_id" ref="account.model_account_payment"/>
+        <field name="state">code</field>
+        <field name="code">
+# Diario tipo cheque ( El nombre dice cheque )
+payment_ids = env['account.payment']
+for payment in env['account.payment'].search([('journal_id', '=', 29), ('check_id', '!=', False)]):
+  if payment.check_id.state:
+    payment_ids += payment
+    payment.write({'check_state': payment.check_id.state})
+        </field>
+        <field eval="False" name="active"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field eval="False" name="doall"/>
+    </record>
+</odoo>
