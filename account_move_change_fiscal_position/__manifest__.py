@@ -15,6 +15,6 @@ Also, moves the fiscal position selector to main view of the invoice
     'data': [
         'views/account_move_view.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

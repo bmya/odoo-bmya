@@ -18,7 +18,7 @@ Agrega Campos Especiales en el modelo stock
     'data': [
         'views/stock_picking.xml'
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }

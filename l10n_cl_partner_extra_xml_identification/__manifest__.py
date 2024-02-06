@@ -1,6 +1,6 @@
 {
     "name": """Chile - Partner XML Identification""",
-    'version': '1.0.',
+    'version': '1.0',
     'category': 'Localization/Chile',
     'license': 'LGPL-3',
     'sequence': 12,
@@ -19,7 +19,7 @@ Agrega Campos Especiales a los XML
         'views/partner_view.xml',
         'template/dte_template.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }

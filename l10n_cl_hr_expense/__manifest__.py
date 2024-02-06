@@ -16,5 +16,5 @@ expenses in miscellaneous Journals.
     ],
     'active': True,
     'auto_install': True,
-    'installable': True,
+    'installable': False,
 }

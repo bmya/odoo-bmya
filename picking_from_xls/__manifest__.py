@@ -18,6 +18,6 @@
         ],
     'version': '1.0',
     'website': 'https://www.bmya.cl',
-    'installable': True,
+    'installable': False,
     'auto-install': False
 }

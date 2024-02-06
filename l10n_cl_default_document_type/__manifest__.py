@@ -13,6 +13,6 @@
     'website': 'https://www.bmya.cl',
     'license': 'LGPL-3',
     'depends': ['l10n_cl'],
-    'installable': True,
+    'installable': False,
     'auto_install': False
 }

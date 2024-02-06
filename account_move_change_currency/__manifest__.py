@@ -12,6 +12,6 @@
     'version': '3.0',
     'website': 'https://www.bmya.cl',
     'license': 'LGPL-3',
-    'installable': True,
+    'installable': False,
     'application': False,
 }

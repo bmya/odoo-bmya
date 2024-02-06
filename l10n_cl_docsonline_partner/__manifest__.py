@@ -19,7 +19,7 @@
         'data/ir.config_parameter.xml',
         'wizard/data_docsonline_view.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }

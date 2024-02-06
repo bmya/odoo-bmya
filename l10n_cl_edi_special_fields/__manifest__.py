@@ -1,6 +1,6 @@
 {
     "name": """Chile - Legacy Special Fields """,
-    'version': '2.0.',
+    'version': '2.0',
     'category': 'Localization/Chile',
     'license': 'LGPL-3',
     'icon': '/l10n_cl_partner_extra_xml_identification/static/description/icon.png',
@@ -19,7 +19,7 @@
         'views/account_move_view.xml',
         'template/dte_template.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }

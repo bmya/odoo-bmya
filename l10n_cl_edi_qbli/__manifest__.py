@@ -1,6 +1,6 @@
 {
     "name": """Chile - Add QBLI Field to invoices """,
-    'version': '2.0.',
+    'version': '2.0',
     'category': 'Localization/Chile',
     'license': 'LGPL-3',
     'sequence': 12,
@@ -19,7 +19,7 @@ Adds QBLI to the invoice lines, according to requirements from some customers us
         'views/account_move_view.xml',
         'template/dte_template.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }
