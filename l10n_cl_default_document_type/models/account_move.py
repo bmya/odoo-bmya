@@ -15,7 +15,7 @@ class AccountMove(models.Model):
             if r.debit_origin_id:
                 doc_types = doc_types.filtered(lambda x: x.internal_type == 'debit_note')
 
-            partner_type = self.partner_id.l10n_cl_sii_taxpayer_type
+            partner_type = r.partner_id.l10n_cl_sii_taxpayer_type
             if partner_type in ['1', '2']:
                 r.l10n_latam_document_type_id = doc_types and doc_types.filtered_domain([('code', '=', '33')]).id
             elif partner_type == '3':
