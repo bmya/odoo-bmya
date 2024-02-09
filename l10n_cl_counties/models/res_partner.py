@@ -12,7 +12,7 @@ class ResPartner(models.Model):
 
     country_id = fields.Many2one("res.country", default=_default_country)
     state_id = fields.Many2one("res.country.state", compute='_change_state_province', store=True, readonly=False,
-        string='Ubication', domain="[('country_id', '=', country_id), ('type', '=', 'normal')]")
+        string='Region or Province', domain="[('country_id', '=', country_id), ('type', '=', 'normal')]")
     real_city = fields.Char(compute='_change_real_city_province', string='City.')
     city = fields.Char(compute='_change_city_province', string='City', store=True, readonly=False)
     country_code = fields.Char(related='country_id.code', string='Country ID')
@@ -48,4 +48,4 @@ class ResPartner(models.Model):
         for record in self:
             if record.country_id != record.env.ref('base.cl'):
                 return
-            record.state_id = record.city_id.state_id.parent_id
+            record.state_id = record.city_id.state_id.parent_id or record.city_id.state_id
