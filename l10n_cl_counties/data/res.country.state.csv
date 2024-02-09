@@ -67,3 +67,6 @@ base.state_cl_15,Arica y Parinacota,CL15000,Chile,,View
 l10n_cl_counties.state_cl_151,Arica,CL15100,Chile,base.state_cl_15,Normal
 l10n_cl_counties.state_cl_152,Parinacota,CL15200,Chile,base.state_cl_15,Normal
 base.state_cl_16,del Ñuble,CL16000,Chile,,View
+l10n_cl_counties.state_cl_161,Itata,CL16100,Chile,base.state_cl_16,Normal
+l10n_cl_counties.state_cl_162,Punilla,CL16200,Chile,base.state_cl_16,Normal
+l10n_cl_counties.state_cl_163,Diguillín,CL16300,Chile,base.state_cl_16,Normal

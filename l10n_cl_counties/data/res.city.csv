@@ -14,7 +14,7 @@ city_cl_08302,CL08302,Antuco,state_cl_083,ur_Log,base.cl
 city_cl_08202,CL08202,Arauco,state_cl_082,ur_Cop,base.cl
 city_cl_15101,CL15101,Arica,state_cl_151,ur_Ari,base.cl
 city_cl_13402,CL13402,Buin,state_cl_134,ur_SaS,base.cl
-city_cl_08402,CL08402,Bulnes,base.state_cl_16,ur_Chi,base.cl
+city_cl_08402,CL08402,Bulnes,state_cl_163,ur_Chi,base.cl
 city_cl_05402,CL05402,Cabildo,state_cl_054,ur_LaL,base.cl
 city_cl_12201,CL12201,Cabo de Hornos,state_cl_122,ur_PuA,base.cl
 city_cl_08303,CL08303,Cabrero,state_cl_083,ur_Log,base.cl
@@ -42,19 +42,19 @@ city_cl_07202,CL07202,Chanco,state_cl_072,ur_Cau,base.cl
 city_cl_06302,CL06302,Chépica,state_cl_063,ur_SaZ,base.cl
 city_cl_08103,CL08103,Chiguayante,state_cl_081,ur_Cop,base.cl
 city_cl_11401,CL11401,Chile Chico,state_cl_114,ur_ChC,base.cl
-city_cl_08401,CL08401,Chillán,base.state_cl_16,ur_Chi,base.cl
-city_cl_08406,CL08406,Chillán Viejo,base.state_cl_16,ur_Chi,base.cl
+city_cl_08401,CL08401,Chillán,state_cl_163,ur_Chi,base.cl
+city_cl_08406,CL08406,Chillán Viejo,state_cl_163,ur_Chi,base.cl
 city_cl_06303,CL06303,Chimbarongo,state_cl_063,ur_SaD,base.cl
 city_cl_09121,CL09121,Cholchol,state_cl_091,ur_Tem,base.cl
 city_cl_10203,CL10203,Chonchi,state_cl_102,ur_Cas,base.cl
 city_cl_11202,CL11202,Cisnes,state_cl_112,ur_Ays,base.cl
-city_cl_08403,CL08403,Cobquecura,base.state_cl_16,ur_Chi,base.cl
+city_cl_08403,CL08403,Cobquecura,state_cl_161,ur_Chi,base.cl
 city_cl_10103,CL10103,Cochamó,state_cl_101,ur_PuV,base.cl
 city_cl_11301,CL11301,Cochrane,state_cl_113,ur_Coc,base.cl
 city_cl_06102,CL06102,Codegua,state_cl_061,ur_Ran,base.cl
-city_cl_08404,CL08404,Coelemu,base.state_cl_16,ur_Chi,base.cl
+city_cl_08404,CL08404,Coelemu,state_cl_161,ur_Chi,base.cl
 city_cl_11101,CL11101,Coihaique,state_cl_111,ur_Coy,base.cl
-city_cl_08405,CL08405,Coihueco,base.state_cl_16,ur_Chi,base.cl
+city_cl_08405,CL08405,Coihueco,state_cl_162,ur_Chi,base.cl
 city_cl_06103,CL06103,Coinco,state_cl_061,ur_Ran,base.cl
 city_cl_07402,CL07402,Colbún,state_cl_074,ur_Lin,base.cl
 city_cl_01403,CL01403,Colchane,state_cl_014,ur_Iqu,base.cl
@@ -83,7 +83,7 @@ city_cl_10205,CL10205,Dalcahue,state_cl_102,ur_Cas,base.cl
 city_cl_03202,CL03202,Diego de Almagro,state_cl_032,ur_Chn,base.cl
 city_cl_06105,CL06105,Doñihue,state_cl_061,ur_Ran,base.cl
 city_cl_13105,CL13105,El Bosque,state_cl_131,ur_SaS,base.cl
-city_cl_08407,CL08407,El Carmen,base.state_cl_16,ur_Chi,base.cl
+city_cl_08407,CL08407,El Carmen,state_cl_163,ur_Chi,base.cl
 city_cl_13602,CL13602,El Monte,state_cl_136,ur_SaP,base.cl
 city_cl_05604,CL05604,El Quisco,state_cl_056,ur_SaA,base.cl
 city_cl_05605,CL05605,El Tabo,state_cl_056,ur_SaA,base.cl
@@ -182,8 +182,8 @@ city_cl_06305,CL06305,Nancagua,state_cl_063,ur_SaD,base.cl
 city_cl_12401,CL12401,Natales,state_cl_124,ur_PuN,base.cl
 city_cl_06205,CL06205,Navidad,state_cl_062,ur_Coy,base.cl
 city_cl_08307,CL08307,Negrete,state_cl_083,ur_Log,base.cl
-city_cl_08408,CL08408,Ninhue,base.state_cl_16,ur_Chi,base.cl
-city_cl_08409,CL08409,Ñiquén,base.state_cl_16,ur_Chi,base.cl
+city_cl_08408,CL08408,Ninhue,state_cl_161,ur_Chi,base.cl
+city_cl_08409,CL08409,Ñiquén,state_cl_162,ur_Chi,base.cl
 city_cl_05506,CL05506,Nogales,state_cl_055,ur_Qui,base.cl
 city_cl_09111,CL09111,Nueva Imperial,state_cl_091,ur_Tem,base.cl
 city_cl_13120,CL13120,Ñuñoa,state_cl_131,ur_SaC,base.cl
@@ -208,7 +208,7 @@ city_cl_07404,CL07404,Parral,state_cl_074,ur_Par,base.cl
 city_cl_13121,CL13121,Pedro Aguirre Cerda,state_cl_131,ur_SaS,base.cl
 city_cl_07106,CL07106,Pelarco,state_cl_071,ur_Tac,base.cl
 city_cl_07203,CL07203,Pelluhue,state_cl_072,ur_Cau,base.cl
-city_cl_08410,CL08410,Pemuco,base.state_cl_16,ur_Chi,base.cl
+city_cl_08410,CL08410,Pemuco,state_cl_163,ur_Chi,base.cl
 city_cl_13605,CL13605,Peñaflor,state_cl_136,ur_SaP,base.cl
 city_cl_13122,CL13122,Peñalolén,state_cl_131,ur_SaS,base.cl
 city_cl_07107,CL07107,Pencahue,state_cl_071,ur_Tac,base.cl
@@ -220,11 +220,11 @@ city_cl_06112,CL06112,Peumo,state_cl_061,ur_SaV,base.cl
 city_cl_01405,CL01405,Pica,state_cl_014,ur_Iqu,base.cl
 city_cl_06113,CL06113,Pichidegua,state_cl_061,ur_SaV,base.cl
 city_cl_06201,CL06201,Pichilemu,state_cl_062,ur_Pic,base.cl
-city_cl_08411,CL08411,Pinto,base.state_cl_16,ur_Chi,base.cl
+city_cl_08411,CL08411,Pinto,state_cl_163,ur_Chi,base.cl
 city_cl_13202,CL13202,Pirque,state_cl_132,ur_SaS,base.cl
 city_cl_09114,CL09114,Pitrufquén,state_cl_091,ur_Tem,base.cl
 city_cl_06308,CL06308,Placilla,state_cl_063,ur_SaD,base.cl
-city_cl_08412,CL08412,Portezuelo,base.state_cl_16,ur_Chi,base.cl
+city_cl_08412,CL08412,Portezuelo,state_cl_161,ur_Chi,base.cl
 city_cl_12301,CL12301,Porvenir,state_cl_123,ur_Por,base.cl
 city_cl_01401,CL01401,Pozo Almonte,state_cl_014,ur_Iqu,base.cl
 city_cl_12302,CL12302,Primavera,state_cl_123,ur_Por,base.cl
@@ -251,16 +251,16 @@ city_cl_10209,CL10209,Quemchi,state_cl_102,ur_Anc,base.cl
 city_cl_08308,CL08308,Quilaco,state_cl_083,ur_Log,base.cl
 city_cl_13125,CL13125,Quilicura,state_cl_131,ur_SaN,base.cl
 city_cl_08309,CL08309,Quilleco,state_cl_083,ur_Log,base.cl
-city_cl_08413,CL08413,Quillón,base.state_cl_16,ur_Chi,base.cl
+city_cl_08413,CL08413,Quillón,state_cl_163,ur_Chi,base.cl
 city_cl_05501,CL05501,Quillota,state_cl_055,ur_Qui,base.cl
 city_cl_05106,CL05106,Quilpué,state_cl_051,ur_ViA,base.cl
 city_cl_10210,CL10210,Quinchao,state_cl_102,ur_PuM,base.cl
 city_cl_06114,CL06114,Quinta de Tilcoco,state_cl_061,ur_Ran,base.cl
 city_cl_13126,CL13126,Quinta Normal,state_cl_131,ur_SaP,base.cl
 city_cl_05107,CL05107,Quintero,state_cl_051,ur_Vlp,base.cl
-city_cl_08414,CL08414,Quirihue,base.state_cl_16,ur_Chi,base.cl
+city_cl_08414,CL08414,Quirihue,state_cl_161,ur_Chi,base.cl
 city_cl_06101,CL06101,Rancagua,state_cl_061,ur_Ran,base.cl
-city_cl_08415,CL08415,Ranquil,base.state_cl_16,ur_Chi,base.cl
+city_cl_08415,CL08415,Ránquil,state_cl_161,ur_Chi,base.cl
 city_cl_07305,CL07305,Rauco,state_cl_073,ur_Cur,base.cl
 city_cl_13127,CL13127,Recoleta,state_cl_131,ur_SaN,base.cl
 city_cl_09209,CL09209,Renaico,state_cl_092,ur_Ang,base.cl
@@ -281,20 +281,20 @@ city_cl_07307,CL07307,Sagrada Familia,state_cl_073,ur_Cur,base.cl
 city_cl_04204,CL04204,Salamanca,state_cl_042,ur_Ill,base.cl
 city_cl_05601,CL05601,San Antonio,state_cl_056,ur_SaA,base.cl
 city_cl_13401,CL13401,San Bernardo,state_cl_134,ur_SaS,base.cl
-city_cl_08416,CL08416,San Carlos,base.state_cl_16,ur_Sar,base.cl
+city_cl_08416,CL08416,San Carlos,state_cl_162,ur_Sar,base.cl
 city_cl_07109,CL07109,San Clemente,state_cl_071,ur_Tac,base.cl
 city_cl_05304,CL05304,San Esteban,state_cl_053,ur_Lod,base.cl
-city_cl_08417,CL08417,San Fabián,base.state_cl_16,ur_Sar,base.cl
+city_cl_08417,CL08417,San Fabián,state_cl_162,ur_Sar,base.cl
 city_cl_05701,CL05701,San Felipe,state_cl_057,ur_SaF,base.cl
 city_cl_06301,CL06301,San Fernando,state_cl_063,ur_SaD,base.cl
 city_cl_12104,CL12104,San Gregorio,state_cl_121,ur_PuA,base.cl
-city_cl_08418,CL08418,San Ignacio,base.state_cl_16,ur_Chi,base.cl
+city_cl_08418,CL08418,San Ignacio,state_cl_163,ur_Chi,base.cl
 city_cl_07406,CL07406,San Javier,state_cl_074,ur_Tac,base.cl
 city_cl_13129,CL13129,San Joaquín,state_cl_131,ur_SaS,base.cl
 city_cl_13203,CL13203,San José de Maipo,state_cl_132,ur_SaS,base.cl
 city_cl_10306,CL10306,San Juan de la Costa,state_cl_103,ur_Oso,base.cl
 city_cl_13130,CL13130,San Miguel,state_cl_131,ur_SaS,base.cl
-city_cl_08419,CL08419,San Nicolás,base.state_cl_16,ur_Sar,base.cl
+city_cl_08419,CL08419,San Nicolás,state_cl_162,ur_Sar,base.cl
 city_cl_10307,CL10307,San Pablo,state_cl_103,ur_Oso,base.cl
 city_cl_13505,CL13505,San Pedro,state_cl_135,ur_SaP,base.cl
 city_cl_02203,CL02203,San Pedro de Atacama,state_cl_022,ur_Cal,base.cl
@@ -327,7 +327,7 @@ city_cl_08111,CL08111,Tomé,state_cl_081,ur_Cop,base.cl
 city_cl_12402,CL12402,Torres del Paine,state_cl_124,ur_PuN,base.cl
 city_cl_11303,CL11303,Tortel,state_cl_113,ur_Coc,base.cl
 city_cl_09210,CL09210,Traiguén,state_cl_092,ur_Vic,base.cl
-city_cl_08420,CL08420,Trehuaco,base.state_cl_16,ur_Chi,base.cl
+city_cl_08420,CL08420,Trehuaco,state_cl_161,ur_Chi,base.cl
 city_cl_08312,CL08312,Tucapel,state_cl_083,ur_Log,base.cl
 city_cl_14101,CL14101,Valdivia,state_cl_141,ur_Vld,base.cl
 city_cl_03301,CL03301,Vallenar,state_cl_033,ur_Val,base.cl
@@ -343,5 +343,5 @@ city_cl_05109,CL05109,Viña del Mar,state_cl_051,ur_Vlp,base.cl
 city_cl_13132,CL13132,Vitacura,state_cl_131,ur_SaO,base.cl
 city_cl_07408,CL07408,Yerbas Buenas,state_cl_074,ur_Lin,base.cl
 city_cl_08313,CL08313,Yumbel,state_cl_083,ur_Log,base.cl
-city_cl_08421,CL08421,Yungay,base.state_cl_16,ur_Chi,base.cl
+city_cl_08421,CL08421,Yungay,state_cl_163,ur_Chi,base.cl
 city_cl_05405,CL05405,Zapallar,state_cl_054,ur_LaL,base.cl
