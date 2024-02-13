@@ -1,6 +1,6 @@
 {
     "name": "Chile Localization Regions, Cities and Counties",
-    "version": "2.0",
+    "version": "2.0.1",
     "author": "Blanco Martín & Asociados",
     'license': "LGPL-3",
     "website": "http://blancomartin.cl",
