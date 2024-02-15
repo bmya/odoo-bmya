@@ -2,3 +2,6 @@
 *.txt
 .idea/
 .DS_Store
+
+# Translations
+*.mo

@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* purchase_stock_no_bill_valuation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-12 16:43+0000\n"
+"PO-Revision-Date: 2024-02-12 16:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_stock_no_bill_valuation
+#: model:ir.model,name:purchase_stock_no_bill_valuation.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: purchase_stock_no_bill_valuation
+#: model:ir.model,name:purchase_stock_no_bill_valuation.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: purchase_stock_no_bill_valuation
+#: model:ir.model.fields,field_description:purchase_stock_no_bill_valuation.field_product_category__reevaluate_on_bill_price_difference
+msgid "Reevaluate On Bill Price Difference"
+msgstr ""
+
+#. module: purchase_stock_no_bill_valuation
+#: model:ir.model.fields,help:purchase_stock_no_bill_valuation.field_product_category__reevaluate_on_bill_price_difference
+msgid ""
+"Reevaluate products when there is a price difference between the Purchase "
+"Order and the Vendor Bill"
+msgstr ""
