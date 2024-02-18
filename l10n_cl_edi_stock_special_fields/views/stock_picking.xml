@@ -7,9 +7,9 @@
         <field name="priority" eval="8"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='carrier_id']" position="after">
-                <field name="vehicle" attrs="{'required':[('transport_type','=', '2')], 'invisible':[('transport_type','!=','2')], 'readonly':[('state', '=', 'done')]}"/>
-                <field name="chofer" attrs="{'required':[('transport_type','=', '2')], 'invisible':[('transport_type','!=','2')], 'readonly':[('state', '=', 'done')]}"/>
-                 <field name="patente" attrs="{'required':[('transport_type','in', ['2'])]}"/>
+                <field name="vehicle" required="transport_type == '2'" invisible="transport_type != '2'" readonly="state == 'done'"/>
+                <field name="chofer" required="transport_type == '2'" invisible="transport_type != '2'" readonly="state == 'done'"/>
+                <field name="patente" required="transport_type == '2'"/>
             </xpath>
             <xpath expr="//field[@name='move_type']" position="after">
                 <field name="transport_type"/>

@@ -10,13 +10,13 @@
 
                     <button name="press_to_update" type="object" class="btn-link"
                             help="Actualizar desde DocumentosOnline"
-                            attrs="{'invisible': ['|', '|', ('vat', '=', False), ('country_code', '!=', 'CL'), ('company_country_code', '!=', 'CL')]}">
+                            invisible="not vat or country_code != 'CL' or company_country_code != 'CL'">
                         <i title="Actualizar" role="img" aria-label="Actualizar" class="fa fa-address-card"/>
                     </button>
 
                     <button name="call_wizard" type="object" class="btn-link"
                             help="Buscar en DocumentosOnline"
-                            attrs="{'invisible': ['|', '|', ('vat', '!=', False), ('country_code', '!=', 'CL'), ('company_country_code', '!=', 'CL')]}">
+                            invisible="not vat or country_code != 'CL' or company_country_code != 'CL'">
                         <i title="Buscar" role="img" aria-label="Buscar" class="fa fa-address-card-o"/>
                     </button>
 

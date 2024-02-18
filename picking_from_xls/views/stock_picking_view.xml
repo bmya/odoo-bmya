@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <field name="backorder_id" position="after">
                 <field name="product_uom_qty"/>
-                <field name="move_file" filename="filename" attrs="{'invisible':[('picking_type_code', '!=', 'internal')]}" required="False"/>
+                <field name="move_file" filename="filename" invisible="picking_type_code != 'internal'" required="False"/>
                 <field name="filename" invisible="1"/>
             </field>
         </field>

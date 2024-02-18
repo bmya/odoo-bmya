@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@id='header_right_group']/field[@name='currency_id']" position="before">
                 <button name="%(account_move_change_currency.action_account_change_currency)d" icon="fa-usd" type="action" class="oe_inline oe_link"
-                        string="Change Currency" attrs="{'invisible':[('state','!=','draft')]}" groups="account.group_account_invoice" help="Change currency and update prices"
+                        string="Change Currency" invisible="state != 'draft'" groups="account.group_account_invoice" help="Change currency and update prices"
                         context="{'default_currency_id': currency_id}"/>
             </xpath>
             <xpath expr="//group[@id='header_right_group']/field[@name='currency_id']" position="attributes">

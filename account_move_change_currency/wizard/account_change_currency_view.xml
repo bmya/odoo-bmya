@@ -8,10 +8,10 @@
                 <form string="Invoice Currency">
                     <group string="This wizard will change the currency of the invoice">
                         <field name="currency_id"/>
-                        <field name="currency_rate" attrs="{'invisible': [('currency_rate', '&lt;=', 1.0)]}" groups="!account_move_change_currency.group_restrict_change_currency_exchange"/>
-                        <field name="currency_rate" attrs="{'invisible': [('currency_rate', '&lt;=', 1.0)]}" readonly="1" groups="account_move_change_currency.group_restrict_change_currency_exchange" force_save="1"/>
-                        <field name="inverse_currency_rate" attrs="{'invisible': [('inverse_currency_rate', '&lt;=', 1.0)]}" groups="!account_move_change_currency.group_restrict_change_currency_exchange"/>
-                        <field name="inverse_currency_rate" attrs="{'invisible': [('inverse_currency_rate', '&lt;=', 1.0)]}" readonly="1" groups="account_move_change_currency.group_restrict_change_currency_exchange" force_save="1"/>
+                        <field name="currency_rate" invisible="currency_rate < 1.0" groups="!account_move_change_currency.group_restrict_change_currency_exchange"/>
+                        <field name="currency_rate" invisible="currency_rate < 1.0" readonly="1" groups="account_move_change_currency.group_restrict_change_currency_exchange" force_save="1"/>
+                        <field name="inverse_currency_rate" invisible="currency_rate < 1.0" groups="!account_move_change_currency.group_restrict_change_currency_exchange"/>
+                        <field name="inverse_currency_rate" invisible="currency_rate < 1.0" readonly="1" groups="account_move_change_currency.group_restrict_change_currency_exchange" force_save="1"/>
                     </group>
                     <footer>
                         <button name="change_currency" string="Change Currency" type="object" class="oe_highlight"/>
