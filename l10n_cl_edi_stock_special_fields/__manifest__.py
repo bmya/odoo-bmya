@@ -1,6 +1,6 @@
 {
     "name": """Chile - Stock Special Fields """,
-    'version': '1.0',
+    'version': '17.0.1.0',
     'category': 'Localization/Chile',
     'license': "LGPL-3",
     'sequence': 12,

@@ -1,6 +1,6 @@
 {
     'name': 'Default Latam Document',
-    'version': '2.0',
+    'version': '17.0.1.0',
     'summary': 'Default Latam Document',
     'description': 'Default Latam Document',
     'category': 'Localization',

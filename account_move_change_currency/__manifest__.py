@@ -9,7 +9,7 @@
         'wizard/account_change_currency_view.xml',
         'views/move_view.xml',
     ],
-    'version': '3.0',
+    'version': '17.0.1.0',
     'website': 'https://www.bmya.cl',
     'license': 'LGPL-3',
     'installable': False,

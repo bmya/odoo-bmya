@@ -1,6 +1,6 @@
 {
     "name": """Chile - Add QBLI Field to invoices """,
-    'version': '2.0',
+    'version': '17.0.1.0',
     'category': 'Localization/Chile',
     'license': 'LGPL-3',
     'sequence': 12,

@@ -7,7 +7,7 @@
         End Consumer: Boleta Electrónica (39)
         Foreigner: Factura de Exportación (110)
     """,
-    'version': '1.0',
+    'version': '17.0.1.0',
     'category': 'Localization',
     'author': 'Blanco Martín & Asociados',
     'website': 'https://www.bmya.cl',

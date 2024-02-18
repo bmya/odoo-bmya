@@ -1,7 +1,7 @@
 # Copyright (c) 2019 - Blanco Martín & Asociados. https://www.bmya.cl
 {
     'name': 'Chile - Expenses Fix',
-    'version': "1.0",
+    'version': "17.0.1.0",
     'license': 'LGPL-3',
     'description': """
 Chilean expenses fix. When installing hr_expense application it fixes the Journal Type to allow registration of

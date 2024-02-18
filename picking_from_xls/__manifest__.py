@@ -16,7 +16,7 @@
     'data': [
         'views/stock_picking_view.xml',
         ],
-    'version': '1.0',
+    'version': '17.0.1.0',
     'website': 'https://www.bmya.cl',
     'installable': False,
     'auto-install': False

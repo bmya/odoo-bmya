@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 {
     'name': 'Authentification - Admin Passkey',
-    'version': '2.0',
+    'version': '17.0.1.0',
     'category': 'base',
     'description': """
 Server Admin password become a passkey for all active logins
