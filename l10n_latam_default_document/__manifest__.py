@@ -11,6 +11,6 @@
     'data': [
         'views/l10n_latam_document_type_view.xml',
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': False
 }
