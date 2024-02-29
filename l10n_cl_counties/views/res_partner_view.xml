@@ -58,7 +58,7 @@
                 <field name="company_country_code" invisible="1"/>
             </field>
             <field name="l10n_cl_sii_taxpayer_type" position="attributes">
-                <attribute name="readonly">not parent_id</attribute>
+                <attribute name="readonly">parent_id</attribute>
                 <attribute name="invisible">country_code != 'CL' and company_country_code != 'CL'</attribute>
             </field>
         </field>
