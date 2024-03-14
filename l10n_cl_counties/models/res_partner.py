@@ -48,4 +48,4 @@ class ResPartner(models.Model):
         for record in self:
             if record.country_id != record.env.ref('base.cl'):
                 return
-            record.state_id = record.city_id.state_id.parent_id
+            record.state_id = record.city_id.state_id
