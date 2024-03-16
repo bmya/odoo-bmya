@@ -14,10 +14,15 @@
                         </group>
                     </div>
                     <footer>
-                        <button string="Confirm Overwrite" name="pick_partner" type="object" class="oe_highlight" />
-                        or
-                        <button string="Confirm Without Overwrite Name or Address" name="pick_partner_protect" type="object"/>
-                        or
+                        <button string="Confirm Overwrite" name="pick_partner" type="object" class="oe_highlight"
+                                invisible="not docs_online_data_ids"
+                                help="Overwrite all partner data with selected DocsOnline data."/>
+                        <button string="Add main Partner and Branches" name="pick_partner_with_branches" type="object" class="btn-primary"
+                                invisible="not docs_online_data_ids"
+                                help="Add the main partner and create all branches as child contacts."/>
+                        <button string="Confirm Without Overwrite of Protected Fields" name="pick_partner_protect" type="object"
+                                invisible="not docs_online_data_ids"
+                                help="Update partner data respecting configuration settings for protected fields."/>
                         <button string="Cancel" class="oe_link" special="cancel"/>
                     </footer>
                 </form>

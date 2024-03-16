@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-22 05:45+0000\n"
-"PO-Revision-Date: 2020-09-22 05:45+0000\n"
+"POT-Creation-Date: 2025-06-26 15:03+0000\n"
+"PO-Revision-Date: 2025-06-26 15:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,6 +30,18 @@ msgid ""
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid ""
+"<span class=\"o_form_label\">Read Chilean partners data from "
+"documentosonline.cl</span>"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "<span class=\"o_form_label\">What to do if partner exists?</span>"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__l10n_cl_activity_description
 msgid "Activity Description"
 msgstr ""
@@ -37,6 +49,16 @@ msgstr ""
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.view_update_button_form
 msgid "Actualizar desde DocumentosOnline"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
+msgid "Add main Partner and Branches"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
+msgid "Add the main partner and create all branches as child contacts."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -61,29 +83,28 @@ msgid "City"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
 msgid "Confirm Overwrite"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
-msgid "Confirm Without Overwrite Name or Address"
+msgid "Confirm Without Overwrite of Protected Fields"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Connection to Documentos Online (documentosonline.cl)"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__contact
 msgid "Contact"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__country_id
-msgid "Country"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__city_id
-msgid "County"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -99,29 +120,82 @@ msgid "Created on"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__l10n_cl_dte_email
-msgid "DTE Email"
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+#, python-format
+msgid "Data not found for RUT %s. Try searching on www.documentosonline.cl"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__display_name
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__3
-msgid "End Consumer"
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__docs_online_data_ids
+msgid "Docs Online Data"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__2
-msgid "Fees Receipt Issuer (2nd category)"
+#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online
+msgid "DocsOnline Wizard"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__4
-msgid "Foreigner"
+#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online_data
+msgid "DocsOnline Wizard Data"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+#: code:addons/l10n_cl_docsonline_partner/wizard/data_docsonline.py:0
+#, python-format
+msgid "DocsOnline: Error fetching data: %s"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+#: code:addons/l10n_cl_docsonline_partner/wizard/data_docsonline.py:0
+#, python-format
+msgid "DocsOnline: Invalid response format"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Documentos Online"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_token
+msgid "DocumentosOnline Token"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/res_config_settings.py:0
+#, python-format
+msgid "DocumentosOnline Token cannot be empty or consist only of whitespace."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_url
+msgid "DocumentosOnline URL"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/res_config_settings.py:0
+#, python-format
+msgid "DocumentosOnline URL cannot be empty after the protocol."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/res_config_settings.py:0
+#, python-format
+msgid "DocumentosOnline URL must start with 'http://' or 'https://'."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -136,8 +210,38 @@ msgid "ID"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__invoice
-msgid "Invoice Address"
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_restrict_token_access
+msgid ""
+"If checked, only users with specific permissions can view or modify the API "
+"token."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_email
+msgid ""
+"If checked, the partner's DTE email will be overwritten with data from "
+"DocumentosOnline when updating."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_activity
+msgid ""
+"If checked, the partner's activity description will be overwritten with data"
+" from DocumentosOnline when updating."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_street
+msgid ""
+"If checked, the partner's address fields will be overwritten with data from "
+"DocumentosOnline when updating."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_name
+msgid ""
+"If checked, the partner's name will be overwritten with data from "
+"DocumentosOnline when updating."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -164,14 +268,26 @@ msgid "Lines"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__display_name
+msgid "List Name"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__name
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__name
 msgid "Name"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__other
-msgid "Other Address"
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+#, python-format
+msgid "No data found on www.documentosonline.cl: %s"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
+msgid "Overwrite all partner data with selected DocsOnline data."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -180,23 +296,92 @@ msgid "Partner"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__private
-msgid "Private Address"
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Partners Token"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__state_id
-msgid "Province"
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Partners URL"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid ""
+"Put here your free API token to get the fiscal data.\n"
+"                                    Visit"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__vat
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.view_search_vat
 msgid "RUT"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__delivery
-msgid "Shipping Address"
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+#, python-format
+msgid "RUT or Name required for DocsOnline update"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Replace Activity"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Replace Address"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Replace Email"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Replace Name"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_activity
+msgid "Replace Partner Activity"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_street
+msgid "Replace Partner Address"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_email
+msgid "Replace Partner Email"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_name
+msgid "Replace Partner Name"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_restrict_token_access
+msgid "Restrict Token Access"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+#, python-format
+msgid "Select a partner from a list"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid ""
+"Select if you want to replace data if the partner already exists in "
+"documentosonline.cl"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -205,41 +390,26 @@ msgid "Street"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__street2
-msgid "Street2"
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_token
+msgid ""
+"The authentication token for accessing the DocumentosOnline API. Keep this "
+"secure and do not share it publicly."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__l10n_cl_sii_taxpayer_type
-msgid "Taxpayer Type"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__type
-msgid "Type of Address"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__1
-msgid "VAT Affected (1st Category)"
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_url
+msgid ""
+"The base URL for the DocumentosOnline API. Leave empty to use the default "
+"provided by the system."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
-msgid "of"
+msgid ""
+"Update partner data respecting configuration settings for protected fields."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
-msgid "or"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online
-msgid "www.documentosonline.cl wizard"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online_data
-msgid "www.documentosonline.cl wizard #2"
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "to register."
 msgstr ""
