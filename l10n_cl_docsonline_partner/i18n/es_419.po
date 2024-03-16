@@ -103,7 +103,7 @@ msgstr "Confirmar sin sobreescribir nombre o dirección"
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
 msgid "Connection to Documentos Online (documentosonline.cl)"
-msgstr "Connexión a Documentos Online (documentosonline.cl)"
+msgstr "Conexión a Documentos Online (documentosonline.cl)"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner
