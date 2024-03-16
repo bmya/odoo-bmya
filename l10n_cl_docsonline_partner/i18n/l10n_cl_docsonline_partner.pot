@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0+e\n"
+"Project-Id-Version: Odoo Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-22 05:45+0000\n"
-"PO-Revision-Date: 2020-09-22 05:45+0000\n"
+"POT-Creation-Date: 2024-03-16 14:20+0000\n"
+"PO-Revision-Date: 2024-03-16 14:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,18 @@ msgstr ""
 msgid ""
 "<i title=\"Buscar\" role=\"img\" aria-label=\"Buscar\" class=\"fa fa-"
 "address-card-o\"/>"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid ""
+"<span class=\"o_form_label\">Read Chilean partners data from "
+"documentosonline.cl</span>"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "<span class=\"o_form_label\">What to do if partner exists?</span>"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -61,6 +73,11 @@ msgid "City"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
 msgid "Confirm Overwrite"
 msgstr ""
@@ -68,6 +85,11 @@ msgstr ""
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
 msgid "Confirm Without Overwrite Name or Address"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Connection to Documentos Online (documentosonline.cl)"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -110,6 +132,16 @@ msgid "Display Name"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Documentos Online"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_token
+msgid "Documentos Online Token"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__3
 msgid "End Consumer"
 msgstr ""
@@ -138,12 +170,6 @@ msgstr ""
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__invoice
 msgid "Invoice Address"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online____last_update
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -180,6 +206,11 @@ msgid "Partner"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Partners Token"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__private
 msgid "Private Address"
 msgstr ""
@@ -190,8 +221,41 @@ msgid "Province"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid ""
+"Put here your free API token to get the fiscal data.\n"
+"                                Visit"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__vat
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.view_search_vat
 msgid "RUT"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Replace Address"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Replace Email"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_email
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_name
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_street
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "Replace Name"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid ""
+"Select if you want to replace data if the partner already exists in "
+"documentosonline.cl"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -226,12 +290,12 @@ msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
-msgid "of"
+msgid "or"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
-msgid "or"
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings_docs_online_connect
+msgid "to register."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner

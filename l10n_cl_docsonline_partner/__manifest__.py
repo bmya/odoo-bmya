@@ -15,9 +15,10 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-        #'views/partner_view.xml',
-        #'data/ir.config_parameter.xml',
-        #'wizard/data_docsonline_view.xml',
+        'data/ir.config_parameter.xml',
+        'views/partner_view.xml',
+        'views/res_config_settings.xml',
+        'wizard/data_docsonline_view.xml',
     ],
     'installable': True,
     'auto_install': False,
