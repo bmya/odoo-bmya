@@ -13,6 +13,6 @@ class ResConfigSettings(models.TransientModel):
     docs_online_partner_replace_name = fields.Boolean(
         string="Replace Name", config_parameter='docsonline.replace_name')
     docs_online_partner_replace_street = fields.Boolean(
-        string="Replace Name", config_parameter='docsonline.replace_street')
+        string="Replace Address", config_parameter='docsonline.replace_street')
     docs_online_partner_replace_email = fields.Boolean(
-        string="Replace Name",config_parameter='docsonline.replace_email')
+        string="Replace Email", config_parameter='docsonline.replace_email')

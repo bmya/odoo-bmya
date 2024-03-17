@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-        <record id="res_config_settings_docs_online_connect" model="ir.ui.view">
+        <record id="res_config_settings" model="ir.ui.view">
         <field name="name">res.config.settings.docs.online.connect</field>
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="l10n_cl.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//block[@id='l10n_cl_section']" position="after">
-                <block title="Connection to Documentos Online (documentosonline.cl)" id="l10n_cl_documentos_online_partner" invisible="country_code != 'CL'">
-                <div class="row" name="l10n_cl_docs_online_connect0">
-                    <div class="col-12 col-lg-6 o_setting_box" id="l10n_cl_account_move_import_docs_online_free_token">
-                        <div class="o_setting_left_pane"/>
-                        <div class="o_setting_right_pane">
-                            <span class="o_form_label">Read Chilean partners data from documentosonline.cl</span>
-                            <div class="text-muted">
-                                Put here your free API token to get the fiscal data.
-                                Visit <a href="https://documentosonline.cl">Documentos Online</a> to register.
-                            </div>
-                            <div class="content-group">
-                                <div class="row mt16">
-                                    <label string="Partners Token" for="docs_online_partner_token" class="col-lg-4 o_light_label"/>
-                                    <field name="docs_online_partner_token"/>
+                <block title="Connection to Documentos Online (documentosonline.cl)" id="l10n_cl_docs_online_partner" invisible="country_code != 'CL'">
+                    <div class="row" name="l10n_cl_docs_online_partner">
+                        <div class="col-12 col-lg-6 o_setting_box" id="l10n_cl_account_move_import_docs_online_free_token">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Read Chilean partners data from documentosonline.cl</span>
+                                <div class="text-muted">
+                                    Put here your free API token to get the fiscal data.
+                                    Visit https://documentosonline.cl to register.
+                                </div>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Partners Token" for="docs_online_partner_token" class="col-lg-4 o_light_label"/>
+                                        <field name="docs_online_partner_token"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-lg-6 o_setting_box" id="l10n_cl_account_move_import_docs_online_replacement">
-                        <div class="o_setting_left_pane"/>
-                        <div class="o_setting_right_pane">
-                            <span class="o_form_label">What to do if partner exists?</span>
-                            <div class="text-muted">
-                                Select if you want to replace data if the partner already exists in documentosonline.cl
-                            </div>
-                            <div class="content-group">
-                                <div class="row mt16">
-                                    <field name="docs_online_partner_replace_name" style="width: 10% !important;"/>
-                                    <label string="Replace Name" for="docs_online_partner_replace_name" class="col-lg-10 o_light_label"/>
+                        <div class="col-12 col-lg-6 o_setting_box" id="l10n_cl_account_move_import_docs_online_replacement">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">What to do if partner exists?</span>
+                                <div class="text-muted">
+                                    Select if you want to replace data if the partner already exists in documentosonline.cl
                                 </div>
-                                <div class="row">
-                                    <field name="docs_online_partner_replace_street" style="width: 10% !important;"/>
-                                    <label string="Replace Address" for="docs_online_partner_replace_street" class="col-lg-10 o_light_label"/>
-                                </div>
-                                <div class="row">
-                                    <field name="docs_online_partner_replace_email" style="width: 10% !important;"/>
-                                    <label string="Replace Email" for="docs_online_partner_replace_email" class="col-lg-10 o_light_label"/>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <field name="docs_online_partner_replace_name" style="width: 10% !important;"/>
+                                        <label string="Replace Name" for="docs_online_partner_replace_name" class="col-lg-10 o_light_label"/>
+                                    </div>
+                                    <div class="row">
+                                        <field name="docs_online_partner_replace_street" style="width: 10% !important;"/>
+                                        <label string="Replace Address" for="docs_online_partner_replace_street" class="col-lg-10 o_light_label"/>
+                                    </div>
+                                    <div class="row">
+                                        <field name="docs_online_partner_replace_email" style="width: 10% !important;"/>
+                                        <label string="Replace Email" for="docs_online_partner_replace_email" class="col-lg-10 o_light_label"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </block>
             </xpath>
         </field>
