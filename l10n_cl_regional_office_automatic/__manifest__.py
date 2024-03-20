@@ -1,6 +1,6 @@
 {
     "name": "Chile Localization SII Regional Offices",
-    "version": "11.0.1.0.0",
+    "version": "14.0.1.0",
     "author": "Blanco Martín & Asociados",
     "license": "LGPL-3",
     "website": "http://blancomartin.cl",
