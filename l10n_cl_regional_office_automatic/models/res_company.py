@@ -72,7 +72,7 @@ class ResCompany(models.Model):
     _inherit = 'res.company'
 
     l10n_cl_sii_regional_office = fields.Selection(
-        L10N_CL_SII_REGIONAL_OFFICES_ITEMS, related='partner_id.l10n_cl_sii_regional_office',
+        L10N_CL_SII_REGIONAL_OFFICES_ITEMS, related='partner_id.l10n_cl_sii_regional_office', readonly=False,
         translate=False, string='SII Regional Office')
 
     @api.onchange('city_id')
