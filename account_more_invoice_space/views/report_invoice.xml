@@ -1,0 +1,8 @@
+<odoo>
+    <template id="report_invoice_document_mt_0_font_size_80_percent" inherit_id="account.report_invoice_document">
+        <div class="mt-5" position="attributes">
+              <attribute name="class">mt-0</attribute>
+              <attribute name="style">font-size: 0.8em;</attribute>
+        </div>
+    </template>
+</odoo>
