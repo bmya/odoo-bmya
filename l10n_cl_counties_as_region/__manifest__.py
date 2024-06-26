@@ -21,6 +21,5 @@
         "data/res.country.state.csv",
         "data/res.city.csv",
     ],
-    "active": False,
     "installable": True,
 }
