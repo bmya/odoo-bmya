@@ -19,7 +19,6 @@
     ],
     "data": [
         "data/res.country.state.csv",
-        "data/res.city.csv",
     ],
     "installable": True,
 }
