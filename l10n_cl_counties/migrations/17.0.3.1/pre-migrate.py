@@ -61,10 +61,14 @@ def migrate(cr, version):
     ENV = util.env(cr)
     new_states = {}
     for country_state in RES_COUNTRY_STATES:
-        country_base_id = ENV.ref(country_state[1]).id
+        country_base = ENV.ref(country_state[1], raise_if_not_found=False)
+        new_state = ENV.ref(country_state[0], raise_if_not_found=False)
+        if country_base is None or new_state is None:
+            continue
+        country_base_id = country_base.id
         if country_base_id not in new_states:
             new_states[country_base_id] = []
-        new_states[country_base_id].append(ENV.ref(country_state[0]).id)
+        new_states[country_base_id].append(new_state.id)
     for base_id, old_state_ids in new_states.items():
         cr.execute("UPDATE res_partner SET state_id={} WHERE state_id in {}".format(base_id, tuple(old_state_ids)))
     util.remove_view(cr, 'l10n_cl_counties.view_partner_form_states_city_inherit')
