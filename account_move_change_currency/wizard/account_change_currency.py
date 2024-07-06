@@ -97,5 +97,5 @@ class AccountChangeCurrency(models.TransientModel):
             move_form.currency_id = self.currency_id
             move_form.save()
         body += Markup('<br />') + _('Calculated Untaxed Amount: %s', formatLang(self.env, move.amount_untaxed, currency_obj=move.currency_id))
-        move.message_post(body=body)
+        move.message_post(body=body, body_is_html=True)
         return {'type': 'ir.actions.act_window_close'}
