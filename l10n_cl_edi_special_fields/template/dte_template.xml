@@ -4,16 +4,17 @@
         <template id="dte_subtemplate" inherit_id="l10n_cl_partner_extra_xml_identification.dte_subtemplate">
             <Receptor position="replace">
                 <Receptor>
-                    <RUTRecep t-esc="'55555555-5' if move.partner_id._l10n_cl_is_foreign() else format_vat(move.commercial_partner_id.vat)"/>
-                    <RznSocRecep t-esc="format_length((move.partner_invoice_id.name or '') + ' - ' + move.partner_invoice_id.commercial_partner_id.name or '', 100)"/>
-                    <Extranjero t-if="move.partner_id._l10n_cl_is_foreign()">
-                        <NumId t-esc="move.partner_id.vat"/>
-                        <IdAdicRecep t-esc="format_length(move.partner_id.country_id.name or move.commercial_partner_id.country_id.name, 20)"/>
+                    <RUTRecep t-esc="'55555555-5' if move.partner_invoice_id._l10n_cl_is_foreign() else format_vat(move.partner_invoice_id.commercial_partner_id.vat)"/>
+                    <RznSocRecep t-esc="format_length((move.partner_invoice_id.name or '') + ' - ' + (move.partner_invoice_id.commercial_partner_id.name or ''), 100)"/>
+                    <Extranjero t-if="move.partner_invoice_id._l10n_cl_is_foreign()">
+                        <NumId t-esc="move.partner_invoice_id.vat"/>
+                        <Nacionalidad t-if="move.partner_invoice_id._l10n_cl_is_foreign()" t-out="move.partner_invoice_id.country_id.l10n_cl_customs_code or '999'"/>
+                        <IdAdicRecep t-if="move.l10n_latam_document_type_id._is_doc_type_export()" t-esc="format_length(move.partner_invoice_id.country_id.name or move.partner_invoice_id.commercial_partner_id.country_id.name, 20)"/>
                     </Extranjero>
-                    <GiroRecep t-if="not move.partner_id._l10n_cl_is_foreign() and not move.l10n_latam_document_type_id._is_doc_type_export() and not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="format_length(move.partner_id.l10n_cl_activity_description, 40)"/>
+                    <GiroRecep t-if="not move.partner_invoice_id._l10n_cl_is_foreign() and not move.l10n_latam_document_type_id._is_doc_type_export() and not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="format_length(move.partner_invoice_id.l10n_cl_activity_description, 40)"/>
                     <Contacto t-esc="format_length(move.partner_invoice_id.phone, 80)"/>
-                    <CorreoRecep t-if="(move.partner_invoice_id.email or move.commercial_partner_id.l10n_cl_dte_email or move.partner_id.email or move.partner_id.l10n_cl_dte_email) and not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="move.commercial_partner_id.l10n_cl_dte_email or move.partner_id.l10n_cl_dte_email or move.commercial_partner_id.email or move.partner_id.email"/>
-                    <DirRecep t-esc="format_length(move.partner_invoice_id.street or move.commercial_partner_id.street or '' + ' ' + move.partner_invoice_id.street2 or move.commercial_partner_id.street2 or '', 70)"/>
+                    <CorreoRecep t-if="(move.partner_invoice_id.email or move.partner_invoice_id.commercial_partner_id.l10n_cl_dte_email or move.partner_invoice_id.email or move.partner_invoice_id.l10n_cl_dte_email) and not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="move.partner_invoice_id.commercial_partner_id.l10n_cl_dte_email or move.partner_invoice_id.l10n_cl_dte_email or move.partner_invoice_id.commercial_partner_id.email or move.partner_invoice_id.email"/>
+                    <DirRecep t-esc="format_length(move.partner_invoice_id.street or move.partner_invoice_id.commercial_partner_id.street or '' + ' ' + (move.partner_invoice_id.street2 or move.commercial_partner_id.street2 or ''), 70)"/>
                     <CmnaRecep t-esc="move._l10n_cl_get_comuna_recep()"/>
                 </Receptor>
             </Receptor>
@@ -28,7 +29,7 @@
 
         <template id="dd_subtemplate" inherit_id="l10n_cl_edi.dd_template">
             <RSR position="replace">
-                    <RSR t-esc="format_length((move.partner_invoice_id.name or '') + ' - ' + move.partner_invoice_id.commercial_partner_id.name or '', 40)"/>
+                    <RSR t-esc="format_length((move.partner_invoice_id.name or '') + ' - ' + (move.partner_invoice_id.commercial_partner_id.name or ''), 40)"/>
             </RSR>
         </template>
     </data>
