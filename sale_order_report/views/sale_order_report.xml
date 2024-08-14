@@ -44,7 +44,7 @@
                         <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
                     </div>
                     <div class="row">
-                            <span name="company_address" style="font-size: smaller" class="mt0 text-right"
+                            <span name="company_address" style="font-size: smaller" class="mt0 text-end"
                                   t-field="company.l10n_cl_activity_description"/>
                             <br/>
                             <span name="company_address2" style="font-size: smaller">
@@ -107,7 +107,7 @@
     <template id="custom_footer_bmya">
         <div class="footer">
 
-            <div class="text-right" style="border-top: 1px solid black;">
+            <div class="text-end" style="border-top: 1px solid black;">
                 <ul class="list-inline mb4"/>
                 <div name="financial_infos"/>
                 <div class="text-muted">
@@ -207,17 +207,17 @@
                             <th>
                                 <strong>Descripción del Artículo</strong>
                             </th>
-                            <th class="text-right">
+                            <th class="text-end">
                                 <strong>Cant</strong>
                             </th>
                             <t t-if="document_type=='ORDEN DE COMPRA'">
-                                <th class="text-right">
+                                <th class="text-end">
                                     <strong>Precio Unitario</strong>
                                 </th>
-                                <th class="text-right">
+                                <th class="text-end">
                                     <strong>Total</strong>
                                 </th>
-                                <th class="text-right">
+                                <th class="text-end">
                                     <strong>Fecha Entr</strong>
                                 </th>
                             </t>
@@ -235,14 +235,14 @@
                             <td>
                                 <span t-field="line.name"/>
                             </td>
-                            <td class="text-right">
+                            <td class="text-end">
                                 <span t-esc="int(line.product_uom_qty)"/>
                             </td>
                             <t t-if="document_type=='ORDEN DE COMPRA'">
-                                <td class="text-right">
+                                <td class="text-end">
                                     <span t-field="line.price_unit"/>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-end">
                                     <span t-field="line.price_subtotal"
                                           t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
                                 </td>
@@ -268,14 +268,14 @@
                                     <td>
                                         <strong>Subtotal</strong>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <span t-field="o.amount_untaxed"
                                               t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Impuestos</td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <span t-field="o.amount_tax"
                                               t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
                                     </td>
@@ -284,7 +284,7 @@
                                     <td>
                                         <strong>Total</strong>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <span t-field="o.amount_total"
                                               t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
                                     </td>
@@ -300,7 +300,7 @@
                     <table class="table table-sm o_main_table">
                         <tbody>
                             <tr>
-                                <td class="text-left" style="vertical-align: top; width: 7%; font-size: xx-small;">
+                                <td class="text-start" style="vertical-align: top; width: 7%; font-size: xx-small;">
                                     <!--<div class="col-xs-6"
                                          style="border-style: solid; border-width: thin; padding-left: 0px; padding-top:0px; padding:bottom: 0px; padding-right: 0px;">-->
                                     <p>
@@ -311,7 +311,7 @@
                                     <!--</div>-->
                                     <!--<br />-->
                                 </td>
-                                <td class="text-left" style="vertical-align: top; width: 7%; font-size: xx-small;">
+                                <td class="text-start" style="vertical-align: top; width: 7%; font-size: xx-small;">
                                     OBSERVACIONES
                                     <br/>
                                     <p t-field="o.note"/>
@@ -319,18 +319,18 @@
                             </tr>
                             <tr>
                                 <td/>
-                                <td colspan="2" class="text-left"
+                                <td colspan="2" class="text-start"
                                     style="vertical-align: top; width: 7%; font-size: xx-small;">
                                     <span style="font-size: xx-small;">CONDICIONES COMERCIALES:</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-left" style="vertical-align: top; width: 7%; font-size: xx-small;">
+                                <td class="text-start" style="vertical-align: top; width: 7%; font-size: xx-small;">
                                     Material Puesto en:
                                     <br/>
                                     <span t-field="o.partner_shipping_id"/>
                                 </td>
-                                <td class="text-left" style="vertical-align: top; width: 7%; font-size: xx-small;">
+                                <td class="text-start" style="vertical-align: top; width: 7%; font-size: xx-small;">
                                     Forma de Pago:
                                     <br/>
                                     <span t-field="o.payment_term_id"/>,
