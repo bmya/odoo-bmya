@@ -3,19 +3,19 @@
     <record id="stock_picking_especial_field_form_inherit" model="ir.ui.view">
         <field name="name">stock_picking_especial_field.form</field>
         <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
+        <field name="inherit_id" ref="stock_delivery.view_picking_withcarrier_out_form"/>
         <field name="priority" eval="8"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='carrier_id']" position="after">
                 <field name="vehicle" required="transport_type == '2'" invisible="transport_type != '2'" readonly="state == 'done'"/>
                 <field name="chofer" required="transport_type == '2'" invisible="transport_type != '2'" readonly="state == 'done'"/>
-                <field name="patente" required="transport_type == '2'"/>
+                <field name="patente" required="transport_type == '2'" readonly="state == 'done'"/>
             </xpath>
             <xpath expr="//field[@name='move_type']" position="after">
-                <field name="transport_type"/>
+                <field name="transport_type" readonly="state == 'done'"/>
             </xpath>
             <xpath expr="//field[@name='origin']" position="after">
-                <field name="contact_id"/>
+                <field name="contact_id" readonly="state == 'done'"/>
             </xpath>
         </field>
     </record>
