@@ -6,7 +6,7 @@
         <field name='type'>form</field>
         <field name='arch' type='xml'>
             <field name="street2" position="after">
-                <field name="city_id" domain="[('country_id', '=', country_id)]" attrs="{'invisible': [('country_id', '!=', %(base.cl)d)]}"
+                <field name="city_id" domain="[('country_id', '=', country_id)]" invisible="country_id != %(base.cl)d"
                     placeholder="Comuna" style="width: 100%" options='{"no_create": True}'/>
                 <field name="real_city" readonly="country_id != %(base.state_cl_13)d"/><br />
             </field>
@@ -17,7 +17,7 @@
                 <attribute name="readonly">country_id == %(base.cl)d</attribute>
             </field>
             <xpath expr="//notebook/page/field[@name='child_ids']/form/sheet/group/group/div/div/field[@name='street2']" position="after">
-                <field name="city_id" domain="[('country_id', '=', country_id)]" attrs="{'invisible': [('country_id', '!=', %(base.cl)d)]}"
+                <field name="city_id" domain="[('country_id', '=', country_id)]" invisible="country_id != %(base.cl)d"
                     placeholder="Comuna" style="width: 100%" options='{"no_create": True}'/>
                 <field name="real_city" readonly="country_id == %(base.cl)d" invisible="state_id != %(base.state_cl_13)d"/><br />
             </xpath>
