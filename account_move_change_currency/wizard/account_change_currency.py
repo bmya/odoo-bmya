@@ -74,14 +74,10 @@ class AccountChangeCurrency(models.TransientModel):
         move = self._get_move()
         if self.currency_id == move.currency_id:
             return {'type': 'ir.actions.act_window_close'}
-        if self.currency_id == move.company_id.currency_id:
-            rate = self.currency_rate
-        else:
-            rate = 1 / self.currency_rate
         with Form(move) as move_form:
             for i in range(len(move_form.invoice_line_ids)):
                 with move_form.invoice_line_ids.edit(i) as line:
-                    line.price_unit = line.price_unit * rate
+                    line.price_unit = line.price_unit * self.currency_rate
                     line.currency_id = self.currency_id
             if self.currency_rate >= 1:
                 previous_currency = move.currency_id
