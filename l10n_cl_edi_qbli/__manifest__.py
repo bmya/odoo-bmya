@@ -5,6 +5,7 @@
     'license': 'LGPL-3',
     'sequence': 12,
     'author':  'Blanco Martín & Asociados',
+    'summary': 'Ciertos clientes que usan SAP requieren que el proveedor coloque en el XML de la factura un QBLI, que es un código en cada linea que identifica el ítem de la orden de compra de este cliente.',
     'description': """
 Adds QBLI to the invoice lines, according to requirements from some customers using SAP
 =======================================================================================

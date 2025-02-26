@@ -6,6 +6,7 @@
     'icon': '/l10n_cl_partner_extra_xml_identification/static/description/icon.png',
     'sequence': 12,
     'author':  'Blanco Martín & Asociados',
+    'summary': 'Además permite que la deuda en el asiento contable se cargue a la empresa principal a pesar que se facture a una sucursal.',
     'description': """
     Permite emitir la factura a la sucursal de un cliente, y asignar la deuda directamente al cliente real.
     Este módulo se conserva para mantener la compatibilidad con versiones anteriores, pero desde odoo 16 este problema

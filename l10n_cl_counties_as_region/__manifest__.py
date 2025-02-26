@@ -1,6 +1,7 @@
 
 {
     "name": "Chile Localization Regions, Cities and Counties",
+    "summary": "Este modulo hace un hack, colocando las comunas como si fuesen regiones, con el objeto de poder usar las reglas originales de Odoo para determinar los transportes disponibles. No se recommienda usarlo si no se usa delivery",
     "description": """
     This module allows to include the county (comuna) as if it were a region. The object of this 
     is to contain all the comunas in a single table.
@@ -11,7 +12,7 @@
     "version": "18.0.1.0.0",
     "author": "Blanco Martín & Asociados",
     'license': "LGPL-3",
-    "website": "https://www.bmya.cl",
+    "website": "http://blancomartin.cl",
     "category": "Localization/Geopolitical Distribution",
     "depends": [
         "base",

@@ -5,6 +5,7 @@
     'license': 'LGPL-3',
     'sequence': 12,
     'author':  'Blanco Martín & Asociados',
+    'summary': 'Ciertos clientes que usan SAP validan CdgVendedor y CdgIntRecep en la factura para identificar al proveedor y exigen que dicho campo no obligatorio esté en la factura. Este modulo resuelve ese gap.',
     'description': """
 Agrega Campos Especiales a los XML
 ==================================
