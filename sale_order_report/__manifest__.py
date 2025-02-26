@@ -3,9 +3,7 @@
 
 {
     'name': 'Sale Order Report',
-    'summary': """
-        This module adapts the sale order to chilean format
-    """,
+    'summary': """Este modulo modifica el formato de las ordenes de venta para adaptarse a los formatos chilenos (recuadro margen superior derecho).""",
     'version': '17.0.1.1.0',
     'license': 'LGPL-3',
     'author': 'Blanco Martín & Asociados',

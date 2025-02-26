@@ -7,7 +7,7 @@
     'author':  'Blanco Martín & Asociados',
     'website': 'http://blancomartin.cl',
     'license': 'LGPL-3',
-    'summary': '',
+    'summary': 'Permite obtener datos tributarios de los clientes conectandose a www.documentosonline.cl. Requiere obtener una API de este sitio. Hay opción de uso gratuito.',
     'depends': [
         'l10n_cl_edi',
         'l10n_cl_counties',

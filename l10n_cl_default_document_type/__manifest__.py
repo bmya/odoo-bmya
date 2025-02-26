@@ -1,6 +1,6 @@
 {
     "name": "Default Document Type (Chilean Localization)",
-    'summary': 'Automatically set a document type depending on the customer\'s taxpayer type.',
+    'summary': 'Establece un tipo de documento por defecto basado en el tipo de contribuyente (consumidor final->boleta, 1ra o 2da categoria de ventas -> factura, extranjero -> factura de exportación.',
     "description": """
         Depending on the partner's taxpayer type we set the default document type to the following:
         1st or 2nd category: Factura Electrónica (33)

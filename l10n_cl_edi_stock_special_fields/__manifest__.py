@@ -5,6 +5,7 @@
     'license': "LGPL-3",
     'sequence': 12,
     'author':  'Blanco Martín & Asociados',
+    'summary': 'Agrega Campos adicionales en el modelo stock como chofer, etc. utilizando el modulo de flota.',
     'description': """
 Agrega Campos Especiales en el modelo stock
 ===========================================

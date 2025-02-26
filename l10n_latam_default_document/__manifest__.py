@@ -1,7 +1,7 @@
 {
     'name': 'Default Latam Document',
     'version': '17.0.1.0',
-    'summary': 'Default Latam Document',
+    'summary': 'Permite ordenar los tipos de documentos de latinoamérica para dar prioridad a un documento por defecto',
     'description': 'Default Latam Document',
     'category': 'Localization',
     'author': 'Blanco Martín & Asociados',
