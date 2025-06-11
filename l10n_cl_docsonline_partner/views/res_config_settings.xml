@@ -13,6 +13,9 @@
                              id="docs_online_1_settings">
                         <div class="content-group">
                             <div class="row">
+                                <label string="Partners URL" for="docs_online_partner_url"
+                                       class="col-lg-4 o_light_label"/>
+                                <field name="docs_online_partner_url"/>
                                 <label string="Partners Token" for="docs_online_partner_token"
                                        class="col-lg-4 o_light_label"/>
                                 <field name="docs_online_partner_token"/>
@@ -36,6 +39,11 @@
                             <div class="row">
                                 <field name="docs_online_partner_replace_email" style="width: 10% !important;"/>
                                 <label string="Replace Email" for="docs_online_partner_replace_email"
+                                       class="col-lg-10 o_light_label"/>
+                            </div>
+                            <div class="row">
+                                <field name="docs_online_partner_replace_activity" style="width: 10% !important;"/>
+                                <label string="Replace Activity" for="docs_online_partner_replace_activity"
                                        class="col-lg-10 o_light_label"/>
                             </div>
                         </div>
