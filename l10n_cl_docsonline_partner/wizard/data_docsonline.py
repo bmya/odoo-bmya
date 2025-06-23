@@ -1,99 +1,148 @@
-from odoo import api, fields, models
+import json
+import logging
+import requests
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
+_logger = logging.getLogger(__name__)
 
 class PartnerDocumentsOnline(models.TransientModel):
-    """Wizard to show www.documentosonline.cl data"""
     _name = 'res.partner.docs.online'
-    _description = 'www.documentosonline.cl wizard'
+    _description = 'DocsOnline Wizard'
 
-    partner_id = fields.Many2one('res.partner')
+    partner_id = fields.Many2one('res.partner', string='Partner')
     name = fields.Char(string='Name', related='partner_id.name', readonly=True)
-    docs_online_data_ids = fields.Many2many('res.partner.docs.online.data', string='-')
+    docs_online_data_ids = fields.Many2many('res.partner.docs.online.data', string='')
 
     @api.model
     def truncate(self):
-        cursor = self.env.cr
-        cursor.execute('truncate res_partner_docs_online cascade')
+        """Clear existing wizard data."""
+        self.env.cr.execute('TRUNCATE res_partner_docs_online CASCADE')
+
+    def _fetch_docsonline_partner_data(self, rut, include_branches=False):
+        """Fetch partner data from DocsOnline API with optional branches.
+
+        Args:
+            rut (str): RUT of the partner to fetch data for.
+            include_branches (bool): If True, include branch data in the API call.
+
+        Returns:
+            dict: JSON data from the API response.
+
+        Raises:
+            UserError: If the API call fails or the response is invalid.
+        """
+        partner_obj = self.env['res.partner']
+        docsonline_data = partner_obj._get_docsonline_data()
+        headers = {
+            'Authorization': docsonline_data['token'],
+            'accept': 'application/json',
+        }
+        endpoint = f"{docsonline_data['url']}/partner/details/{rut}"
+        if include_branches:
+            endpoint += "?include_sucursales=True"
+        try:
+            response = requests.get(endpoint, headers=headers, timeout=10)
+            response.raise_for_status()
+        except requests.RequestException as e:
+            _logger.error("DocsOnline API error for RUT %s: %s", rut, str(e))
+            raise UserError(_('DocsOnline: Error fetching data: %s') % str(e))
+
+        try:
+            data = response.json()
+            _logger.debug("DocsOnline response for RUT %s: %s", rut, data)
+            return data
+        except json.JSONDecodeError:
+            _logger.error("Invalid JSON response for RUT %s: %s", rut, response.text)
+            raise UserError(_('DocsOnline: Invalid response format'))
+
+    def _update_partner_from_data(self, partner_data, protect_fields=False, update_vat=True):
+        """Update the partner with data fetched from DocsOnline.
+
+        Args:
+            partner_data (dict): Data to update the partner with.
+            protect_fields (bool): If True, respect configuration settings to protect certain fields.
+            update_vat (bool): If True, update the VAT field.
+        """
+        partner_odoo_data = self.env['res.partner']._prepare_single_partner_data(partner_data)
+        if update_vat:
+            partner_odoo_data['vat'] = self.docs_online_data_ids[0].vat
+
+        if protect_fields:
+            config_params = self.env['ir.config_parameter'].sudo()
+            update_vals = {
+                'vat': partner_odoo_data['vat'],
+                'l10n_latam_identification_type_id': partner_odoo_data['l10n_latam_identification_type_id'],
+                'l10n_cl_sii_taxpayer_type': partner_odoo_data['l10n_cl_sii_taxpayer_type'],
+            }
+            if config_params.get_param('docsonline.replace_name', False):
+                update_vals['name'] = partner_odoo_data['name']
+            if config_params.get_param('docsonline.replace_street', False):
+                update_vals.update({
+                    'street': partner_odoo_data['street'],
+                    'street2': partner_odoo_data['street2'],
+                    'city': partner_odoo_data['city'],
+                    'city_id': partner_odoo_data['city_id'],
+                })
+            if config_params.get_param('docsonline.replace_email', False):
+                update_vals['l10n_cl_dte_email'] = partner_odoo_data['l10n_cl_dte_email']
+            if config_params.get_param('docsonline.replace_activity', False):
+                update_vals['l10n_cl_activity_description'] = partner_odoo_data['l10n_cl_activity_description']
+            self.partner_id.update(update_vals)
+        else:
+            self.partner_id.update(partner_odoo_data)
 
     def pick_partner(self):
-        # implemented just for one record by now
+        """Create or update a partner record from DocsOnline data without protected fields."""
+        self.ensure_one()
         nr = self.docs_online_data_ids[0]
-        self.partner_id.update({
-            'name': nr.name,
-            'street': nr.street,
-            'street2': nr.street2,
-            'city': nr.city,
-            'city_id': nr.city_id,
-            'state_id': nr.state_id,
-            'l10n_cl_dte_email': nr.l10n_cl_dte_email,
-            'vat': nr.vat,
-            'l10n_cl_activity_description':  nr.l10n_cl_activity_description,
-            'country_id':  nr.country_id,
-            'l10n_cl_sii_taxpayer_type':  '1',  # nr.l10n_cl_sii_taxpayer_type,
-            'type':  nr.type,
-            'l10n_latam_identification_type_id': self.env.ref('l10n_cl.it_RUT').id
-        })
-        self.partner_id.press_to_update()
+        partner_values = self._fetch_docsonline_partner_data(nr.vat)
+        self._update_partner_from_data(partner_values, protect_fields=False)
+
+    def pick_partner_with_branches(self):
+        """Create or update a partner record from DocsOnline data including branches."""
+        self.ensure_one()
+        nr = self.docs_online_data_ids[0]
+        partner_values = self._fetch_docsonline_partner_data(nr.vat, include_branches=True)
+        self._update_partner_from_data(partner_values, protect_fields=False)
+        # Create branches as child contacts
+        branches = partner_values.get('domicilios', [])
+        branches_odoo = self.env['res.partner']._prepare_branch_data(self.partner_id, branches)
+        suc_qty = len(branches_odoo)
+        self.env['res.partner'].create(branches_odoo)
+        _logger.info("Created %s branches for partner %s", suc_qty, self.partner_id.name)
 
     def pick_partner_protect(self):
-        # implemented just for one record by now
+        """Update existing partner record based on configuration settings for protected fields."""
+        self.ensure_one()
         nr = self.docs_online_data_ids[0]
-        self.partner_id.update({
-            'city': nr.city,
-            'city_id': nr.city_id,
-            'state_id': nr.state_id,
-            'l10n_cl_dte_email': nr.l10n_cl_dte_email,
-            'vat': nr.vat,
-            'l10n_cl_activity_description':  nr.l10n_cl_activity_description,
-            'country_id':  nr.country_id,
-            'l10n_cl_sii_taxpayer_type':  '1',  # nr.l10n_cl_sii_taxpayer_type,
-            'type':  nr.type,
-            'l10n_latam_identification_type_id': self.env.ref('l10n_cl.it_RUT').id
-        })
-
+        partner_values = self._fetch_docsonline_partner_data(nr.vat)
+        self._update_partner_from_data(partner_values, protect_fields=True)
 
 class PartnerDocumentsOnLineData(models.TransientModel):
     _name = 'res.partner.docs.online.data'
-    _description = 'www.documentosonline.cl wizard #2'
+    _description = 'DocsOnline Wizard Data'
 
     partner_docs_ids = fields.Many2many('res.partner.docs.online', string='Lines')
     name = fields.Char('Name')
+    display_name = fields.Char("List Name", compute='_compute_display_name')
     street = fields.Char('Street')
-    street2 = fields.Char('Street2')
     city = fields.Char('City')
-    city_id = fields.Many2one('res.city', 'County')
-    state_id = fields.Many2one('res.country.state', string='Province')
-    l10n_cl_dte_email = fields.Char('DTE Email')
     vat = fields.Char('RUT')
     l10n_cl_activity_description = fields.Char(string='Activity Description')
-    country_id = fields.Many2one('res.country', string='Country')
-    l10n_cl_sii_taxpayer_type = fields.Selection(
-        [('1', 'VAT Affected (1st Category)'), ('2', 'Fees Receipt Issuer (2nd category)'), ('3', 'End Consumer'),
-         ('4', 'Foreigner')], 'Taxpayer Type', index=True)
-    type = fields.Selection([('contact', 'Contact'), ('invoice', 'Invoice Address'), ('delivery', 'Shipping Address'),
-            ('other', 'Other Address'), ('private', 'Private Address')], string='Type of Address')
 
     @api.model
     def truncate(self):
-        cursor = self.env.cr
-        cursor.execute('truncate res_partner_docs_online_data cascade')
+        """Clear existing wizard data."""
+        self.env.cr.execute('TRUNCATE res_partner_docs_online_data CASCADE')
 
-    def name_get(self):
-        result = []
+    @api.depends('name', 'vat', 'street', 'l10n_cl_activity_description')
+    def _compute_display_name(self):
         for record in self:
-            name = record.name
-            if record.vat:
-                name = '%s %s' % (name, record.vat)
-            if record.street:
-                name = '%s %s' % (name, record.street)
-            if record.street2:
-                name = '%s %s' % (name, record.street2)
-            if record.city:
-                name = '%s, %s' % (name, record.city)
-            if record.type:
-                if record.type == 'other':
-                    name = '%s (%s)' % (name, 'Sucursal')
-            if record.l10n_cl_activity_description:
-                name = '%s - %s' % (name, record.l10n_cl_activity_description)
-            result.append((record.id, name))
-        return result
+            name_parts = [part for part in [
+                record.name,
+                record.vat,
+                record.street,
+                record.l10n_cl_activity_description
+            ] if part]
+            record.display_name = ' - '.join(name_parts) if name_parts else f"{record._name},{record.id}"

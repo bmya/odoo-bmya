@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-17 14:24+0000\n"
-"PO-Revision-Date: 2024-03-17 11:25-0300\n"
+"POT-Creation-Date: 2025-06-12 22:20+0000\n"
+"PO-Revision-Date: 2025-06-12 18:25-0400\n"
 "Last-Translator: Daniel Blanco <daniel@blancomartin.cl>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.view_update_button_form
@@ -34,22 +34,6 @@ msgid ""
 msgstr ""
 "<i title=\"Buscar\" role=\"img\" aria-label=\"Buscar\" class=\"fa fa-address-"
 "card-o\"/>"
-
-#. module: l10n_cl_docsonline_partner
-#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
-msgid ""
-"<span class=\"o_form_label\">Read Chilean partners data from "
-"documentosonline.cl</span>"
-msgstr ""
-"<span class=\"o_form_label\">Leer datos de clientes o proveedores chilenos "
-"desde documentosonline.cl</span>"
-
-#. module: l10n_cl_docsonline_partner
-#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
-msgid "<span class=\"o_form_label\">What to do if partner exists?</span>"
-msgstr ""
-"<span class=\"o_form_label\">¿Qué hacer si el cliente o proveedor existe?</"
-"span>"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__l10n_cl_activity_description
@@ -107,19 +91,8 @@ msgstr "Conexión a Documentos Online (documentosonline.cl)"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__contact
 msgid "Contact"
 msgstr "Contacto"
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__country_id
-msgid "Country"
-msgstr "País"
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__city_id
-msgid "County"
-msgstr "Comuna"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__create_uid
@@ -135,36 +108,34 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__l10n_cl_dte_email
-msgid "DTE Email"
-msgstr "Correo DTE"
-
-#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__display_name
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__display_name
 #, fuzzy
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online
+msgid "DocsOnline Wizard"
+msgstr "Asistente de DocumentosOnline"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online_data
+msgid "DocsOnline Wizard Data"
+msgstr "Lista del Asistente de DocumentosOnline"
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_token
-msgid "Documentos Online Token"
+#, fuzzy
+#| msgid "Documentos Online Token"
+msgid "DocumentosOnline Token"
 msgstr "Token de Documentos Online"
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__3
-msgid "End Consumer"
-msgstr "Consumidor Final"
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__2
-msgid "Fees Receipt Issuer (2nd category)"
-msgstr "Emisor de Boletas de Honorarios (2da categoría)"
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__4
-msgid "Foreigner"
-msgstr "Extranjero"
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_url
+#, fuzzy
+#| msgid "Documentos Online Token"
+msgid "DocumentosOnline URL"
+msgstr "Token de Documentos Online"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
@@ -176,11 +147,6 @@ msgstr "Haga click aqui y seleccione alguno"
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__id
 msgid "ID"
 msgstr "ID"
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__invoice
-msgid "Invoice Address"
-msgstr "Dirección de Facturación"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__write_uid
@@ -202,15 +168,16 @@ msgid "Lines"
 msgstr "Líneas"
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__display_name
+#, fuzzy
+msgid "List Name"
+msgstr "Nombre mostrado"
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__name
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__name
 msgid "Name"
 msgstr "Nombre"
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__other
-msgid "Other Address"
-msgstr "Otra dirección"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__partner_id
@@ -223,31 +190,37 @@ msgid "Partners Token"
 msgstr "API token de partners"
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__private
-msgid "Private Address"
-msgstr "Dirección privada"
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__state_id
-msgid "Province"
-msgstr "Región"
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+#, fuzzy
+#| msgid "Partner"
+msgid "Partners URL"
+msgstr "Empresa"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid ""
-"Put here your free API token to get the fiscal data.\n"
-"                                    Visit https://documentosonline.cl to "
-"register."
+"Put here your free API token to get the fiscal data. Visit https://"
+"documentosonline.cl to register."
 msgstr ""
-"Coloque aquí su token API gratuito para obtener datos fiscales.\n"
-"                                    Visite https://documentosonline.cl para "
-"registrarse."
+"Coloque aquí su token API para obtener datos fiscales. Visite https://"
+"documentosonline.cl para registrarse."
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__vat
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.view_search_vat
 msgid "RUT"
 msgstr "RUT"
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "Read Chilean partners data from documentosonline.cl"
+msgstr "Leer Contactos chilenos desde documentosonline.cl"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_activity
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "Replace Activity"
+msgstr "Reemplazar Giro"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_street
@@ -277,46 +250,67 @@ msgstr ""
 "exista en documentosonline.cl"
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__delivery
-msgid "Shipping Address"
-msgstr "Dirección de Entrega"
-
-#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__street
 msgid "Street"
 msgstr "Calle"
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__street2
-msgid "Street2"
-msgstr "Calle 2"
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__l10n_cl_sii_taxpayer_type
-msgid "Taxpayer Type"
-msgstr "Tipo de contribuyente"
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__type
-msgid "Type of Address"
-msgstr "Tipo de Dirección"
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__1
-msgid "VAT Affected (1st Category)"
-msgstr "IVA Afecto (1ra categoría)"
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "What to do if partner exists?"
+msgstr "¿Que hacer si un contacto existe?"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
 msgid "or"
 msgstr "ó"
 
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online
-msgid "www.documentosonline.cl wizard"
-msgstr "asistente de documentosonline.cl"
+#~ msgid "Country"
+#~ msgstr "País"
 
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online_data
-msgid "www.documentosonline.cl wizard #2"
-msgstr "asistente de documentosonline.cl #2"
+#~ msgid "County"
+#~ msgstr "Comuna"
+
+#~ msgid "DTE Email"
+#~ msgstr "Correo DTE"
+
+#~ msgid "End Consumer"
+#~ msgstr "Consumidor Final"
+
+#~ msgid "Fees Receipt Issuer (2nd category)"
+#~ msgstr "Emisor de Boletas de Honorarios (2da categoría)"
+
+#~ msgid "Foreigner"
+#~ msgstr "Extranjero"
+
+#~ msgid "Invoice Address"
+#~ msgstr "Dirección de Facturación"
+
+#~ msgid "Other Address"
+#~ msgstr "Otra dirección"
+
+#~ msgid "Private Address"
+#~ msgstr "Dirección privada"
+
+#~ msgid "Province"
+#~ msgstr "Región"
+
+#~ msgid "Shipping Address"
+#~ msgstr "Dirección de Entrega"
+
+#~ msgid "Street2"
+#~ msgstr "Calle 2"
+
+#~ msgid "Taxpayer Type"
+#~ msgstr "Tipo de contribuyente"
+
+#~ msgid "Type of Address"
+#~ msgstr "Tipo de Dirección"
+
+#~ msgid "VAT Affected (1st Category)"
+#~ msgstr "IVA Afecto (1ra categoría)"
+
+#~ msgid "www.documentosonline.cl wizard"
+#~ msgstr "asistente de documentosonline.cl"
+
+#~ msgid "www.documentosonline.cl wizard #2"
+#~ msgstr "asistente de documentosonline.cl #2"
