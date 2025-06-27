@@ -6,7 +6,7 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <field name="name" position="after">
+                <xpath expr="//form/sheet/div/field[@name='company_type']" position="after">
 
                     <button name="press_to_update" type="object" class="btn-link"
                             help="Actualizar desde DocumentosOnline"
@@ -20,7 +20,7 @@
                         <i title="Buscar" role="img" aria-label="Buscar" class="fa fa-address-card-o"/>
                     </button>
 
-                </field>
+                </xpath>
             </field>
         </record>
 
