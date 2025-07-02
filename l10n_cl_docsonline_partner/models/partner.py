@@ -30,7 +30,7 @@ class ResPartner(models.Model):
 
     backup_name = fields.Char('Backup Name')
 
-    def _fetch_docsonline_partner_data(self, endpoint, value, include_branches=False):
+    def _fetch_docsonline_partner_data(self, endpoint, value):
         """Fetch data from DocsOnline API for a given endpoint and value.
         Args:
             endpoint (str): API endpoint to call (e.g., 'partner/search', 'partner/details').
@@ -45,21 +45,20 @@ class ResPartner(models.Model):
             'Authorization': docsonline_data['token'],
             'accept': 'application/json',
         }
-        if not value or not isinstance(value, str):
-            raise UserError(_('DocumentosOnline: Invalid RUT or search term provided.'))
-        url = f"{docsonline_data['url']}/{endpoint}/{value}"
-        if include_branches:
-            url += "?include_sucursales=True"
         try:
-            response = requests.get(url, headers=headers, timeout=10)
+            response = requests.get(
+                f"{docsonline_data['url']}/{endpoint}/{value}",
+                headers=headers,
+                timeout=10,
+            )
             response.raise_for_status()
         except requests.RequestException as e:
-            _logger.error("DocsOnline API error for %s/%s: %s, Response: %s", endpoint, value, str(e), getattr(e.response, 'text', 'No response'))
+            _logger.error("DocsumentosOnline: Error API para %s/%s: %s, Respuesta: %s", endpoint, value, str(e), getattr(e.response, 'text', 'No response'))
             try:
-                error_detail = e.response.json().get('detail', str(e))
+                error_detail = e.response.json().get('detail', str(e))  # Extract detail from JSON response
                 raise UserError(_('DocumentosOnline: %s') % error_detail)
             except (json.JSONDecodeError, AttributeError):
-                raise UserError(_('DocumentosOnline: %s') % str(e))
+                raise UserError(_('DocumentosOnline: %s') % str(e))  # Fallback to generic error
         try:
             data = response.json()
             _logger.debug("DocumentosOnline: %s/%s: %s", endpoint, value, data)
@@ -120,106 +119,50 @@ class ResPartner(models.Model):
         state_ref = REGIONES.get(state)
         return self.env.ref(f'base.{state_ref}').id if state_ref else False
 
-    def _prepare_data_entry(self, data, is_branch=False, for_wizard=False, parent_id=None):
-        """Prepare partner or branch data based on input and context.
-        Args:
-            data (dict): API response data for the partner or branch.
-            is_branch (bool): Whether the data is for a branch.
-            for_wizard (bool): Whether the data is for wizard formatting.
-            parent_id (res.partner, optional): Parent partner for branches.
-        Returns:
-            dict: Prepared data dictionary for partner or branch.
-        """
-        # Use data directly for branches, fallback to 'contacto' for main partner
-        address_data = data if is_branch else data.get('contacto', {})
-
+    def _prepare_data_entry(self, data, is_branch=False, for_wizard=False):
+        address_data = data.get('contacto', {})
         city = self._capital_preferences(address_data.get('comuna', ''))
 
-        # Initialize base data
-        base_data = {}
-
-        # Set name conditionally
-        if is_branch and parent_id:
-            base_data['name'] = self._capital_preferences(
-                f"{parent_id.name} - SUC: {address_data.get('calle', '')} {address_data.get('numero', '')}"
-            )
-        else:
-            base_data['name'] = self._capital_preferences(data.get('razon_social', ''))
-
-        # Address handling based on context
         if for_wizard:
-            base_data['street'] = self._capital_preferences(
-                f"{address_data.get('calle', '')} {address_data.get('numero', '')} "
-                f"{address_data.get('departamento', '')} {address_data.get('bloque', '')}"
-            ).strip()
-        else:
-            base_data['street'] = self._capital_preferences(
-                f"{address_data.get('calle', '')} {address_data.get('numero', '')}"
-            ).strip()
-            base_data['street2'] = self._capital_preferences(
-                f"{address_data.get('departamento', '')} {address_data.get('bloque', '')}"
-            ).strip()
-            base_data['city'] = city
-            base_data['city_id'] = self._get_partner_location_id(city) if not is_branch else self._get_partner_location_id(address_data.get('comuna', ''))
-            base_data['state_id'] = self._get_partner_state_id(address_data.get('region', None))
-            base_data['country_id'] = self.env.ref('base.cl').id
-
-        # Add main partner-specific fields
-        if not is_branch and not for_wizard:
-            base_data.update({
+            # Wizard-specific fields only
+            base_data = {
+                'name': self._capital_preferences(data.get('razon_social', False)),
                 'vat': data.get('rut', ''),
-                'l10n_latam_identification_type_id': self.env.ref('l10n_cl.it_RUT').id,
-                'l10n_cl_sii_taxpayer_type': '1',
-                'l10n_cl_dte_email': data.get('email_intercambio', ''),
+                'street': self._capital_preferences(
+                    f"{address_data.get('calle', '')} {address_data.get('numero', '')} "
+                    f"{address_data.get('departamento', '')} {address_data.get('bloque', '')}"
+                ).strip(),
+                'city': city,
                 'l10n_cl_activity_description': self._capital_preferences(data.get('giro', '')),
-            })
-
-        # Add branch-specific fields
-        if is_branch and parent_id:
-            base_data.update({
-                'parent_id': parent_id.id,
-                'is_company': True,
-                'type': 'other',
-            })
+            }
+        else:
+            # Full partner or branch data
+            base_data = {
+                'name': self._capital_preferences(data.get('razon_social', False)),
+                'vat': data.get('rut', ''),
+                'street': self._capital_preferences(
+                    f"{address_data.get('calle', '')} {address_data.get('numero', '')}"
+                ).strip(),
+                'street2': self._capital_preferences(
+                    f"{address_data.get('departamento', '')} {address_data.get('bloque', '')}"
+                ).strip(),
+                'city': city,
+                'city_id': self._get_partner_location_id(city),
+                'state_id': self._get_partner_state_id(address_data.get('region', None)),
+                'country_id': self.env.ref('base.cl').id,
+                'l10n_cl_activity_description': self._capital_preferences(data.get('giro', '')),
+            }
+            if not is_branch:
+                base_data.update({
+                    'l10n_latam_identification_type_id': self.env.ref('l10n_cl.it_RUT').id,
+                    'l10n_cl_sii_taxpayer_type': '1',
+                    'l10n_cl_dte_email': data.get('email_intercambio', ''),
+                })
 
         return base_data
 
     def _prepare_single_partner_data(self, partner_values):
-        return self._prepare_data_entry(partner_values, is_branch=False, for_wizard=False)
-
-    def _prepare_branch_data(self, parent_id, branches):
-        """Prepare data for branch (sucursal) records based on domicile data.
-
-        Args:
-            parent_id (res.partner): The main partner record to use as parent.
-            branches (list): List of branch data dictionaries from API response.
-
-        Returns:
-            list: List of dictionaries representing branch records.
-        """
-        branch_data = []
-        for branch in branches:
-            if branch.get('tipo') != 'SUCURSAL' or branch.get('vigencia') != 'S':
-                continue
-            branch_record = self._prepare_data_entry(branch, is_branch=True, for_wizard=False, parent_id=parent_id)
-            branch_data.append(branch_record)
-        return branch_data
-
-    def _process_dol_data(self, partner_values):
-        """Process multiple partner data entries from DocsOnline API response for the wizard.
-
-        Args:
-            partner_values (dict): Dictionary with lists of partner data entries.
-
-        Returns:
-            list: List of processed partner data dictionaries.
-        """
-        list_partner_data = []
-        for key, list_data in partner_values.items():
-            for data in list_data:
-                partner_odoo_data = self._prepare_data_entry(data, is_branch=False, for_wizard=True)
-                list_partner_data.append(partner_odoo_data)
-        return list_partner_data
+        return self._prepare_data_entry(partner_values, is_branch=False)
 
     def _get_docsonline_data(self):
         """Get configuration data for DocsOnline API.
@@ -318,3 +261,34 @@ class ResPartner(models.Model):
             except Exception as e:
                 _logger.warning("Failed to update partner %s: %s", r.id, str(e))
                 continue
+
+    def _prepare_branch_data(self, parent_id, branches):
+        """Prepare data for branch (sucursal) records based on domicile data.
+
+        Args:
+            parent_id (res.partner): The main partner record to use as parent.
+            branches (list): List of branch data dictionaries from API response (e.g., 'domicilios').
+
+        Returns:
+            list: List of dictionaries representing branch records.
+        """
+        branch_data = []
+        for branch in branches:
+            branch_data.append({
+                'parent_id': parent_id.id,
+                'name': self._capital_preferences(
+                    f"{parent_id.name} - SUC: {branch.get('calle', '')} {branch.get('numero', '')}"
+                ),
+                'street': self._capital_preferences(
+                    f"{branch.get('calle', '')} {branch.get('numero', '')}"
+                ).strip(),
+                'street2': self._capital_preferences(
+                    f"{branch.get('departamento', '')} {branch.get('bloque', '')}"
+                ).strip(),
+                'city': self._capital_preferences(branch.get('comuna', '')),
+                'city_id': self._get_partner_location_id(self._capital_preferences(branch.get('comuna', ''))),
+                'state_id': self._get_partner_state_id(branch.get('region', None)),
+                'country_id': self.env.ref('base.cl').id,
+                'type': 'other',
+            })
+        return branch_data
