@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 {
     "name": """Chile get customer data from www.documentosonline.cl""",
-    'version': '17.0.2.0.2',
+    'version': '18.0.2.0.2',
     'category': 'Localization/Chile',
     'sequence': 12,
     'author':  'Blanco Martín & Asociados',
