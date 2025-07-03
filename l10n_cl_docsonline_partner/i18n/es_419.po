@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-12 22:20+0000\n"
-"PO-Revision-Date: 2025-06-12 18:25-0400\n"
+"POT-Creation-Date: 2025-07-02 23:59+0000\n"
+"PO-Revision-Date: 2025-07-02 20:06-0400\n"
 "Last-Translator: Daniel Blanco <daniel@blancomartin.cl>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -47,6 +47,18 @@ msgid "Actualizar desde DocumentosOnline"
 msgstr "Actualizar desde DocumentosOnline"
 
 #. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
+msgid "Add main Partner and Branches"
+msgstr "Agregar Contacto principal y sucursales"
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
+msgid "Add the main partner and create all branches as child contacts."
+msgstr ""
+"Agrega el contacto principal y crea todas las sucursales como contactos "
+"hijos."
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner__backup_name
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_users__backup_name
 msgid "Backup Name"
@@ -81,7 +93,9 @@ msgstr "Confirmar Sobreescritura"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
-msgid "Confirm Without Overwrite Name or Address"
+#, fuzzy
+#| msgid "Confirm Without Overwrite Name or Address"
+msgid "Confirm Without Overwrite of Protected Fields"
 msgstr "Confirmar sin sobreescribir nombre o dirección"
 
 #. module: l10n_cl_docsonline_partner
@@ -112,6 +126,13 @@ msgstr "Creado en"
 #, fuzzy
 msgid "Display Name"
 msgstr "Nombre mostrado"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__docs_online_data_ids
+#, fuzzy
+#| msgid "DocsOnline Wizard Data"
+msgid "Docs Online Data"
+msgstr "Lista del Asistente de DocumentosOnline"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online
@@ -149,6 +170,51 @@ msgid "ID"
 msgstr "ID"
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_restrict_token_access
+msgid ""
+"If checked, only users with specific permissions can view or modify the API "
+"token."
+msgstr ""
+"Si se marca, solo los usuarios con permisos especíricos pueden ver o "
+"modificar el token API."
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_email
+msgid ""
+"If checked, the partner's DTE email will be overwritten with data from "
+"DocumentosOnline when updating."
+msgstr ""
+"Si se marca, el correo de intercambio del cliente será sobreescrito con los "
+"datos de DocumentosOnline cuando se actualice."
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_activity
+msgid ""
+"If checked, the partner's activity description will be overwritten with data "
+"from DocumentosOnline when updating."
+msgstr ""
+"Si se marca, la actividad económica (giro) será sobreescrito con los datos "
+"de DocumentosOnline cuando se actualice."
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_street
+msgid ""
+"If checked, the partner's address fields will be overwritten with data from "
+"DocumentosOnline when updating."
+msgstr ""
+"Si se marca, los campos de dirección serán sobreescrito con los datos de "
+"DocumentosOnline cuando se actualice."
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_name
+msgid ""
+"If checked, the partner's name will be overwritten with data from "
+"DocumentosOnline when updating."
+msgstr ""
+"Si se marca, el nombre de la empresa o contacto será sobreescrito con los "
+"datos de DocumentosOnline cuando se actualice."
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__write_uid
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__write_uid
 #, fuzzy
@@ -178,6 +244,11 @@ msgstr "Nombre mostrado"
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__name
 msgid "Name"
 msgstr "Nombre"
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
+msgid "Overwrite all partner data with selected DocsOnline data."
+msgstr "Sobreescribe todos los datos con los datos de DocumentosOnline."
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__partner_id
@@ -217,28 +288,57 @@ msgid "Read Chilean partners data from documentosonline.cl"
 msgstr "Leer Contactos chilenos desde documentosonline.cl"
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_activity
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "Replace Activity"
 msgstr "Reemplazar Giro"
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_street
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "Replace Address"
 msgstr "Reemplazar Dirección"
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_email
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "Replace Email"
 msgstr "Remplazar Email"
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_name
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "Replace Name"
 msgstr "Reemplazar Nombre"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_activity
+#, fuzzy
+#| msgid "Replace Activity"
+msgid "Replace Partner Activity"
+msgstr "Reemplazar Giro"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_street
+#, fuzzy
+#| msgid "Replace Address"
+msgid "Replace Partner Address"
+msgstr "Reemplazar Dirección"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_email
+#, fuzzy
+#| msgid "Replace Email"
+msgid "Replace Partner Email"
+msgstr "Remplazar Email"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_name
+#, fuzzy
+#| msgid "Replace Name"
+msgid "Replace Partner Name"
+msgstr "Reemplazar Nombre"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_restrict_token_access
+msgid "Restrict Token Access"
+msgstr "Restringe el acceso al token."
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
@@ -255,14 +355,38 @@ msgid "Street"
 msgstr "Calle"
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_token
+msgid ""
+"The authentication token for accessing the DocumentosOnline API. Keep this "
+"secure and do not share it publicly."
+msgstr ""
+"El token de autenticación para acceder a la API de DocumentosOnline. "
+"Mangenga este valr seguro y no lo comparta publicamente."
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_url
+msgid ""
+"The base URL for the DocumentosOnline API. Leave empty to use the default "
+"provided by the system."
+msgstr ""
+"La URL base para la API de DocumentosOnline. Deje este valor vacío para usar "
+"la que se provee por defecto por el sistema."
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
+msgid ""
+"Update partner data respecting configuration settings for protected fields."
+msgstr ""
+"Actualiza los datos del cliente respetando las configuraciones para los "
+"campos protegidos."
+
+#. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "What to do if partner exists?"
 msgstr "¿Que hacer si un contacto existe?"
 
-#. module: l10n_cl_docsonline_partner
-#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
-msgid "or"
-msgstr "ó"
+#~ msgid "or"
+#~ msgstr "ó"
 
 #~ msgid "Country"
 #~ msgstr "País"
