@@ -640,5 +640,6 @@ class ResPartner(models.Model):
                 'state_id': self._get_partner_state_id(branch.get('region', None)),
                 'country_id': self.env.ref('base.cl').id,
                 'type': 'other',
+                'is_company': True,
             })
         return branch_data
