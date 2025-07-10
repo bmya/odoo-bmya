@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
-        <record id="tree_docsonline_partners_view" model="ir.ui.view">
-            <field name="name">www.documentosonline.cl possible data</field>
-            <field name="model">res.partner.docs.online</field>
-            <field name="arch" type="xml">
-                <form>
-                    <field name="partner_id" invisible="0" readonly="1"/>
-                    <div class="row">
-                        <group>
-                            <field name="docs_online_data_ids"
-                                placeholder="Haga click aqui y seleccione alguno" widget="many2many_tags" options="{'no_create': True}"/>
-                        </group>
-                    </div>
-                    <footer>
-                        <button string="Confirm Overwrite" name="pick_partner" type="object" class="oe_highlight"
-                                invisible="not docs_online_data_ids"
-                                help="Overwrite all partner data with selected DocsOnline data."/>
-                        <button string="Add main Partner and Branches" name="pick_partner_with_branches" type="object" class="btn-primary"
-                                invisible="not docs_online_data_ids"
-                                help="Add the main partner and create all branches as child contacts."/>
-                        <button string="Confirm Without Overwrite of Protected Fields" name="pick_partner_protect" type="object"
-                                invisible="not docs_online_data_ids"
-                                help="Update partner data respecting configuration settings for protected fields."/>
-                        <button string="Cancel" class="oe_link" special="cancel"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
-    </data>
+    <record id="tree_docsonline_partners_view" model="ir.ui.view">
+        <field name="name">www.documentosonline.cl possible data</field>
+        <field name="model">res.partner.docs.online</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="partner_id" invisible="0" readonly="1"/>
+                <div class="row">
+                    <group>
+                        <field name="docs_online_data_ids"
+                            placeholder="Haga click aqui y seleccione alguno" widget="many2many_tags" options="{'no_create': True}"/>
+                    </group>
+                </div>
+                <footer>
+                    <button string="Confirm Overwrite" name="pick_partner" type="object" class="oe_highlight"
+                            invisible="not docs_online_data_ids"
+                            help="Overwrite all partner data with selected DocsOnline data."/>
+                    <button string="Add main Partner and Branches" name="pick_partner_with_branches" type="object" class="btn-primary"
+                            invisible="not docs_online_data_ids"
+                            help="Add the main partner and create all branches as child contacts."/>
+                    <button string="Confirm Without Overwrite of Protected Fields" name="pick_partner_protect" type="object"
+                            invisible="not docs_online_data_ids"
+                            help="Update partner data respecting configuration settings for protected fields."/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_res_partner_docs_online_data_list" model="ir.ui.view">
+        <field name="name">docsonline.wizard.data.list</field>
+        <field name="model">res.partner.docs.online.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="vat"/>
+                <field name="street"/>
+                <field name="city"/>
+                <field name="l10n_cl_activity_description"/>
+            </tree>
+        </field>
+    </record>
 </odoo>
