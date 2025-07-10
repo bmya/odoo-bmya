@@ -42,12 +42,17 @@ class PartnerDocumentsOnline(models.TransientModel):
         if include_branches:
             endpoint += "?include_sucursales=True"
         try:
-            response = requests.get(endpoint, headers=headers, timeout=10)
+            response = requests.get(endpoint, headers=headers, timeout=30)
             response.raise_for_status()
         except requests.RequestException as e:
             _logger.error("DocsOnline API error for RUT %s: %s", rut, str(e))
-            raise UserError(_('DocsOnline: Error fetching data: %s') % str(e))
-
+            try:
+                data = e.response.json()
+                if 'error' in data:
+                    raise UserError(_('DocsOnline: %s - %s') % (data.get('error'), data.get('detail', str(e))))
+                raise UserError(_('DocsOnline: Error fetching data: %s') % data.get('detail', str(e)))
+            except (json.JSONDecodeError, AttributeError):
+                raise UserError(_('DocsOnline: Error fetching data: %s') % str(e))
         try:
             data = response.json()
             _logger.debug("DocsOnline response for RUT %s: %s", rut, data)

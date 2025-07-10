@@ -398,16 +398,19 @@ class ResPartner(models.Model):
             response = requests.get(
                 f"{docsonline_data['url']}/{endpoint}/{value}",
                 headers=headers,
-                timeout=10,
+                timeout=30,
             )
             response.raise_for_status()
         except requests.RequestException as e:
             _logger.error("DocsumentosOnline: Error API para %s/%s: %s, Respuesta: %s", endpoint, value, str(e), getattr(e.response, 'text', 'No response'))
             try:
-                error_detail = e.response.json().get('detail', str(e))  # Extract detail from JSON response
+                data = e.response.json()
+                if 'error' in data:
+                    raise UserError(_('DocumentosOnline: %s - %s') % (data.get('error'), data.get('detail', str(e))))
+                error_detail = data.get('detail', str(e))
                 raise UserError(_('DocumentosOnline: %s') % error_detail)
             except (json.JSONDecodeError, AttributeError):
-                raise UserError(_('DocumentosOnline: %s') % str(e))  # Fallback to generic error
+                raise UserError(_('DocumentosOnline: %s') % str(e))
         try:
             data = response.json()
             _logger.debug("DocumentosOnline: %s/%s: %s", endpoint, value, data)
