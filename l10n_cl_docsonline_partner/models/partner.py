@@ -2,6 +2,8 @@
 import json
 import logging
 import requests
+import urllib
+import time
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
