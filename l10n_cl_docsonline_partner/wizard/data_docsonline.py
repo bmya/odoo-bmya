@@ -1,8 +1,8 @@
-import json
 import logging
-import requests
-from odoo import api, fields, models, _
+
 from odoo.exceptions import UserError
+
+from odoo import _, api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -33,28 +33,7 @@ class PartnerDocumentsOnline(models.TransientModel):
             UserError: If the API call fails or the response is invalid.
         """
         partner_obj = self.env['res.partner']
-        docsonline_data = partner_obj._get_docsonline_data()
-        headers = {
-            'Authorization': docsonline_data['token'],
-            'accept': 'application/json',
-        }
-        endpoint = f"{docsonline_data['url']}/partner/details/{rut}"
-        if include_branches:
-            endpoint += "?include_sucursales=True"
-        try:
-            response = requests.get(endpoint, headers=headers, timeout=10)
-            response.raise_for_status()
-        except requests.RequestException as e:
-            _logger.error("DocsOnline API error for RUT %s: %s", rut, str(e))
-            raise UserError(_('DocsOnline: Error fetching data: %s') % str(e))
-
-        try:
-            data = response.json()
-            _logger.debug("DocsOnline response for RUT %s: %s", rut, data)
-            return data
-        except json.JSONDecodeError:
-            _logger.error("Invalid JSON response for RUT %s: %s", rut, response.text)
-            raise UserError(_('DocsOnline: Invalid response format'))
+        return partner_obj._fetch_docsonline_partner_data('partner/details', rut, include_sucursales=include_branches)
 
     def _update_partner_from_data(self, partner_data, protect_fields=False, update_vat=True):
         """Update the partner with data fetched from DocsOnline.
@@ -95,6 +74,8 @@ class PartnerDocumentsOnline(models.TransientModel):
     def pick_partner(self):
         """Create or update a partner record from DocsOnline data without protected fields."""
         self.ensure_one()
+        if not self.docs_online_data_ids:
+            raise UserError(_("Por favor, seleccione un socio de la lista antes de confirmar."))
         nr = self.docs_online_data_ids[0]
         partner_values = self._fetch_docsonline_partner_data(nr.vat)
         self._update_partner_from_data(partner_values, protect_fields=False)
@@ -102,19 +83,24 @@ class PartnerDocumentsOnline(models.TransientModel):
     def pick_partner_with_branches(self):
         """Create or update a partner record from DocsOnline data including branches."""
         self.ensure_one()
+        if not self.docs_online_data_ids:
+            raise UserError(_("Por favor, seleccione un socio de la lista antes de confirmar."))
         nr = self.docs_online_data_ids[0]
         partner_values = self._fetch_docsonline_partner_data(nr.vat, include_branches=True)
         self._update_partner_from_data(partner_values, protect_fields=False)
-        # Create branches as child contacts
         branches = partner_values.get('domicilios', [])
         branches_odoo = self.env['res.partner']._prepare_branch_data(self.partner_id, branches)
-        suc_qty = len(branches_odoo)
         self.env['res.partner'].create(branches_odoo)
-        _logger.info("Created %s branches for partner %s", suc_qty, self.partner_id.name)
+        # Se restaura la definición de la variable suc_qty
+        suc_qty = len(branches_odoo)
+        if suc_qty:
+            _logger.info("Created %s branches for partner %s", suc_qty, self.partner_id.name)
 
     def pick_partner_protect(self):
         """Update existing partner record based on configuration settings for protected fields."""
         self.ensure_one()
+        if not self.docs_online_data_ids:
+            raise UserError(_("Por favor, seleccione un socio de la lista antes de confirmar."))
         nr = self.docs_online_data_ids[0]
         partner_values = self._fetch_docsonline_partner_data(nr.vat)
         self._update_partner_from_data(partner_values, protect_fields=True)

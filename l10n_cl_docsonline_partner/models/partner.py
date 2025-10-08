@@ -1,9 +1,12 @@
-# -*- coding: utf-8 -*-
 import json
 import logging
+import time
+import urllib
+
 import requests
-from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+from odoo import _, api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -30,12 +33,13 @@ class PartnerDataSII(models.Model):
 
     backup_name = fields.Char('Backup Name')
 
-    def _fetch_docsonline_partner_data(self, endpoint, value):
+    def _fetch_docsonline_partner_data(self, endpoint, value, include_sucursales=False):
         """Fetch data from DocsOnline API for a given endpoint and value.
 
         Args:
             endpoint (str): API endpoint to call (e.g., 'partner/search', 'partner/details').
             value (str): Value to pass to the endpoint (e.g., RUT or search term).
+            include_sucursales (bool): If True, add include_sucursales query parameter.
 
         Returns:
             dict: JSON data from the API response.
@@ -49,15 +53,31 @@ class PartnerDataSII(models.Model):
             'accept': 'application/json',
         }
         try:
+            encoded_value = urllib.parse.quote(value)
+            url = f"{docsonline_data['url']}/{endpoint}/{encoded_value}"
+            if include_sucursales:
+                url += "?include_sucursales=True"
+            start_time = time.time()
+            _logger.debug(f"Requesting {url} with value: {value}")
             response = requests.get(
-                f"{docsonline_data['url']}/{endpoint}/{value}",
+                url,
                 headers=headers,
-                timeout=10,
+                timeout=90,
             )
             response.raise_for_status()
+            end_time = time.time()
+            _logger.debug(f"Response received in {end_time - start_time:.2f} seconds: {response.text[:200]}...")
         except requests.RequestException as e:
-            _logger.error("DocsOnline API error for %s/%s: %s", endpoint, value, str(e))
-            raise UserError(_('DocsOnline: Error fetching data: %s') % str(e))
+            _logger.error(f"DocumentosOnline: Error API para {endpoint}/{value}: {str(e)}, Respuesta: {getattr(e.response, 'text', 'No response')}")
+            if e.response:
+                if e.response.status_code in [404, 500]:
+                    try:
+                        data = e.response.json()
+                        error_msg = data.get('error', data.get('detail', str(e)))
+                        return {'error': error_msg}
+                    except json.JSONDecodeError:
+                        return {'error': str(e)}
+            raise UserError(_('DocumentosOnline: %s') % str(e))
 
         try:
             data = response.json()
@@ -216,13 +236,18 @@ class PartnerDataSII(models.Model):
         """
         self.ensure_one()
         partner_values = self._fetch_docsonline_partner_data('partner/search', self.name)
+        if 'error' in partner_values:
+            raise UserError(_('DocumentosOnline: %s') % partner_values['error'])
         wizard_obj = self.env['res.partner.docs.online']
         wizard_obj_data = self.env['res.partner.docs.online.data']
         wizard_obj.truncate()
         wizard_obj_data.truncate()
         wizard_id = wizard_obj.create({'partner_id': self.id})
         list_partner_data = self._process_dol_data(partner_values)
-        for partner_odoo_data in list_partner_data:
+
+        sorted_list_partner_data = sorted(list_partner_data, key=lambda p: p.get('name', ''))
+
+        for partner_odoo_data in sorted_list_partner_data:
             _logger.info("Creating wizard data: %s", partner_odoo_data)
             wizard_obj_data.create(partner_odoo_data)
 
@@ -231,11 +256,11 @@ class PartnerDataSII(models.Model):
             'name': _('Select a partner from a list'),
             'res_model': 'res.partner.docs.online',
             'view_mode': 'form',
+            'target': 'new',
+            'res_id': wizard_id.id,
             'view_type': 'form',
             'view_id': self.env.ref('l10n_cl_docsonline_partner.tree_docsonline_partners_view').id,
-            'target': 'new',
             'active_id': wizard_id.id,
-            'res_id': wizard_id.id,
         }
 
     def _get_data_from_docsonline(self, rut_input=False):
@@ -247,8 +272,7 @@ class PartnerDataSII(models.Model):
         rut = rut_input or self.vat.replace('.', '')
         partner_values = self._fetch_docsonline_partner_data('partner/details', rut)
         if 'error' in partner_values:
-            _logger.warning("DocsOnline error: %s", partner_values['error'])
-            raise UserError(_('No data found on www.documentosonline.cl: %s') % partner_values.get('error'))
+            raise UserError(_('DocumentosOnline: %s') % partner_values['error'])
         if not partner_values.get('razon_social'):
             raise UserError(_('Data not found for RUT %s. Try searching on www.documentosonline.cl') % rut)
 
