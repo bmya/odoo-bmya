@@ -1,0 +1,66 @@
+<odoo>
+    <template id="report_invoice_transferable_table" inherit_id="l10n_cl.report_invoice_document">
+        <xpath expr="//div[@name='transferable-table']" position="attributes">
+            <attribute name="class">col-7</attribute>
+        </xpath>
+        <xpath expr="//div[@name='transferable-legend']" position="attributes">
+            <attribute name="class">col-5 text-end</attribute>
+        </xpath>
+        <xpath expr="//div[@name='transferable-table']" position="inside">
+            <t t-if="cedible">
+                <style>
+                  br {
+                      content: "";
+                      margin: 1.4em;
+                      display: block;
+                  }
+                </style>
+                <p class="text-justify" style="font-size: 9px;">
+                    <strong>NOMBRE:</strong> ..............................................................................<br/>
+                    <strong>RUT:</strong> .........................................................................................<br/>
+                    <strong>FECHA:</strong> ...................................................................................<br/>
+                    <strong>RECINTO:</strong> ..............................................................................<br/>
+                </p>
+                <p class="text-justify" style="font-size: 9px; margin-top: 25px;">
+                    <strong>FIRMA:</strong> ....................................................................................<br/>
+                </p>
+            </t>
+        </xpath>
+        <xpath expr="//div[@name='transferable-legend']" position="inside">
+            <t t-if="cedible">
+                <p style="font-size: 11px;">El acuse de recibo que se declara
+                    en este acto, de acuerdo a lo
+                    dispuesto en la letra b) del Artículo 4°, y
+                    la letra c) del Artículo 5° de la Ley 19.983, acredita que
+                    la entrega de mercaderías o servicio(s) prestado(s)
+                    ha(n) sido recibido(s).
+                </p>
+                <p style="margin-bottom: 0px; font-size: 10px;"><br/><br/>
+                    <font style="color: rgb(255, 0, 0);">CEDIBLE</font>
+                </p>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="report_invoice_cedible">
+        <t t-call="account.report_invoice">
+            <t t-set="cedible" t-value="1"/>
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang"/>
+                <t t-set="print_with_payments" t-value="True"/>
+                <t t-call="l10n_cl_report_invoice_cedible.report_invoice_transferable_table"/>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_invoice_cedible" model="ir.actions.report">
+        <field name="name">Cedible</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_cl_report_invoice_cedible.report_invoice_cedible</field>
+        <field name="report_file">l10n_cl_report_invoice_cedible.report_invoice_cedible</field>
+        <field name="print_report_name">'Cedible - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
