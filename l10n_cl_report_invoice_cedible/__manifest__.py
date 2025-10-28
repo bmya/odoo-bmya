@@ -10,7 +10,6 @@
     """,
     'depends': [
         'l10n_cl',
-        'bmya_support_service',
     ],
     'data': [
         # 'templates/report_invoice.xml',
