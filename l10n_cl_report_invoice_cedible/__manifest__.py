@@ -12,7 +12,7 @@
         'l10n_cl',
     ],
     'data': [
-        # 'templates/report_invoice.xml',
+        'templates/report_invoice.xml',
     ],
     'installable': True,
     'auto_install': True,
