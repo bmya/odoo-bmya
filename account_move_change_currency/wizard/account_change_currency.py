@@ -33,7 +33,7 @@ class AccountChangeCurrency(models.TransientModel):
     def _get_move(self):
         self.ensure_one()
         move = self.env['account.move'].browse(
-            self._context.get('active_id', False))
+            self.env.context.get('active_id', False))
         if not move:
             raise ValidationError(_('No Invoice on context as "active_id"'))
         return move
