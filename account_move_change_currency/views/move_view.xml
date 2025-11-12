@@ -8,7 +8,7 @@
             <xpath expr="//div[@name='currency_div']" position="after">
                 <div name="change_currency_button_div">
                     <button name="%(account_move_change_currency.action_account_change_currency)d" icon="fa-refresh" type="action" class="oe_inline oe_link"
-                        invisible="state != 'draft'" groups="account.group_account_invoice" help="Change currency and update prices"
+                        invisible="state != 'draft'" groups="account.group_account_invoice" help="Change currency and update prices" title="Change currency and update prices"
                         context="{'default_currency_id': currency_id}"/>
                 </div>
             </xpath>
