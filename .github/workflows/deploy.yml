@@ -35,7 +35,7 @@ env:
 jobs:
   deploy:
     name: Deploy to Odoo Servers
-    runs-on: [self-hosted, bmya, sauron]
+    runs-on: self-hosted
 
     # Solo ejecutar si:
     # - Es un push directo a la rama
