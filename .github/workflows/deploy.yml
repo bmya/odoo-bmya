@@ -69,18 +69,7 @@ jobs:
             *) echo "ansible_group=odoo_servers" >> $GITHUB_OUTPUT ;;
           esac
 
-      - name: Send start notification
-        run: |
-          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-50)
-          curl -s -X POST "$WEBHOOK_URL" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "level": "info",
-              "title": "🔄 Deploy Iniciado: ${{ env.REPO_NAME }}",
-              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\nCommit: ${{ github.sha }}\nMensaje: '"$COMMIT_MSG"'\nAutor: ${{ github.actor }}",
-              "server": "GitHub Actions",
-              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
-            }' || true
+      # Notificación inicial removida - solo enviaremos resultado final
 
       - name: Run Ansible playbook
         id: ansible
@@ -99,19 +88,29 @@ jobs:
             -e "github_token=$GH_TOKEN" \
             2>&1 | tee /tmp/ansible-output.log
 
-          # Capturar servidores actualizados
-          SERVERS=$(grep -E "^(ok|changed):" /tmp/ansible-output.log | awk '{print $2}' | sort -u | tr '\n' ', ' | sed 's/,$//')
-          echo "servers=$SERVERS" >> $GITHUB_OUTPUT
+          # Capturar servidores OK y fallidos
+          SERVERS_OK=$(grep -E "^(ok|changed):" /tmp/ansible-output.log | awk '{print $2}' | sort -u | tr '\n' ',' | sed 's/,$//')
+          SERVERS_FAIL=$(grep -E "^fatal:" /tmp/ansible-output.log | awk '{print $2}' | sort -u | tr '\n' ',' | sed 's/,$//')
+
+          # Contar cambios detectados
+          CHANGES=$(grep -c "UPDATED" /tmp/ansible-output.log || echo "0")
+          RESTARTS=$(grep -c "Restart.*container" /tmp/ansible-output.log || echo "0")
+
+          echo "servers_ok=$SERVERS_OK" >> $GITHUB_OUTPUT
+          echo "servers_fail=$SERVERS_FAIL" >> $GITHUB_OUTPUT
+          echo "changes=$CHANGES" >> $GITHUB_OUTPUT
+          echo "restarts=$RESTARTS" >> $GITHUB_OUTPUT
 
       - name: Send success notification
         if: success()
         run: |
+          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-100)
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
             -d '{
               "level": "success",
-              "title": "✅ Deploy Exitoso: ${{ env.REPO_NAME }}",
-              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\nServidores: ${{ steps.ansible.outputs.servers }}\nCommit: ${{ github.sha }}",
+              "title": "✅ Deploy Exitoso",
+              "message": "📦 Repositorio: ${{ env.REPO_NAME }}\n📌 Versión: ${{ steps.version.outputs.odoo_version }}\n\n👤 Autor: ${{ github.actor }}\n💬 Commit: '"$COMMIT_MSG"'\n🔗 SHA: ${{ github.sha }}\n\n🖥️  Servidores actualizados:\n${{ steps.ansible.outputs.servers_ok }}\n\n📊 Resumen:\n  • Cambios detectados: ${{ steps.ansible.outputs.changes }}\n  • Contenedores reiniciados: ${{ steps.ansible.outputs.restarts }}",
               "server": "GitHub Actions",
               "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
             }' || true
@@ -119,12 +118,17 @@ jobs:
       - name: Send failure notification
         if: failure()
         run: |
+          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-100)
+          FAIL_MSG=""
+          if [ -n "${{ steps.ansible.outputs.servers_fail }}" ]; then
+            FAIL_MSG="\n\n❌ Servidores fallidos:\n${{ steps.ansible.outputs.servers_fail }}\n"
+          fi
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
             -d '{
               "level": "critical",
-              "title": "🚨 Deploy Fallido: ${{ env.REPO_NAME }}",
-              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\nCommit: ${{ github.sha }}\n\nRevisar logs en GitHub Actions:\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              "title": "🚨 Deploy Fallido",
+              "message": "📦 Repositorio: ${{ env.REPO_NAME }}\n📌 Versión: ${{ steps.version.outputs.odoo_version }}\n\n👤 Autor: ${{ github.actor }}\n💬 Commit: '"$COMMIT_MSG"'\n🔗 SHA: ${{ github.sha }}'"${FAIL_MSG}"'\n\n🔍 Logs completos:\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
               "server": "GitHub Actions",
               "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
             }' || true
