@@ -6,6 +6,7 @@ on:
       - '16.0'
       - '17.0'
       - '18.0'
+      - '19.0'
 
   # Solo trigger en merge de PR, no en push directo
   pull_request:
@@ -14,6 +15,7 @@ on:
       - '16.0'
       - '17.0'
       - '18.0'
+      - '19.0'
 
   # Permitir ejecución manual
   workflow_dispatch:
@@ -26,6 +28,7 @@ on:
           - '16.0'
           - '17.0'
           - '18.0'
+          - '19.0'
 
 env:
   REPO_NAME: odoo-bmya
