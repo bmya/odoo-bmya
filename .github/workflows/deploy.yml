@@ -81,6 +81,9 @@ jobs:
 
       - name: Run Ansible playbook
         id: ansible
+        env:
+          GH_USER: ${{ secrets.GH_USER }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           cd /opt/bmya-infrastructure/ansible
 
@@ -89,6 +92,8 @@ jobs:
             --limit ${{ steps.version.outputs.ansible_group }} \
             -e "repo_name=${{ env.REPO_NAME }}" \
             -e "odoo_version=${{ steps.version.outputs.odoo_version }}" \
+            -e "github_user=$GH_USER" \
+            -e "github_token=$GH_TOKEN" \
             2>&1 | tee /tmp/ansible-output.log
 
           # Capturar servidores actualizados
