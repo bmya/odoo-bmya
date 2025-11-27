@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 
 from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
@@ -7,10 +7,15 @@ from odoo.exceptions import ValidationError
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
+    bmya_support_service_installed = fields.Boolean(
+        string="BMyA Support Service Installed",
+        compute='_compute_bmya_support_service_installed',
+        help="Indicates if the BMyA Support Service module is installed."
+    )
     docs_online_partner_url = fields.Char(
         string="DocumentosOnline URL",
         config_parameter='docsonline.url',
-        default='',
+        default='https://www.documentosonline.cl',
         help="The base URL for the DocumentosOnline API. Leave empty to use the default provided by the system."
     )
     docs_online_partner_token = fields.Char(
@@ -49,6 +54,28 @@ class ResConfigSettings(models.TransientModel):
         default=False,
         help="If checked, only users with specific permissions can view or modify the API token."
     )
+    # Fields for bmya_support_service compatibility (stored as config parameters)
+    docs_online_url = fields.Char(
+        string="BMyA Support Service URL",
+        config_parameter='bmya_support_service.url',
+        help="The base URL for the BMyA Support Service API."
+    )
+    docs_online_token_auth = fields.Char(
+        string="BMyA Support Service Token",
+        config_parameter='bmya_support_service.token',
+        help="The authentication token for accessing the BMyA Support Service API."
+    )
+
+    @api.depends_context('company')
+    def _compute_bmya_support_service_installed(self):
+        """Check if bmya_support_service module is installed."""
+        for record in self:
+            record.bmya_support_service_installed = bool(
+                self.env['ir.module.module'].search([
+                    ('name', '=', 'bmya_support_service'),
+                    ('state', '=', 'installed')
+                ], limit=1)
+            )
 
     @api.constrains('docs_online_partner_url')
     def _check_docs_online_url(self):

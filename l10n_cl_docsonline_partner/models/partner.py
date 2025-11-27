@@ -6,6 +6,7 @@ import urllib
 import time
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools.translate import _, LazyTranslate
 
 
 _logger = logging.getLogger(__name__)
@@ -418,7 +419,7 @@ class ResPartner(models.Model):
             end_time = time.time()
             _logger.debug(f"Response received in {end_time - start_time:.2f} seconds: {response.text[:200]}...")
         except requests.RequestException as e:
-            _logger.error(f"DocsumentosOnline: Error API para {endpoint}/{value}: {str(e)}, Respuesta: {getattr(e.response, 'text', 'No response')}")
+            _logger.error(f"DocumentosOnline: Error API para {endpoint}/{value}: {str(e)}, Respuesta: {getattr(e.response, 'text', 'No response')}")
             if e.response:
                 if e.response.status_code in [404, 500]:
                     try:
@@ -544,9 +545,26 @@ class ResPartner(models.Model):
             dict: Dictionary with API URL and token.
         """
         conf = self.env['ir.config_parameter'].sudo()
+
+        # Check if bmya_support_service is installed
+        if self.env['ir.module.module'].search([
+            ('name', '=', 'bmya_support_service'),
+            ('state', '=', 'installed')
+        ], limit=1):
+            # Use token from bmya_support_service (company-level for multi-company support)
+            # URL is always read from config_parameter (shared across companies)
+            company = self.env.company
+            url = conf.get_param('docsonline.url') or conf.get_param('bmya_support_service.url') or 'https://www.documentosonline.cl'
+            token = company.docs_online_token_auth or conf.get_param('bmya_support_service.token') or conf.get_param('docsonline.token')
+        else:
+            # Fallback to config parameters (l10n_cl_docsonline_partner standalone)
+            url = conf.get_param('docsonline.url') or 'https://www.documentosonline.cl'
+            token = conf.get_param('docsonline.token')
+        if not url or not token:
+            raise UserError(_('DocsOnline: URL or token not configured'))
         return {
-            'url': conf.get_param('docsonline.url'),
-            'token': conf.get_param('docsonline.token'),
+            'url': url,
+            'token': token,
         }
 
     def _send_notification(self, msg_type, msg, sticky=False):
@@ -603,7 +621,7 @@ class ResPartner(models.Model):
         if 'error' in partner_values:
             raise UserError(_('DocumentosOnline: %s') % partner_values['error'])
         if not partner_values.get('razon_social'):
-            raise UserError(_('Data not found for RUT %s. Try searching on www.documentosonline.cl') % rut)
+            raise UserError(_('No se encontraron datos para el RUT %s. Intente buscar en www.documentosonline.cl') % rut)
 
         partner_odoo_data = self._prepare_single_partner_data(partner_values)
         config_params = self.env['ir.config_parameter'].sudo()
@@ -632,19 +650,43 @@ class ResPartner(models.Model):
     def press_to_update(self):
         """Update partner data from DocsOnline when the update button is pressed."""
         if not self.vat and not self.name:
-            raise UserError(_('RUT or Name required for DocsOnline update'))
+            raise UserError(_('Se requiere el RUT o el Nombre para actualizar desde DocumentosOnline'))
         rut_input = (self.vat or self.name).replace('.', '')
         self._get_data_from_docsonline(rut_input)
 
-    @api.model
     def multiple_update(self):
         """Update multiple partners from DocsOnline data."""
         for r in self:
             try:
+                if r.country_code != 'CL':
+                    msg = _('La Empresa %(name)s no se actualizó: no es de Chile') % {'name': r.name}
+                    r._send_notification('warning', msg, sticky=False)
+                    continue
+                if not r.is_company and r.parent_id:
+                    msg = _('El contacto %(name)s no se actualizó: es un contacto de %(parent)s') % {
+                        'name': r.name,
+                        'parent': r.commercial_partner_id.name
+                    }
+                    r._send_notification('danger', msg, sticky=True)
+                    continue
+                if r.is_company and r.parent_id:
+                    msg = _('La empresa %(name)s no se actualizó: es una sucursal de of %(parent)s') % {
+                        'name': r.name,
+                        'parent': r.commercial_partner_id.name
+                    }
+                    r._send_notification('warning', msg, sticky=False)
+                    continue
                 r.press_to_update()
-                _logger.info("Updated partner %s", r.id)
+                msg = _('La empresa %(name)s se actualizó con éxito') % {'name': r.name}
+                r._send_notification('info', msg, sticky=False)
+                _logger.info(msg)
             except Exception as e:
-                _logger.warning("Failed to update partner %s: %s", r.id, str(e))
+                msg = _('Falló la actualización de la empresa %(name)s: %(error)s') % {
+                    'name': r.name,
+                    'error': str(e)
+                }
+                r._send_notification('warning', msg, sticky=True)
+                _logger.warning(msg)
                 continue
 
     def _prepare_branch_data(self, parent_id, branches):
