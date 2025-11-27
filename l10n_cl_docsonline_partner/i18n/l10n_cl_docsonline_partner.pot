@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-11 20:12+0000\n"
-"PO-Revision-Date: 2025-07-11 20:12+0000\n"
+"POT-Creation-Date: 2025-11-29 19:41+0000\n"
+"PO-Revision-Date: 2025-11-29 19:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,6 +47,21 @@ msgstr ""
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
 msgid "Add the main partner and create all branches as child contacts."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__bmya_support_service_installed
+msgid "BMyA Support Service Installed"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_token_auth
+msgid "BMyA Support Service Token"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_url
+msgid "BMyA Support Service URL"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -184,6 +199,11 @@ msgid ""
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__bmya_support_service_installed
+msgid "Indicates if the BMyA Support Service module is installed."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__write_uid
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__write_uid
 msgid "Last Updated by"
@@ -228,14 +248,9 @@ msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
-msgid "Partners URL"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid ""
-"Put here your free API token to get the fiscal data. Visit "
-"https://documentosonline.cl to register."
+"Put here your free API token to get the fiscal data. Please register in "
+"https://www.documentosonline.cl."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -307,6 +322,11 @@ msgid "Street"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_token_auth
+msgid "The authentication token for accessing the BMyA Support Service API."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_token
 msgid ""
 "The authentication token for accessing the DocumentosOnline API. Keep this "
@@ -314,10 +334,25 @@ msgid ""
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_url
+msgid "The base URL for the BMyA Support Service API."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_url
 msgid ""
 "The base URL for the DocumentosOnline API. Leave empty to use the default "
 "provided by the system."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "URL Docsonline taxpayer search"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.actions.server,name:l10n_cl_docsonline_partner.action_partner_multiple_update_docsonline
+msgid "Update from DocumentosOnline"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -329,4 +364,9 @@ msgstr ""
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "What to do if partner exists?"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "https://www.documentosonline.cl"
 msgstr ""
