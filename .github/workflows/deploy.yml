@@ -1,1 +1,229 @@
-FIX workflows deploy
+name: Deploy to Servers
+
+on:
+  push:
+    branches:
+      - '15.0'
+      - '16.0'
+      - '17.0'
+      - '18.0'
+      - '19.0'
+
+  pull_request:
+    types: [closed]
+    branches:
+      - '15.0'
+      - '16.0'
+      - '17.0'
+      - '18.0'
+      - '19.0'
+
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Rama/versión a desplegar'
+        required: true
+        type: choice
+        options:
+          - '15.0'
+          - '16.0'
+          - '17.0'
+          - '18.0'
+          - '19.0'
+
+env:
+  WEBHOOK_URL: ${{ secrets.TELEGRAM_WEBHOOK_URL }}
+  ANSIBLE_HOST_KEY_CHECKING: 'False'
+
+jobs:
+  deploy:
+    name: Deploy to Odoo Servers
+    runs-on: self-hosted
+
+    if: |
+      github.event_name == 'push' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+
+    steps:
+      - name: Determine Odoo version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.target_branch }}"
+          else
+            VERSION="${GITHUB_REF#refs/heads/}"
+          fi
+          echo "odoo_version=$VERSION" >> $GITHUB_OUTPUT
+
+          case "$VERSION" in
+            15.0) echo "ansible_group=odoo_15" >> $GITHUB_OUTPUT ;;
+            16.0) echo "ansible_group=odoo_16" >> $GITHUB_OUTPUT ;;
+            17.0) echo "ansible_group=odoo_17" >> $GITHUB_OUTPUT ;;
+            18.0) echo "ansible_group=odoo_18" >> $GITHUB_OUTPUT ;;
+            19.0) echo "ansible_group=odoo_19" >> $GITHUB_OUTPUT ;;
+            *) echo "ansible_group=odoo_servers" >> $GITHUB_OUTPUT ;;
+          esac
+
+      - name: Send start notification
+        run: |
+          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-50)
+          COMMIT_AUTHOR="${{ github.event.head_commit.author.name }}"
+
+          # Si no hay head_commit (ej: workflow_dispatch), usar datos del actor
+          if [ -z "$COMMIT_MSG" ]; then
+            COMMIT_MSG="Deploy manual"
+            COMMIT_AUTHOR="${{ github.actor }}"
+          fi
+
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+
+          curl -s -X POST "$WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "level": "info",
+              "title": "🔄 Deploy Iniciado: '"$REPO_NAME"'",
+              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\nCommit: '"${GITHUB_SHA:0:7}"'\nMensaje: '"$COMMIT_MSG"'\nAutor: '"$COMMIT_AUTHOR"'",
+              "server": "GitHub Actions",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
+            }' || true
+
+      - name: Run Ansible playbook
+        id: ansible
+        env:
+          GH_USER: ${{ secrets.GH_USER }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          cd /opt/bmya-infrastructure/ansible
+
+          # Extraer nombre del repo (sin el owner)
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+
+          # Limpiar logs anteriores
+          rm -f /tmp/ansible-output.log /tmp/ansible-stderr.log
+
+          # Ejecutar actualización con output completo
+          set +e  # No salir en error, capturar exit code
+          ansible-playbook -i inventory/infrastructure-vlan.yml playbooks/update-odoo-modules.yml \
+            --limit ${{ steps.version.outputs.ansible_group }} \
+            -e "repo_name=$REPO_NAME" \
+            -e "odoo_version=${{ steps.version.outputs.odoo_version }}" \
+            -e "github_user=$GH_USER" \
+            -e "github_token=$GH_TOKEN" \
+            > /tmp/ansible-output.log 2> /tmp/ansible-stderr.log
+
+          ANSIBLE_EXIT_CODE=$?
+          set -e
+
+          # Capturar servidores procesados (ok o changed)
+          SERVERS=$(grep -E "^(ok|changed):" /tmp/ansible-output.log | awk '{print $2}' | sort -u | tr '\n' ',' | sed 's/,$//' || echo "")
+
+          # Capturar servidores con cambios
+          CHANGED_SERVERS=$(grep -E "changed=[1-9]" /tmp/ansible-output.log | grep -oP '^\w+' | sort -u | tr '\n' ',' | sed 's/,$//' || echo "")
+
+          # Capturar servidores fallidos
+          FAILED_SERVERS=$(grep -E "^failed:" /tmp/ansible-output.log | awk '{print $2}' | sort -u | tr '\n' ',' | sed 's/,$//' || echo "")
+
+          # Contar cambios
+          CHANGED_COUNT=$(grep -E "changed=[1-9]" /tmp/ansible-output.log | wc -l | tr -d ' ' || echo "0")
+          TOTAL_COUNT=$(grep -E "ok=[0-9]" /tmp/ansible-output.log | wc -l | tr -d ' ' || echo "0")
+
+          # Capturar errores si los hay
+          if [ -s /tmp/ansible-stderr.log ]; then
+            ERROR_MSG=$(head -5 /tmp/ansible-stderr.log | tr '\n' ' ' | cut -c1-200)
+          else
+            ERROR_MSG=""
+          fi
+
+          echo "exit_code=$ANSIBLE_EXIT_CODE" >> $GITHUB_OUTPUT
+          echo "servers=$SERVERS" >> $GITHUB_OUTPUT
+          echo "changed_servers=$CHANGED_SERVERS" >> $GITHUB_OUTPUT
+          echo "failed_servers=$FAILED_SERVERS" >> $GITHUB_OUTPUT
+          echo "changed_count=$CHANGED_COUNT" >> $GITHUB_OUTPUT
+          echo "total_count=$TOTAL_COUNT" >> $GITHUB_OUTPUT
+          echo "error_msg=$ERROR_MSG" >> $GITHUB_OUTPUT
+
+          # Si Ansible falló, salir con error
+          if [ $ANSIBLE_EXIT_CODE -ne 0 ]; then
+            echo "Ansible failed with exit code $ANSIBLE_EXIT_CODE"
+            cat /tmp/ansible-stderr.log
+            exit $ANSIBLE_EXIT_CODE
+          fi
+
+      - name: Send success notification
+        if: success()
+        run: |
+          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-50)
+          COMMIT_AUTHOR="${{ github.event.head_commit.author.name }}"
+
+          if [ -z "$COMMIT_MSG" ]; then
+            COMMIT_MSG="Deploy manual"
+            COMMIT_AUTHOR="${{ github.actor }}"
+          fi
+
+          # Determinar nivel y texto según cambios
+          if [ "${{ steps.ansible.outputs.changed_count }}" -gt 0 ]; then
+            LEVEL="success"
+            CHANGES_TEXT="Actualizados: ${{ steps.ansible.outputs.changed_count }}/${{ steps.ansible.outputs.total_count }} servidores"
+            SERVERS_LIST="${{ steps.ansible.outputs.changed_servers }}"
+          else
+            LEVEL="info"
+            CHANGES_TEXT="Sin cambios (ya actualizado)"
+            SERVERS_LIST="${{ steps.ansible.outputs.servers }}"
+          fi
+
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+
+          curl -s -X POST "$WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "level": "'$LEVEL'",
+              "title": "✅ Deploy Exitoso: '"$REPO_NAME"'",
+              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\n'"$CHANGES_TEXT"'\nServidores: '"$SERVERS_LIST"'\nCommit: '"${GITHUB_SHA:0:7}"'\nAutor: '"$COMMIT_AUTHOR"'",
+              "server": "GitHub Actions",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
+            }' || true
+
+      - name: Send failure notification
+        if: failure()
+        run: |
+          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-50)
+          COMMIT_AUTHOR="${{ github.event.head_commit.author.name }}"
+
+          if [ -z "$COMMIT_MSG" ]; then
+            COMMIT_MSG="Deploy manual"
+            COMMIT_AUTHOR="${{ github.actor }}"
+          fi
+
+          # Obtener detalles del error
+          ERROR_DETAILS="${{ steps.ansible.outputs.error_msg }}"
+          FAILED_LIST="${{ steps.ansible.outputs.failed_servers }}"
+
+          # Si no hay failed_servers pero hay error, usar el mensaje de error
+          if [ -z "$FAILED_LIST" ] && [ -n "$ERROR_DETAILS" ]; then
+            FAILED_LIST="Ver logs para detalles"
+          elif [ -z "$FAILED_LIST" ]; then
+            FAILED_LIST="Error en workflow (no en Ansible)"
+          fi
+
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+
+          curl -s -X POST "$WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "level": "critical",
+              "title": "🚨 Deploy Fallido: '"$REPO_NAME"'",
+              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\nServidores fallidos: '"$FAILED_LIST"'\nCommit: '"${GITHUB_SHA:0:7}"'\nAutor: '"$COMMIT_AUTHOR"'\n\nLogs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              "server": "GitHub Actions",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
+            }' || true
+
+      - name: Upload logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ansible-logs-${{ github.run_id }}
+          path: |
+            /tmp/ansible-output.log
+            /tmp/ansible-stderr.log
+          retention-days: 7
