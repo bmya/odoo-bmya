@@ -277,13 +277,11 @@ jobs:
           MESSAGE="📦 Repo: ${{ steps.ansible.outputs.repo_name }}\n📌 Versión: ${{ steps.version.outputs.odoo_version }}\n\n"
 
           if [ "${{ steps.ansible.outputs.updated_count }}" -gt 0 ]; then
-            MESSAGE="${MESSAGE}✅ ACTUALIZADOS (${{ steps.ansible.outputs.updated_count }}/${{ steps.ansible.outputs.target_count }}):
-${UPDATED_LINES}\n"
+            MESSAGE="${MESSAGE}✅ ACTUALIZADOS (${{ steps.ansible.outputs.updated_count }}/${{ steps.ansible.outputs.target_count }}):\n${UPDATED_LINES}\n"
           fi
 
           if [ "${{ steps.ansible.outputs.failed_count }}" -gt 0 ]; then
-            MESSAGE="${MESSAGE}❌ FALLIDOS (${{ steps.ansible.outputs.failed_count }}/${{ steps.ansible.outputs.target_count }}):
-${FAILED_LINES}\n"
+            MESSAGE="${MESSAGE}❌ FALLIDOS (${{ steps.ansible.outputs.failed_count }}/${{ steps.ansible.outputs.target_count }}):\n${FAILED_LINES}\n"
           fi
 
           if [ "${{ steps.ansible.outputs.updated_count }}" -eq 0 ] && [ "${{ steps.ansible.outputs.failed_count }}" -eq 0 ]; then
