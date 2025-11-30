@@ -138,11 +138,11 @@ jobs:
             fi
 
             if echo "$line" | grep -q "BEFORE="; then
-              CURRENT_BEFORE=$(echo "$line" | sed 's/.*BEFORE=\(.*\)/\1/' | tr -d ' ')
+              CURRENT_BEFORE=$(echo "$line" | sed 's/.*BEFORE=//;s/[[:space:]]*$//' | head -1)
             fi
 
             if echo "$line" | grep -q "AFTER="; then
-              CURRENT_AFTER=$(echo "$line" | sed 's/.*AFTER=\(.*\)/\1/' | tr -d ' ')
+              CURRENT_AFTER=$(echo "$line" | sed 's/.*AFTER=//;s/[[:space:]]*$//' | head -1)
 
               # Procesar servidor
               if [ -n "$CURRENT_SERVER" ] && [ -n "$CURRENT_STATUS" ]; then
@@ -228,7 +228,7 @@ jobs:
             COMMIT_AUTHOR="${{ github.actor }}"
           fi
 
-          # Formatear listas
+          # Formatear listas con saltos de línea reales
           UPDATED_LINES=""
           if [ -n "${{ steps.ansible.outputs.updated_list }}" ]; then
             COUNT=0
@@ -237,9 +237,9 @@ jobs:
               if [ -n "$entry" ]; then
                 COUNT=$((COUNT + 1))
                 if [ $COUNT -eq $TOTAL ]; then
-                  UPDATED_LINES="${UPDATED_LINES}└─ ${entry}\n"
+                  UPDATED_LINES="${UPDATED_LINES}└─ ${entry}"$'\n'
                 else
-                  UPDATED_LINES="${UPDATED_LINES}├─ ${entry}\n"
+                  UPDATED_LINES="${UPDATED_LINES}├─ ${entry}"$'\n'
                 fi
               fi
             done <<< "${{ steps.ansible.outputs.updated_list }}"
@@ -253,9 +253,9 @@ jobs:
               if [ -n "$entry" ]; then
                 COUNT=$((COUNT + 1))
                 if [ $COUNT -eq $TOTAL ]; then
-                  FAILED_LINES="${FAILED_LINES}└─ ${entry}\n"
+                  FAILED_LINES="${FAILED_LINES}└─ ${entry}"$'\n'
                 else
-                  FAILED_LINES="${FAILED_LINES}├─ ${entry}\n"
+                  FAILED_LINES="${FAILED_LINES}├─ ${entry}"$'\n'
                 fi
               fi
             done <<< "${{ steps.ansible.outputs.failed_list }}"
@@ -273,22 +273,22 @@ jobs:
             TITLE="ℹ️ Sin Cambios"
           fi
 
-          # Mensaje
-          MESSAGE="📦 Repo: ${{ steps.ansible.outputs.repo_name }}\n📌 Versión: ${{ steps.version.outputs.odoo_version }}\n\n"
+          # Mensaje con saltos de línea reales
+          MESSAGE="📦 Repo: ${{ steps.ansible.outputs.repo_name }}"$'\n'"📌 Versión: ${{ steps.version.outputs.odoo_version }}"$'\n\n'
 
           if [ "${{ steps.ansible.outputs.updated_count }}" -gt 0 ]; then
-            MESSAGE="${MESSAGE}✅ ACTUALIZADOS (${{ steps.ansible.outputs.updated_count }}/${{ steps.ansible.outputs.target_count }}):\n${UPDATED_LINES}\n"
+            MESSAGE="${MESSAGE}✅ ACTUALIZADOS (${{ steps.ansible.outputs.updated_count }}/${{ steps.ansible.outputs.target_count }}):"$'\n'"${UPDATED_LINES}"$'\n'
           fi
 
           if [ "${{ steps.ansible.outputs.failed_count }}" -gt 0 ]; then
-            MESSAGE="${MESSAGE}❌ FALLIDOS (${{ steps.ansible.outputs.failed_count }}/${{ steps.ansible.outputs.target_count }}):\n${FAILED_LINES}\n"
+            MESSAGE="${MESSAGE}❌ FALLIDOS (${{ steps.ansible.outputs.failed_count }}/${{ steps.ansible.outputs.target_count }}):"$'\n'"${FAILED_LINES}"$'\n'
           fi
 
           if [ "${{ steps.ansible.outputs.updated_count }}" -eq 0 ] && [ "${{ steps.ansible.outputs.failed_count }}" -eq 0 ]; then
-            MESSAGE="${MESSAGE}ℹ️ Sin cambios - Todos actualizados\n"
+            MESSAGE="${MESSAGE}ℹ️ Sin cambios - Todos actualizados"$'\n'
           fi
 
-          MESSAGE="${MESSAGE}\nCommit: ${GITHUB_SHA:0:7} | $COMMIT_AUTHOR"
+          MESSAGE="${MESSAGE}"$'\n'"Commit: ${GITHUB_SHA:0:7} | $COMMIT_AUTHOR"
 
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
@@ -311,21 +311,54 @@ jobs:
             COMMIT_AUTHOR="${{ github.actor }}"
           fi
 
-          MESSAGE="📦 Repo: ${{ steps.ansible.outputs.repo_name }}\n📌 Versión: ${{ steps.version.outputs.odoo_version }}\n\n"
-          MESSAGE="${MESSAGE}🚨 Objetivo: ${{ steps.ansible.outputs.target_count }} servidores\n\n"
+          # Formatear listas para failure
+          UPDATED_LINES_FAIL=""
+          if [ -n "${{ steps.ansible.outputs.updated_list }}" ]; then
+            COUNT=0
+            TOTAL=$(echo "${{ steps.ansible.outputs.updated_list }}" | tr '|' '\n' | grep -v '^$' | wc -l)
+            while IFS='|' read -r entry; do
+              if [ -n "$entry" ]; then
+                COUNT=$((COUNT + 1))
+                if [ $COUNT -eq $TOTAL ]; then
+                  UPDATED_LINES_FAIL="${UPDATED_LINES_FAIL}└─ ${entry}"$'\n'
+                else
+                  UPDATED_LINES_FAIL="${UPDATED_LINES_FAIL}├─ ${entry}"$'\n'
+                fi
+              fi
+            done <<< "${{ steps.ansible.outputs.updated_list }}"
+          fi
+
+          FAILED_LINES_FAIL=""
+          if [ -n "${{ steps.ansible.outputs.failed_list }}" ]; then
+            COUNT=0
+            TOTAL=$(echo "${{ steps.ansible.outputs.failed_list }}" | tr '|' '\n' | grep -v '^$' | wc -l)
+            while IFS='|' read -r entry; do
+              if [ -n "$entry" ]; then
+                COUNT=$((COUNT + 1))
+                if [ $COUNT -eq $TOTAL ]; then
+                  FAILED_LINES_FAIL="${FAILED_LINES_FAIL}└─ ${entry}"$'\n'
+                else
+                  FAILED_LINES_FAIL="${FAILED_LINES_FAIL}├─ ${entry}"$'\n'
+                fi
+              fi
+            done <<< "${{ steps.ansible.outputs.failed_list }}"
+          fi
+
+          MESSAGE="📦 Repo: ${{ steps.ansible.outputs.repo_name }}"$'\n'"📌 Versión: ${{ steps.version.outputs.odoo_version }}"$'\n\n'
+          MESSAGE="${MESSAGE}🚨 Objetivo: ${{ steps.ansible.outputs.target_count }} servidores"$'\n\n'
 
           if [ "${{ steps.ansible.outputs.updated_count }}" -gt 0 ]; then
-            MESSAGE="${MESSAGE}✅ Exitosos: ${{ steps.ansible.outputs.updated_count }}\n"
+            MESSAGE="${MESSAGE}✅ EXITOSOS (${{ steps.ansible.outputs.updated_count }}):"$'\n'"${UPDATED_LINES_FAIL}"$'\n'
           fi
 
           if [ "${{ steps.ansible.outputs.failed_count }}" -gt 0 ]; then
-            MESSAGE="${MESSAGE}❌ FALLIDOS: ${{ steps.ansible.outputs.failed_count }}\n"
+            MESSAGE="${MESSAGE}❌ FALLIDOS (${{ steps.ansible.outputs.failed_count }}):"$'\n'"${FAILED_LINES_FAIL}"$'\n'
           else
-            MESSAGE="${MESSAGE}❌ Error completo del workflow\n"
+            MESSAGE="${MESSAGE}❌ Error completo del workflow"$'\n'
           fi
 
-          MESSAGE="${MESSAGE}\nCommit: ${GITHUB_SHA:0:7} | $COMMIT_AUTHOR\n"
-          MESSAGE="${MESSAGE}\n🔍 Logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          MESSAGE="${MESSAGE}"$'\n'"Commit: ${GITHUB_SHA:0:7} | $COMMIT_AUTHOR"$'\n\n'
+          MESSAGE="${MESSAGE}🔍 Logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
