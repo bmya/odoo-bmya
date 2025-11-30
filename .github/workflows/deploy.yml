@@ -32,7 +32,6 @@ on:
           - '19.0'
 
 env:
-  REPO_NAME: odoo-bmya
   WEBHOOK_URL: ${{ secrets.TELEGRAM_WEBHOOK_URL }}
   ANSIBLE_HOST_KEY_CHECKING: 'False'
 
@@ -68,25 +67,24 @@ jobs:
 
       - name: Send start notification
         run: |
-          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-100)
+          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-50)
           COMMIT_AUTHOR="${{ github.event.head_commit.author.name }}"
 
           # Si no hay head_commit (ej: workflow_dispatch), usar datos del actor
           if [ -z "$COMMIT_MSG" ]; then
-            COMMIT_MSG="Deploy manual desde GitHub Actions"
+            COMMIT_MSG="Deploy manual"
             COMMIT_AUTHOR="${{ github.actor }}"
           fi
+
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
 
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
             -d '{
               "level": "info",
-              "title": "🔄 Deploy Iniciado",
-              "repository": "${{ env.REPO_NAME }}",
-              "version": "${{ steps.version.outputs.odoo_version }}",
-              "commit": "'"${GITHUB_SHA:0:7}"'",
-              "message": "'"$COMMIT_MSG"'",
-              "author": "'"$COMMIT_AUTHOR"'",
+              "title": "🔄 Deploy Iniciado: '"$REPO_NAME"'",
+              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\nCommit: '"${GITHUB_SHA:0:7}"'\nMensaje: '"$COMMIT_MSG"'\nAutor: '"$COMMIT_AUTHOR"'",
+              "server": "GitHub Actions",
               "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
             }' || true
 
@@ -98,6 +96,9 @@ jobs:
         run: |
           cd /opt/bmya-infrastructure/ansible
 
+          # Extraer nombre del repo (sin el owner)
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+
           # Limpiar logs anteriores
           rm -f /tmp/ansible-output.log /tmp/ansible-stderr.log
 
@@ -105,7 +106,7 @@ jobs:
           set +e  # No salir en error, capturar exit code
           ansible-playbook -i inventory/infrastructure-vlan.yml playbooks/update-odoo-modules.yml \
             --limit ${{ steps.version.outputs.ansible_group }} \
-            -e "repo_name=${{ env.REPO_NAME }}" \
+            -e "repo_name=$REPO_NAME" \
             -e "odoo_version=${{ steps.version.outputs.odoo_version }}" \
             -e "github_user=$GH_USER" \
             -e "github_token=$GH_TOKEN" \
@@ -152,73 +153,68 @@ jobs:
       - name: Send success notification
         if: success()
         run: |
-          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-100)
+          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-50)
           COMMIT_AUTHOR="${{ github.event.head_commit.author.name }}"
 
           if [ -z "$COMMIT_MSG" ]; then
-            COMMIT_MSG="Deploy manual desde GitHub Actions"
+            COMMIT_MSG="Deploy manual"
             COMMIT_AUTHOR="${{ github.actor }}"
           fi
 
-          # Determinar si hubo cambios reales
+          # Determinar nivel y texto según cambios
           if [ "${{ steps.ansible.outputs.changed_count }}" -gt 0 ]; then
-            CHANGES_TEXT="✅ ${{ steps.ansible.outputs.changed_count }}/${{ steps.ansible.outputs.total_count }} servidores actualizados"
+            LEVEL="success"
+            CHANGES_TEXT="Actualizados: ${{ steps.ansible.outputs.changed_count }}/${{ steps.ansible.outputs.total_count }} servidores"
             SERVERS_LIST="${{ steps.ansible.outputs.changed_servers }}"
           else
-            CHANGES_TEXT="ℹ️ Sin cambios (ya actualizado)"
+            LEVEL="info"
+            CHANGES_TEXT="Sin cambios (ya actualizado)"
             SERVERS_LIST="${{ steps.ansible.outputs.servers }}"
           fi
+
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
 
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
             -d '{
-              "level": "success",
-              "title": "✅ Deploy Exitoso",
-              "repository": "${{ env.REPO_NAME }}",
-              "version": "${{ steps.version.outputs.odoo_version }}",
-              "commit": "'"${GITHUB_SHA:0:7}"'",
-              "message": "'"$COMMIT_MSG"'",
-              "author": "'"$COMMIT_AUTHOR"'",
-              "servers": "'"$SERVERS_LIST"'",
-              "changes": "'"$CHANGES_TEXT"'",
-              "changed_count": "${{ steps.ansible.outputs.changed_count }}",
-              "total_count": "${{ steps.ansible.outputs.total_count }}",
+              "level": "'$LEVEL'",
+              "title": "✅ Deploy Exitoso: '"$REPO_NAME"'",
+              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\n'"$CHANGES_TEXT"'\nServidores: '"$SERVERS_LIST"'\nCommit: '"${GITHUB_SHA:0:7}"'\nAutor: '"$COMMIT_AUTHOR"'",
+              "server": "GitHub Actions",
               "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
             }' || true
 
       - name: Send failure notification
         if: failure()
         run: |
-          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-100)
+          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-50)
           COMMIT_AUTHOR="${{ github.event.head_commit.author.name }}"
 
           if [ -z "$COMMIT_MSG" ]; then
-            COMMIT_MSG="Deploy manual desde GitHub Actions"
+            COMMIT_MSG="Deploy manual"
             COMMIT_AUTHOR="${{ github.actor }}"
           fi
 
-          # Obtener error message si existe
+          # Obtener detalles del error
           ERROR_DETAILS="${{ steps.ansible.outputs.error_msg }}"
           FAILED_LIST="${{ steps.ansible.outputs.failed_servers }}"
 
-          # Si no hay failed_servers pero Ansible falló, mostrar mensaje genérico
-          if [ -z "$FAILED_LIST" ]; then
-            FAILED_LIST="Error en el workflow (revisar logs)"
+          # Si no hay failed_servers pero hay error, usar el mensaje de error
+          if [ -z "$FAILED_LIST" ] && [ -n "$ERROR_DETAILS" ]; then
+            FAILED_LIST="Ver logs para detalles"
+          elif [ -z "$FAILED_LIST" ]; then
+            FAILED_LIST="Error en workflow (no en Ansible)"
           fi
+
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
 
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
             -d '{
               "level": "critical",
-              "title": "🚨 Deploy Fallido",
-              "repository": "${{ env.REPO_NAME }}",
-              "version": "${{ steps.version.outputs.odoo_version }}",
-              "commit": "'"${GITHUB_SHA:0:7}"'",
-              "message": "'"$COMMIT_MSG"'",
-              "author": "'"$COMMIT_AUTHOR"'",
-              "failed_servers": "'"$FAILED_LIST"'",
-              "error": "'"$ERROR_DETAILS"'",
-              "logs_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              "title": "🚨 Deploy Fallido: '"$REPO_NAME"'",
+              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\nServidores fallidos: '"$FAILED_LIST"'\nCommit: '"${GITHUB_SHA:0:7}"'\nAutor: '"$COMMIT_AUTHOR"'\n\nLogs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              "server": "GitHub Actions",
               "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
             }' || true
 
