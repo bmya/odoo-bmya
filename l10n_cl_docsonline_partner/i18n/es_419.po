@@ -4,18 +4,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0+e\n"
+"Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-02 23:59+0000\n"
-"PO-Revision-Date: 2025-07-02 20:06-0400\n"
+"POT-Creation-Date: 2025-11-29 19:41+0000\n"
+"PO-Revision-Date: 2025-11-29 18:02-0300\n"
 "Last-Translator: Daniel Blanco <daniel@blancomartin.cl>\n"
 "Language-Team: \n"
-"Language: es\n"
+"Language: es_419\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.view_update_button_form
@@ -37,7 +37,6 @@ msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__l10n_cl_activity_description
-#, fuzzy
 msgid "Activity Description"
 msgstr "Descripcion de Actividad"
 
@@ -59,6 +58,21 @@ msgstr ""
 "hijos."
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__bmya_support_service_installed
+msgid "BMyA Support Service Installed"
+msgstr "Modulo de Servicio de Soporte BMyA Instalado"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_token_auth
+msgid "BMyA Support Service Token"
+msgstr "Token de Servicio de Soporte BMyA"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_url
+msgid "BMyA Support Service URL"
+msgstr "Token de Servicio de Soporte BMyA"
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner__backup_name
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_users__backup_name
 msgid "Backup Name"
@@ -71,7 +85,6 @@ msgstr "Buscar en DocumentosOnline"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
-#, fuzzy
 msgid "Cancel"
 msgstr "Anular"
 
@@ -82,7 +95,6 @@ msgstr "Ciudad"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model,name:l10n_cl_docsonline_partner.model_res_config_settings
-#, fuzzy
 msgid "Config Settings"
 msgstr "Ajustes de Configuracion"
 
@@ -93,10 +105,8 @@ msgstr "Confirmar Sobreescritura"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
-#, fuzzy
-#| msgid "Confirm Without Overwrite Name or Address"
 msgid "Confirm Without Overwrite of Protected Fields"
-msgstr "Confirmar sin sobreescribir nombre o dirección"
+msgstr "Confirme sin sobreescritura de campos protegidos"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
@@ -117,22 +127,18 @@ msgstr "Creado por"
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__create_date
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__create_date
-#, fuzzy
 msgid "Created on"
 msgstr "Creado en"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__display_name
-#, fuzzy
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__docs_online_data_ids
-#, fuzzy
-#| msgid "DocsOnline Wizard Data"
 msgid "Docs Online Data"
-msgstr "Lista del Asistente de DocumentosOnline"
+msgstr "Datos de DocumentosOnline"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online
@@ -146,17 +152,13 @@ msgstr "Lista del Asistente de DocumentosOnline"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_token
-#, fuzzy
-#| msgid "Documentos Online Token"
 msgid "DocumentosOnline Token"
-msgstr "Token de Documentos Online"
+msgstr "Token de DocumentosOnline"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_url
-#, fuzzy
-#| msgid "Documentos Online Token"
 msgid "DocumentosOnline URL"
-msgstr "Token de Documentos Online"
+msgstr "URL de DocumentosOnline"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
@@ -215,16 +217,19 @@ msgstr ""
 "datos de DocumentosOnline cuando se actualice."
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__bmya_support_service_installed
+msgid "Indicates if the BMyA Support Service module is installed."
+msgstr "Indica si el Token de Servicio de Soporte BMyA está instalado o no."
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__write_uid
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__write_uid
-#, fuzzy
 msgid "Last Updated by"
 msgstr "Última actualización de"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__write_date
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__write_date
-#, fuzzy
 msgid "Last Updated on"
 msgstr "Última actualización en"
 
@@ -235,9 +240,8 @@ msgstr "Líneas"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__display_name
-#, fuzzy
 msgid "List Name"
-msgstr "Nombre mostrado"
+msgstr "Lista de Nombres"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__name
@@ -262,16 +266,9 @@ msgstr "API token de partners"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
-#, fuzzy
-#| msgid "Partner"
-msgid "Partners URL"
-msgstr "Empresa"
-
-#. module: l10n_cl_docsonline_partner
-#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid ""
-"Put here your free API token to get the fiscal data. Visit https://"
-"documentosonline.cl to register."
+"Put here your free API token to get the fiscal data. Please register in "
+"https://www.documentosonline.cl."
 msgstr ""
 "Coloque aquí su token API para obtener datos fiscales. Visite https://"
 "documentosonline.cl para registrarse."
@@ -290,7 +287,7 @@ msgstr "Leer Contactos chilenos desde documentosonline.cl"
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "Replace Activity"
-msgstr "Reemplazar Giro"
+msgstr "Reemplaza Giro"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
@@ -309,36 +306,28 @@ msgstr "Reemplazar Nombre"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_activity
-#, fuzzy
-#| msgid "Replace Activity"
 msgid "Replace Partner Activity"
-msgstr "Reemplazar Giro"
+msgstr "Reemplaza Giro del Cliente o Proveedor"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_street
-#, fuzzy
-#| msgid "Replace Address"
 msgid "Replace Partner Address"
-msgstr "Reemplazar Dirección"
+msgstr "Reemplaza Dirección del Cliente o Proveedor"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_email
-#, fuzzy
-#| msgid "Replace Email"
 msgid "Replace Partner Email"
-msgstr "Remplazar Email"
+msgstr "Reemplaza Email del Cliente o Proveedor"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_name
-#, fuzzy
-#| msgid "Replace Name"
 msgid "Replace Partner Name"
-msgstr "Reemplazar Nombre"
+msgstr "Reemplaza Nombre del Cliente o Proveedor"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_restrict_token_access
 msgid "Restrict Token Access"
-msgstr "Restringe el acceso al token."
+msgstr "Restringe el acceso al token"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
@@ -355,6 +344,11 @@ msgid "Street"
 msgstr "Calle"
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_token_auth
+msgid "The authentication token for accessing the BMyA Support Service API."
+msgstr "El token de autenticación para acceder el servicio de soporte de BMyA."
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_token
 msgid ""
 "The authentication token for accessing the DocumentosOnline API. Keep this "
@@ -364,6 +358,11 @@ msgstr ""
 "Mangenga este valr seguro y no lo comparta publicamente."
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_url
+msgid "The base URL for the BMyA Support Service API."
+msgstr "La URL base para acceder el servicio de soporte de BMyA."
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_url
 msgid ""
 "The base URL for the DocumentosOnline API. Leave empty to use the default "
@@ -371,6 +370,16 @@ msgid ""
 msgstr ""
 "La URL base para la API de DocumentosOnline. Deje este valor vacío para usar "
 "la que se provee por defecto por el sistema."
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "URL Docsonline taxpayer search"
+msgstr "URL para búsqueda de contribuyentes Docsonline"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.actions.server,name:l10n_cl_docsonline_partner.action_partner_multiple_update_docsonline
+msgid "Update from DocumentosOnline"
+msgstr "Actualizar desde DocumentosOnline"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
@@ -385,56 +394,19 @@ msgstr ""
 msgid "What to do if partner exists?"
 msgstr "¿Que hacer si un contacto existe?"
 
-#~ msgid "or"
-#~ msgstr "ó"
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "https://www.documentosonline.cl"
+msgstr "https://www.documentosonline.cl"
 
-#~ msgid "Country"
-#~ msgstr "País"
+#~ msgid "Partner %(name)s not updated: is not from Chile"
+#~ msgstr "Empresa %(name)s no actualizada: no es de Chile"
 
-#~ msgid "County"
-#~ msgstr "Comuna"
+#~ msgid "Partner %(name)s not updated: is a contact of %(parent)s"
+#~ msgstr "Empresa %(name)s no actualizada: es un contacto de %(parent)s"
 
-#~ msgid "DTE Email"
-#~ msgstr "Correo DTE"
+#~ msgid "Partner %(name)s not updated: is a branch of %(parent)s"
+#~ msgstr "Empresa %(name)s no actualizada: es una sucursal de %(parent)s"
 
-#~ msgid "End Consumer"
-#~ msgstr "Consumidor Final"
-
-#~ msgid "Fees Receipt Issuer (2nd category)"
-#~ msgstr "Emisor de Boletas de Honorarios (2da categoría)"
-
-#~ msgid "Foreigner"
-#~ msgstr "Extranjero"
-
-#~ msgid "Invoice Address"
-#~ msgstr "Dirección de Facturación"
-
-#~ msgid "Other Address"
-#~ msgstr "Otra dirección"
-
-#~ msgid "Private Address"
-#~ msgstr "Dirección privada"
-
-#~ msgid "Province"
-#~ msgstr "Región"
-
-#~ msgid "Shipping Address"
-#~ msgstr "Dirección de Entrega"
-
-#~ msgid "Street2"
-#~ msgstr "Calle 2"
-
-#~ msgid "Taxpayer Type"
-#~ msgstr "Tipo de contribuyente"
-
-#~ msgid "Type of Address"
-#~ msgstr "Tipo de Dirección"
-
-#~ msgid "VAT Affected (1st Category)"
-#~ msgstr "IVA Afecto (1ra categoría)"
-
-#~ msgid "www.documentosonline.cl wizard"
-#~ msgstr "asistente de documentosonline.cl"
-
-#~ msgid "www.documentosonline.cl wizard #2"
-#~ msgstr "asistente de documentosonline.cl #2"
+#~ msgid "Partner %(name)s successfully updated"
+#~ msgstr "Empresa %(name)s actualizada con éxito"
