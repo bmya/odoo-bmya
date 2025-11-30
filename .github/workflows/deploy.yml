@@ -70,7 +70,6 @@ jobs:
           COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-50)
           COMMIT_AUTHOR="${{ github.event.head_commit.author.name }}"
 
-          # Si no hay head_commit (ej: workflow_dispatch), usar datos del actor
           if [ -z "$COMMIT_MSG" ]; then
             COMMIT_MSG="Deploy manual"
             COMMIT_AUTHOR="${{ github.actor }}"
@@ -82,8 +81,8 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{
               "level": "info",
-              "title": "🔄 Deploy Iniciado: '"$REPO_NAME"'",
-              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\nCommit: '"${GITHUB_SHA:0:7}"'\nMensaje: '"$COMMIT_MSG"'\nAutor: '"$COMMIT_AUTHOR"'",
+              "title": "🔄 Deploy Iniciado",
+              "message": "📦 Repo: '"$REPO_NAME"'\n📌 Versión: ${{ steps.version.outputs.odoo_version }}\n\nCommit: '"${GITHUB_SHA:0:7}"'\nAutor: '"$COMMIT_AUTHOR"'\nMensaje: '"$COMMIT_MSG"'",
               "server": "GitHub Actions",
               "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
             }' || true
@@ -96,18 +95,17 @@ jobs:
         run: |
           cd /opt/bmya-infrastructure/ansible
 
-          # Extraer nombre del repo (sin el owner)
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
 
-          # Obtener lista de servidores objetivo ANTES de ejecutar
+          # Obtener lista de servidores objetivo
           TARGET_SERVERS=$(ansible -i inventory/infrastructure-vlan.yml ${{ steps.version.outputs.ansible_group }} --list-hosts 2>/dev/null | tail -n +2 | tr -d ' ' | sort | tr '\n' ',' | sed 's/,$//' || echo "")
           TARGET_COUNT=$(echo "$TARGET_SERVERS" | tr ',' '\n' | grep -v '^$' | wc -l | tr -d ' ')
 
-          # Limpiar logs anteriores
+          # Limpiar logs
           rm -f /tmp/ansible-output.log /tmp/ansible-stderr.log
 
-          # Ejecutar actualización con output completo
-          set +e  # No salir en error, capturar exit code
+          # Ejecutar playbook
+          set +e
           ansible-playbook -i inventory/infrastructure-vlan.yml playbooks/update-odoo-modules.yml \
             --limit ${{ steps.version.outputs.ansible_group }} \
             -e "repo_name=$REPO_NAME" \
@@ -119,68 +117,102 @@ jobs:
           ANSIBLE_EXIT_CODE=$?
           set -e
 
-          # Capturar servidores EXITOSOS (ok o changed en summary)
-          SUCCESS_SERVERS=$(grep -E "^(ok|changed):" /tmp/ansible-output.log | awk '{print $2}' | sort -u | tr '\n' ',' | sed 's/,$//' || echo "")
+          # Parsear resultados del playbook mejorado
+          UPDATED_LIST=""
+          FAILED_LIST=""
 
-          # Capturar servidores con cambios
-          CHANGED_SERVERS=$(grep -E "changed=[1-9]" /tmp/ansible-output.log | grep -oP '^\w+' | sort -u | tr '\n' ',' | sed 's/,$//' || echo "")
+          # Variables temporales
+          CURRENT_SERVER=""
+          CURRENT_STATUS=""
+          CURRENT_BEFORE=""
+          CURRENT_AFTER=""
 
-          # Capturar servidores FALLIDOS (failed)
-          FAILED_SERVERS=$(grep -E "^failed:" /tmp/ansible-output.log | awk '{print $2}' | sort -u | tr '\n' ' ' || echo "")
+          # Parsear output línea por línea
+          while IFS= read -r line; do
+            if echo "$line" | grep -q "Update Summary for"; then
+              CURRENT_SERVER=$(echo "$line" | sed -n 's/.*Update Summary for \([^ ]*\).*/\1/p')
+            fi
 
-          # Capturar servidores UNREACHABLE
-          UNREACHABLE_SERVERS=$(grep -E "^unreachable:" /tmp/ansible-output.log | awk '{print $2}' | sort -u | tr '\n' ' ' || echo "")
+            if echo "$line" | grep -q "STATUS="; then
+              CURRENT_STATUS=$(echo "$line" | sed 's/.*STATUS=\(.*\)/\1/' | tr -d ' ')
+            fi
 
-          # Capturar servidores SKIPPED (si aplica)
-          SKIPPED_SERVERS=$(grep -E "^skipping:" /tmp/ansible-output.log | awk '{print $2}' | sort -u | tr '\n' ' ' || echo "")
+            if echo "$line" | grep -q "BEFORE="; then
+              CURRENT_BEFORE=$(echo "$line" | sed 's/.*BEFORE=\(.*\)/\1/' | tr -d ' ')
+            fi
 
-          # Consolidar TODOS los servidores con problemas
-          NOT_UPDATED=""
-          for server in $FAILED_SERVERS; do
-            NOT_UPDATED="${NOT_UPDATED}${server}(failed) "
+            if echo "$line" | grep -q "AFTER="; then
+              CURRENT_AFTER=$(echo "$line" | sed 's/.*AFTER=\(.*\)/\1/' | tr -d ' ')
+
+              # Procesar servidor
+              if [ -n "$CURRENT_SERVER" ] && [ -n "$CURRENT_STATUS" ]; then
+                case "$CURRENT_STATUS" in
+                  OK)
+                    if [ -n "$CURRENT_BEFORE" ] && [ -n "$CURRENT_AFTER" ] && [ "$CURRENT_BEFORE" != "$CURRENT_AFTER" ]; then
+                      UPDATED_LIST="${UPDATED_LIST}${CURRENT_SERVER}: OK (${CURRENT_BEFORE}→${CURRENT_AFTER})|"
+                    else
+                      UPDATED_LIST="${UPDATED_LIST}${CURRENT_SERVER}: OK (sin cambios)|"
+                    fi
+                    ;;
+                  RESTART_FAIL)
+                    FAILED_LIST="${FAILED_LIST}${CURRENT_SERVER}: Git pull OK, pero restart FALLÓ|"
+                    ;;
+                  NO_CHANGES|NO_RESTART_NEEDED)
+                    UPDATED_LIST="${UPDATED_LIST}${CURRENT_SERVER}: OK (sin cambios)|"
+                    ;;
+                esac
+              fi
+
+              CURRENT_SERVER=""
+              CURRENT_STATUS=""
+              CURRENT_BEFORE=""
+              CURRENT_AFTER=""
+            fi
+          done < /tmp/ansible-output.log
+
+          # Detectar unreachable/failed
+          UNREACHABLE=$(grep -E "^unreachable:" /tmp/ansible-output.log 2>/dev/null | awk '{print $2}' | tr '\n' ' ' || echo "")
+          ANSIBLE_FAILED=$(grep -E "^failed:" /tmp/ansible-output.log 2>/dev/null | awk '{print $2}' | tr '\n' ' ' || echo "")
+
+          for server in $UNREACHABLE; do
+            FAILED_LIST="${FAILED_LIST}${server}: No accesible (SSH failed)|"
           done
-          for server in $UNREACHABLE_SERVERS; do
-            NOT_UPDATED="${NOT_UPDATED}${server}(unreachable) "
-          done
-          for server in $SKIPPED_SERVERS; do
-            NOT_UPDATED="${NOT_UPDATED}${server}(skipped) "
+
+          for server in $ANSIBLE_FAILED; do
+            if ! echo "$FAILED_LIST" | grep -q "$server:"; then
+              FAILED_LIST="${FAILED_LIST}${server}: Error en playbook|"
+            fi
           done
 
-          # Limpiar espacios extra y convertir a lista separada por comas
-          NOT_UPDATED=$(echo "$NOT_UPDATED" | sed 's/ *$//' | tr ' ' ',' || echo "")
+          # Limpiar
+          UPDATED_LIST=$(echo "$UPDATED_LIST" | sed 's/|$//')
+          FAILED_LIST=$(echo "$FAILED_LIST" | sed 's/|$//')
 
-          # Contar servidores NO actualizados
-          if [ -n "$NOT_UPDATED" ]; then
-            NOT_UPDATED_COUNT=$(echo "$NOT_UPDATED" | tr ',' '\n' | grep -v '^$' | wc -l | tr -d ' ')
+          # Contar
+          if [ -n "$UPDATED_LIST" ]; then
+            UPDATED_COUNT=$(echo "$UPDATED_LIST" | tr '|' '\n' | grep -v '^$' | wc -l | tr -d ' ')
           else
-            NOT_UPDATED_COUNT=0
+            UPDATED_COUNT=0
           fi
 
-          # Contar cambios
-          CHANGED_COUNT=$(grep -E "changed=[1-9]" /tmp/ansible-output.log | wc -l | tr -d ' ' || echo "0")
-          SUCCESS_COUNT=$(echo "$SUCCESS_SERVERS" | tr ',' '\n' | grep -v '^$' | wc -l | tr -d ' ')
-
-          # Capturar errores si los hay
-          if [ -s /tmp/ansible-stderr.log ]; then
-            ERROR_MSG=$(head -5 /tmp/ansible-stderr.log | tr '\n' ' ' | cut -c1-200)
+          if [ -n "$FAILED_LIST" ]; then
+            FAILED_COUNT=$(echo "$FAILED_LIST" | tr '|' '\n' | grep -v '^$' | wc -l | tr -d ' ')
           else
-            ERROR_MSG=""
+            FAILED_COUNT=0
           fi
 
-          echo "exit_code=$ANSIBLE_EXIT_CODE" >> $GITHUB_OUTPUT
+          # Outputs
+          echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT
           echo "target_servers=$TARGET_SERVERS" >> $GITHUB_OUTPUT
           echo "target_count=$TARGET_COUNT" >> $GITHUB_OUTPUT
-          echo "success_servers=$SUCCESS_SERVERS" >> $GITHUB_OUTPUT
-          echo "success_count=$SUCCESS_COUNT" >> $GITHUB_OUTPUT
-          echo "changed_servers=$CHANGED_SERVERS" >> $GITHUB_OUTPUT
-          echo "changed_count=$CHANGED_COUNT" >> $GITHUB_OUTPUT
-          echo "not_updated=$NOT_UPDATED" >> $GITHUB_OUTPUT
-          echo "not_updated_count=$NOT_UPDATED_COUNT" >> $GITHUB_OUTPUT
-          echo "error_msg=$ERROR_MSG" >> $GITHUB_OUTPUT
+          echo "updated_list=$UPDATED_LIST" >> $GITHUB_OUTPUT
+          echo "updated_count=$UPDATED_COUNT" >> $GITHUB_OUTPUT
+          echo "failed_list=$FAILED_LIST" >> $GITHUB_OUTPUT
+          echo "failed_count=$FAILED_COUNT" >> $GITHUB_OUTPUT
+          echo "exit_code=$ANSIBLE_EXIT_CODE" >> $GITHUB_OUTPUT
 
-          # Si Ansible falló, salir con error
-          if [ $ANSIBLE_EXIT_CODE -ne 0 ]; then
-            echo "Ansible failed with exit code $ANSIBLE_EXIT_CODE"
+          if [ $ANSIBLE_EXIT_CODE -ne 0 ] && [ "$UPDATED_COUNT" -eq 0 ]; then
+            echo "Ansible failed completely"
             cat /tmp/ansible-stderr.log
             exit $ANSIBLE_EXIT_CODE
           fi
@@ -196,32 +228,76 @@ jobs:
             COMMIT_AUTHOR="${{ github.actor }}"
           fi
 
-          # Construir mensaje de estado
-          STATUS_MSG="✅ Exitosos: ${{ steps.ansible.outputs.success_count }}/${{ steps.ansible.outputs.target_count }}"
-
-          if [ "${{ steps.ansible.outputs.changed_count }}" -gt 0 ]; then
-            STATUS_MSG="${STATUS_MSG}\n📦 Con cambios: ${{ steps.ansible.outputs.changed_count }}"
+          # Formatear listas
+          UPDATED_LINES=""
+          if [ -n "${{ steps.ansible.outputs.updated_list }}" ]; then
+            COUNT=0
+            TOTAL=$(echo "${{ steps.ansible.outputs.updated_list }}" | tr '|' '\n' | grep -v '^$' | wc -l)
+            while IFS='|' read -r entry; do
+              if [ -n "$entry" ]; then
+                COUNT=$((COUNT + 1))
+                if [ $COUNT -eq $TOTAL ]; then
+                  UPDATED_LINES="${UPDATED_LINES}└─ ${entry}\n"
+                else
+                  UPDATED_LINES="${UPDATED_LINES}├─ ${entry}\n"
+                fi
+              fi
+            done <<< "${{ steps.ansible.outputs.updated_list }}"
           fi
 
-          # Si hay servidores NO actualizados, reportarlos CLARAMENTE
-          if [ "${{ steps.ansible.outputs.not_updated_count }}" -gt 0 ]; then
+          FAILED_LINES=""
+          if [ -n "${{ steps.ansible.outputs.failed_list }}" ]; then
+            COUNT=0
+            TOTAL=$(echo "${{ steps.ansible.outputs.failed_list }}" | tr '|' '\n' | grep -v '^$' | wc -l)
+            while IFS='|' read -r entry; do
+              if [ -n "$entry" ]; then
+                COUNT=$((COUNT + 1))
+                if [ $COUNT -eq $TOTAL ]; then
+                  FAILED_LINES="${FAILED_LINES}└─ ${entry}\n"
+                else
+                  FAILED_LINES="${FAILED_LINES}├─ ${entry}\n"
+                fi
+              fi
+            done <<< "${{ steps.ansible.outputs.failed_list }}"
+          fi
+
+          # Nivel
+          if [ "${{ steps.ansible.outputs.failed_count }}" -gt 0 ]; then
             LEVEL="warning"
-            STATUS_MSG="${STATUS_MSG}\n⚠️ NO ACTUALIZADOS: ${{ steps.ansible.outputs.not_updated_count }}\n└─ ${{ steps.ansible.outputs.not_updated }}"
-          elif [ "${{ steps.ansible.outputs.changed_count }}" -gt 0 ]; then
+            TITLE="⚠️ Deploy con Errores"
+          elif [ "${{ steps.ansible.outputs.updated_count }}" -gt 0 ]; then
             LEVEL="success"
+            TITLE="✅ Deploy Exitoso"
           else
             LEVEL="info"
-            STATUS_MSG="${STATUS_MSG}\n(Sin cambios - ya actualizado)"
+            TITLE="ℹ️ Sin Cambios"
           fi
 
-          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          # Mensaje
+          MESSAGE="📦 Repo: ${{ steps.ansible.outputs.repo_name }}\n📌 Versión: ${{ steps.version.outputs.odoo_version }}\n\n"
+
+          if [ "${{ steps.ansible.outputs.updated_count }}" -gt 0 ]; then
+            MESSAGE="${MESSAGE}✅ ACTUALIZADOS (${{ steps.ansible.outputs.updated_count }}/${{ steps.ansible.outputs.target_count }}):
+${UPDATED_LINES}\n"
+          fi
+
+          if [ "${{ steps.ansible.outputs.failed_count }}" -gt 0 ]; then
+            MESSAGE="${MESSAGE}❌ FALLIDOS (${{ steps.ansible.outputs.failed_count }}/${{ steps.ansible.outputs.target_count }}):
+${FAILED_LINES}\n"
+          fi
+
+          if [ "${{ steps.ansible.outputs.updated_count }}" -eq 0 ] && [ "${{ steps.ansible.outputs.failed_count }}" -eq 0 ]; then
+            MESSAGE="${MESSAGE}ℹ️ Sin cambios - Todos actualizados\n"
+          fi
+
+          MESSAGE="${MESSAGE}\nCommit: ${GITHUB_SHA:0:7} | $COMMIT_AUTHOR"
 
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
             -d '{
-              "level": "'$LEVEL'",
-              "title": "✅ Deploy Completado: '"$REPO_NAME"'",
-              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\n'"$STATUS_MSG"'\n\nCommit: '"${GITHUB_SHA:0:7}"'\nAutor: '"$COMMIT_AUTHOR"'",
+              "level": "'"$LEVEL"'",
+              "title": "'"$TITLE"'",
+              "message": "'"$MESSAGE"'",
               "server": "GitHub Actions",
               "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
             }' || true
@@ -237,34 +313,28 @@ jobs:
             COMMIT_AUTHOR="${{ github.actor }}"
           fi
 
-          # Construir mensaje detallado de fallo
-          FAIL_MSG="🚨 Objetivo: ${{ steps.ansible.outputs.target_count }} servidores"
+          MESSAGE="📦 Repo: ${{ steps.ansible.outputs.repo_name }}\n📌 Versión: ${{ steps.version.outputs.odoo_version }}\n\n"
+          MESSAGE="${MESSAGE}🚨 Objetivo: ${{ steps.ansible.outputs.target_count }} servidores\n\n"
 
-          # Mostrar exitosos si los hubo
-          if [ "${{ steps.ansible.outputs.success_count }}" -gt 0 ]; then
-            FAIL_MSG="${FAIL_MSG}\n✅ Exitosos: ${{ steps.ansible.outputs.success_count }}"
+          if [ "${{ steps.ansible.outputs.updated_count }}" -gt 0 ]; then
+            MESSAGE="${MESSAGE}✅ Exitosos: ${{ steps.ansible.outputs.updated_count }}\n"
           fi
 
-          # Mostrar servidores NO actualizados con detalles
-          if [ -n "${{ steps.ansible.outputs.not_updated }}" ]; then
-            FAIL_MSG="${FAIL_MSG}\n\n❌ NO ACTUALIZADOS (${{ steps.ansible.outputs.not_updated_count }}):\n${{ steps.ansible.outputs.not_updated }}"
+          if [ "${{ steps.ansible.outputs.failed_count }}" -gt 0 ]; then
+            MESSAGE="${MESSAGE}❌ FALLIDOS: ${{ steps.ansible.outputs.failed_count }}\n"
           else
-            FAIL_MSG="${FAIL_MSG}\n\n❌ Error en workflow (no en servidores)"
+            MESSAGE="${MESSAGE}❌ Error completo del workflow\n"
           fi
 
-          # Agregar error de stderr si existe
-          if [ -n "${{ steps.ansible.outputs.error_msg }}" ]; then
-            FAIL_MSG="${FAIL_MSG}\n\n⚠️ Error:\n${{ steps.ansible.outputs.error_msg }}"
-          fi
-
-          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          MESSAGE="${MESSAGE}\nCommit: ${GITHUB_SHA:0:7} | $COMMIT_AUTHOR\n"
+          MESSAGE="${MESSAGE}\n🔍 Logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
             -d '{
               "level": "critical",
-              "title": "🚨 Deploy Fallido: '"$REPO_NAME"'",
-              "message": "Versión: ${{ steps.version.outputs.odoo_version }}\n'"$FAIL_MSG"'\n\nCommit: '"${GITHUB_SHA:0:7}"'\nAutor: '"$COMMIT_AUTHOR"'\n\nLogs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              "title": "🚨 Deploy Fallido",
+              "message": "'"$MESSAGE"'",
               "server": "GitHub Actions",
               "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
             }' || true
