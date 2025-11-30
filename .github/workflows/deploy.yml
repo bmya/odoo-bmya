@@ -77,15 +77,19 @@ jobs:
 
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
 
+          MESSAGE="📦 Repo: ${REPO_NAME}"$'\n'"📌 Versión: ${{ steps.version.outputs.odoo_version }}"$'\n\n'"Commit: ${GITHUB_SHA:0:7}"$'\n'"Autor: ${COMMIT_AUTHOR}"$'\n'"Mensaje: ${COMMIT_MSG}"
+
+          PAYLOAD=$(jq -n \
+            --arg level "info" \
+            --arg title "🔄 Deploy Iniciado" \
+            --arg message "$MESSAGE" \
+            --arg server "GitHub Actions" \
+            --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{level: $level, title: $title, message: $message, server: $server, timestamp: $timestamp}')
+
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
-            -d '{
-              "level": "info",
-              "title": "🔄 Deploy Iniciado",
-              "message": "📦 Repo: '"$REPO_NAME"'\n📌 Versión: ${{ steps.version.outputs.odoo_version }}\n\nCommit: '"${GITHUB_SHA:0:7}"'\nAutor: '"$COMMIT_AUTHOR"'\nMensaje: '"$COMMIT_MSG"'",
-              "server": "GitHub Actions",
-              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
-            }' || true
+            -d "$PAYLOAD" || true
 
       - name: Run Ansible playbook
         id: ansible
@@ -290,15 +294,18 @@ jobs:
 
           MESSAGE="${MESSAGE}"$'\n'"Commit: ${GITHUB_SHA:0:7} | $COMMIT_AUTHOR"
 
+          # Usar jq para construir JSON de forma segura
+          PAYLOAD=$(jq -n \
+            --arg level "$LEVEL" \
+            --arg title "$TITLE" \
+            --arg message "$MESSAGE" \
+            --arg server "GitHub Actions" \
+            --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{level: $level, title: $title, message: $message, server: $server, timestamp: $timestamp}')
+
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
-            -d '{
-              "level": "'"$LEVEL"'",
-              "title": "'"$TITLE"'",
-              "message": "'"$MESSAGE"'",
-              "server": "GitHub Actions",
-              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
-            }' || true
+            -d "$PAYLOAD" || true
 
       - name: Send failure notification
         if: failure()
@@ -360,15 +367,18 @@ jobs:
           MESSAGE="${MESSAGE}"$'\n'"Commit: ${GITHUB_SHA:0:7} | $COMMIT_AUTHOR"$'\n\n'
           MESSAGE="${MESSAGE}🔍 Logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
+          # Usar jq para construir JSON de forma segura
+          PAYLOAD=$(jq -n \
+            --arg level "critical" \
+            --arg title "🚨 Deploy Fallido" \
+            --arg message "$MESSAGE" \
+            --arg server "GitHub Actions" \
+            --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{level: $level, title: $title, message: $message, server: $server, timestamp: $timestamp}')
+
           curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
-            -d '{
-              "level": "critical",
-              "title": "🚨 Deploy Fallido",
-              "message": "'"$MESSAGE"'",
-              "server": "GitHub Actions",
-              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
-            }' || true
+            -d "$PAYLOAD" || true
 
       - name: Upload logs on failure
         if: failure()
