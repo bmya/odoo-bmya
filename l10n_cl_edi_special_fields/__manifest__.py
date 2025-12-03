@@ -20,7 +20,7 @@
         'views/account_move_view.xml',
         'template/dte_template.xml',
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
     'application': False,
 }
