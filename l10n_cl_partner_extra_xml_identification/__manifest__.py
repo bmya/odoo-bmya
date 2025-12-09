@@ -20,7 +20,7 @@ Agrega Campos Especiales a los XML
         'views/partner_view.xml',
         'template/dte_template.xml',
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
     'application': False,
 }
