@@ -1,6 +1,6 @@
 {
     "name": """Chile - Partner XML Identification""",
-    'version': '18.0.1.0.0',
+    'version': '19.0.1.0.0',
     'category': 'Localization/Chile',
     'license': 'LGPL-3',
     'sequence': 12,

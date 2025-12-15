@@ -33,7 +33,7 @@ class AccountChangeCurrency(models.TransientModel):
     def _get_move(self):
         self.ensure_one()
         move = self.env['account.move'].browse(
-            self._context.get('active_id', False))
+            self.env.context.get('active_id', False))
         if not move:
             raise ValidationError(_('No Invoice on context as "active_id"'))
         return move
@@ -70,29 +70,56 @@ class AccountChangeCurrency(models.TransientModel):
         self.ensure_one()
         move = self._get_move()
         old_amount_untaxed = move.amount_untaxed
+        old_currency = move.currency_id
+
         if self.currency_id == move.currency_id:
             return {'type': 'ir.actions.act_window_close'}
-        for line in move.invoice_line_ids:
-            line.price_unit = line.price_unit * self.currency_rate
-            line.currency_id = self.currency_id
+
+        # Store previous currency info for message
         if self.currency_rate >= 1:
             previous_currency = move.currency_id
             rate = self.currency_rate
         else:
             previous_currency = self.currency_id
             rate = 1 / self.currency_rate
+
+        # Change currency on invoice lines and update prices
+        for line in move.invoice_line_ids:
+            line.write({
+                'price_unit': line.price_unit * self.currency_rate,
+                'currency_id': self.currency_id.id,
+            })
+
+        # Change currency on move header
+        move.write({'currency_id': self.currency_id.id})
+
+        # Odoo 19: Manually update accounting lines (line_ids)
+        # In v18 this was automatic, but in v19 we need to explicitly recalculate
+        # debit/credit/balance for all accounting lines to match the new currency
+        for line in move.line_ids:
+            if line.currency_id != self.currency_id:
+                new_balance = line.balance * self.currency_rate
+                line.write({
+                    'currency_id': self.currency_id.id,
+                    'debit': new_balance if new_balance > 0 else 0.0,
+                    'credit': -new_balance if new_balance < 0 else 0.0,
+                    'amount_currency': line.amount_currency * self.currency_rate if line.amount_currency else 0.0,
+                })
+
+        # Add message to narration
         message = _("|| Original or Previous quotation in {0}. Rate: {1}").format(
             previous_currency.name, formatLang(self.env, rate, currency_obj=move.company_id.currency_id))
         if '||' in str(move.narration):
             move.narration = move.narration[:move.narration.find('||')] + message
         else:
             move.narration = '{0} {1}'.format(move.narration or '', message)
+
+        # Post message with amounts
         body = '{message1}. {message2}: {message3}'.format(
             message1=message.split(". ")[1],
             message2=_('Original or Previous Untaxed Amount'),
-            message3=formatLang(self.env, old_amount_untaxed, currency_obj=move.currency_id)
+            message3=formatLang(self.env, old_amount_untaxed, currency_obj=old_currency)
         )
-        move.currency_id = self.currency_id
         body += Markup('<br />') + _('Calculated Untaxed Amount: {}').format(
             formatLang(self.env, move.amount_untaxed, currency_obj=move.currency_id))
         move.message_post(body=body)

@@ -1,0 +1,134 @@
+name: Deploy to Servers
+
+on:
+  push:
+    branches:
+      - '16.0'
+      - '17.0'
+      - '18.0'
+      - '19.0'
+
+  # Solo trigger en merge de PR, no en push directo
+  pull_request:
+    types: [closed]
+    branches:
+      - '16.0'
+      - '17.0'
+      - '18.0'
+      - '19.0'
+
+  # Permitir ejecución manual
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Rama/versión a desplegar'
+        required: true
+        type: choice
+        options:
+          - '16.0'
+          - '17.0'
+          - '18.0'
+          - '19.0'
+
+env:
+  REPO_NAME: odoo-bmya
+  WEBHOOK_URL: ${{ secrets.TELEGRAM_WEBHOOK_URL }}
+  ANSIBLE_HOST_KEY_CHECKING: 'False'
+
+jobs:
+  deploy:
+    name: Deploy to Odoo Servers
+    runs-on: self-hosted
+
+    # Solo ejecutar si:
+    # - Es un push directo a la rama
+    # - O es un workflow_dispatch manual
+    # - O es un PR mergeado (no solo cerrado)
+    if: |
+      github.event_name == 'push' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+
+    steps:
+      - name: Determine Odoo version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.target_branch }}"
+          else
+            # Extraer versión del nombre de la rama
+            VERSION="${GITHUB_REF#refs/heads/}"
+          fi
+          echo "odoo_version=$VERSION" >> $GITHUB_OUTPUT
+
+          # Mapear versión a grupo de Ansible
+          case "$VERSION" in
+            16.0) echo "ansible_group=odoo_16" >> $GITHUB_OUTPUT ;;
+            17.0) echo "ansible_group=odoo_17" >> $GITHUB_OUTPUT ;;
+            18.0) echo "ansible_group=odoo_18" >> $GITHUB_OUTPUT ;;
+            *) echo "ansible_group=odoo_servers" >> $GITHUB_OUTPUT ;;
+          esac
+
+      # Notificación inicial removida - solo enviaremos resultado final
+
+      - name: Run Ansible playbook
+        id: ansible
+        env:
+          GH_USER: ${{ secrets.GH_USER }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          cd /opt/bmya-infrastructure/ansible
+
+          # Ejecutar actualización de módulos (usando inventario VLAN desde SAURON)
+          ansible-playbook -i inventory/infrastructure-vlan.yml playbooks/update-odoo-modules.yml \
+            --limit ${{ steps.version.outputs.ansible_group }} \
+            -e "repo_name=${{ env.REPO_NAME }}" \
+            -e "odoo_version=${{ steps.version.outputs.odoo_version }}" \
+            -e "github_user=$GH_USER" \
+            -e "github_token=$GH_TOKEN" \
+            2>&1 | tee /tmp/ansible-output.log
+
+          # Capturar servidores OK y fallidos
+          SERVERS_OK=$(grep -E "^(ok|changed):" /tmp/ansible-output.log | awk '{print $2}' | sort -u | tr '\n' ',' | sed 's/,$//')
+          SERVERS_FAIL=$(grep -E "^fatal:" /tmp/ansible-output.log | awk '{print $2}' | sort -u | tr '\n' ',' | sed 's/,$//')
+
+          # Contar cambios detectados
+          CHANGES=$(grep -c "UPDATED" /tmp/ansible-output.log || echo "0")
+          RESTARTS=$(grep -c "Restart.*container" /tmp/ansible-output.log || echo "0")
+
+          echo "servers_ok=$SERVERS_OK" >> $GITHUB_OUTPUT
+          echo "servers_fail=$SERVERS_FAIL" >> $GITHUB_OUTPUT
+          echo "changes=$CHANGES" >> $GITHUB_OUTPUT
+          echo "restarts=$RESTARTS" >> $GITHUB_OUTPUT
+
+      - name: Send success notification
+        if: success()
+        run: |
+          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-100)
+          curl -s -X POST "$WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "level": "success",
+              "title": "✅ Deploy Exitoso",
+              "message": "📦 Repositorio: ${{ env.REPO_NAME }}\n📌 Versión: ${{ steps.version.outputs.odoo_version }}\n\n👤 Autor: ${{ github.actor }}\n💬 Commit: '"$COMMIT_MSG"'\n🔗 SHA: ${{ github.sha }}\n\n🖥️  Servidores actualizados:\n${{ steps.ansible.outputs.servers_ok }}\n\n📊 Resumen:\n  • Cambios detectados: ${{ steps.ansible.outputs.changes }}\n  • Contenedores reiniciados: ${{ steps.ansible.outputs.restarts }}",
+              "server": "GitHub Actions",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
+            }' || true
+
+      - name: Send failure notification
+        if: failure()
+        run: |
+          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -1 | cut -c1-100)
+          FAIL_MSG=""
+          if [ -n "${{ steps.ansible.outputs.servers_fail }}" ]; then
+            FAIL_MSG="\n\n❌ Servidores fallidos:\n${{ steps.ansible.outputs.servers_fail }}\n"
+          fi
+          curl -s -X POST "$WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "level": "critical",
+              "title": "🚨 Deploy Fallido",
+              "message": "📦 Repositorio: ${{ env.REPO_NAME }}\n📌 Versión: ${{ steps.version.outputs.odoo_version }}\n\n👤 Autor: ${{ github.actor }}\n💬 Commit: '"$COMMIT_MSG"'\n🔗 SHA: ${{ github.sha }}'"${FAIL_MSG}"'\n\n🔍 Logs completos:\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              "server": "GitHub Actions",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
+            }' || true

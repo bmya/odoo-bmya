@@ -1,6 +1,6 @@
 {
     'name': 'Default Latam Document',
-    'version': '18.0.1.0.0',
+    'version': '19.0.1.0.0',
     'summary': 'Permite ordenar los tipos de documentos de latinoamérica para dar prioridad a un documento por defecto',
     'description': 'Default Latam Document',
     'category': 'Localization',

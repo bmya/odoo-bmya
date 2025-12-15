@@ -9,7 +9,7 @@
     of adding additional entropy to the module.
     NOTE: DO NOT INSTALL if you don't need to use delivery methods rules based on comunas.
     """,
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "author": "Blanco Martín & Asociados",
     'license': "LGPL-3",
     "website": "http://blancomartin.cl",

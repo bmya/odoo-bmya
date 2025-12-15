@@ -1,6 +1,6 @@
 {
     'name': 'Chilean Edi Fix Validation',
-    'version': '18.0.1.0.0',
+    'version': '19.0.1.0.0',
     'summary': 'Evita rechazos por parte del SII validando campos obligatorios',
     'description': 'Evita rechazos por parte del SII por falta de algunos campos obligatorios. Inicialmente la comuna, '
                    'que se encuentra en el campo Ciudad',
