@@ -17,5 +17,5 @@
     'installable': True,
     'auto_install': True,
     'website': 'http://www.bmya.cl',
-    'license': 'OPL-1',
+    'license': "LGPL-3",
 }
