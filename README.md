@@ -12,7 +12,6 @@
 | Agrega Campos adicionales en el modelo stock como chofer, etc. utilizando el modulo de flota. | l10n_cl_edi_stock_special_fields | 19.0.1.0.0 |
 | Ciertos clientes que usan SAP validan CdgVendedor y CdgIntRecep en la factura para identificar al proveedor y exigen que dicho campo no obligatorio esté en la factura. Este modulo resuelve ese gap. | l10n_cl_partner_extra_xml_identification | No Disponible |
 | Módulo que permite la impresión de la factura cedible, como un documento separado a la factura. Incorpora en el PDF las leyendas para que la cedible sea firmada y la leyenda CEDIBLE | l10n_cl_report_invoice_cedible | 19.0.1.0.0 |
-| Permite ordenar los tipos de documentos de latinoamérica para dar prioridad a un documento por defecto | l10n_latam_default_document | 19.0.1.0.0 |
 |  | picking_from_xls | No Disponible |
-| Este modulo modifica el formato de las ordenes de compra para adaptarse a los formatos chilenos (recuadro margen superior derecho). | purchase_order_report | 19.0.1.0.0 |
+| Este modulo modifica el formato de las ordenes de compra para adaptarse a los formatos chilenos (recuadro margen superior derecho). | purchase_order_report | No Disponible |
 | Este modulo modifica el formato de las ordenes de venta para adaptarse a los formatos chilenos (recuadro margen superior derecho). | sale_order_report | No Disponible |
