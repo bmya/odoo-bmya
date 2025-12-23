@@ -1,6 +1,3 @@
-# Copyright 2019 Blanco Martín & Asociados (https://www.bmya.cl).
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-
 {
     'name': 'Purchase Order Report',
     'summary': """Este modulo modifica el formato de las ordenes de compra para adaptarse a los formatos chilenos (recuadro margen superior derecho).""",
@@ -15,4 +12,5 @@
     'data': [
         'views/purchase_order_report.xml',
     ],
+    'installable': False,
 }
