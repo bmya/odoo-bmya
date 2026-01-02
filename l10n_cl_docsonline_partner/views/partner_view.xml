@@ -15,7 +15,7 @@
                     </button>
 
                     <button name="call_wizard" type="object" class="btn-link"
-                            help="Buscar en DocumentosOnline"
+                                help="Buscar en DocumentosOnline"
                             invisible="vat or country_code != 'CL' or company_country_code != 'CL'">
                         <i title="Buscar" role="img" aria-label="Buscar" class="fa fa-address-card-o"/>
                     </button>
