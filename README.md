@@ -7,9 +7,9 @@
 | Permite obtener datos tributarios de los clientes conectandose a www.documentosonline.cl. Requiere obtener una API de este sitio. Hay opción de uso gratuito. | l10n_cl_docsonline_partner | 18.0.2.0.4 |
 | Evita rechazos por parte del SII validando campos obligatorios | l10n_cl_edi_fix_validation | 18.0.1.0.0 |
 | Ciertos clientes que usan SAP requieren que el proveedor coloque en el XML de la factura un QBLI, que es un código en cada linea que identifica el ítem de la orden de compra de este cliente. | l10n_cl_edi_qbli | No Disponible |
-| Además permite que la deuda en el asiento contable se cargue a la empresa principal a pesar que se facture a una sucursal. | l10n_cl_edi_special_fields | No Disponible |
+| Además permite que la deuda en el asiento contable se cargue a la empresa principal a pesar que se facture a una sucursal. | l10n_cl_edi_special_fields | 18.0.1.0.0 |
 | Agrega Campos adicionales en el modelo stock como chofer, etc. utilizando el modulo de flota. | l10n_cl_edi_stock_special_fields | 18.0.1.0.0 |
-| Ciertos clientes que usan SAP validan CdgVendedor y CdgIntRecep en la factura para identificar al proveedor y exigen que dicho campo no obligatorio esté en la factura. Este modulo resuelve ese gap. | l10n_cl_partner_extra_xml_identification | No Disponible |
+| Ciertos clientes que usan SAP validan CdgVendedor y CdgIntRecep en la factura para identificar al proveedor y exigen que dicho campo no obligatorio esté en la factura. Este modulo resuelve ese gap. | l10n_cl_partner_extra_xml_identification | 18.0.1.0.0 |
 | Módulo que permite la impresión de la factura cedible, como un documento separado a la factura. Incorpora en el PDF las leyendas para que la cedible sea firmada y la leyenda CEDIBLE | l10n_cl_report_invoice_cedible | 18.0.1.0.0 |
 | Permite ordenar los tipos de documentos de latinoamérica para dar prioridad a un documento por defecto | l10n_latam_default_document | 18.0.1.0.0 |
 |  | picking_from_xls | No Disponible |
