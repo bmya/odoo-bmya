@@ -10,9 +10,9 @@
 | Establece un tipo de documento por defecto basado en el tipo de contribuyente (consumidor final->boleta, 1ra o 2da categoria de ventas -> factura, extranjero -> factura de exportación. | l10n_cl_default_document_type | 17.0.1.0.0 |
 | Permite obtener datos tributarios de los clientes conectandose a www.documentosonline.cl. Requiere obtener una API de este sitio. Hay opción de uso gratuito. | l10n_cl_docsonline_partner | 17.0.2.0.2 |
 | Ciertos clientes que usan SAP requieren que el proveedor coloque en el XML de la factura un QBLI, que es un código en cada linea que identifica el ítem de la orden de compra de este cliente. | l10n_cl_edi_qbli | No Disponible |
-| Además permite que la deuda en el asiento contable se cargue a la empresa principal a pesar que se facture a una sucursal. | l10n_cl_edi_special_fields | No Disponible |
+| Además permite que la deuda en el asiento contable se cargue a la empresa principal a pesar que se facture a una sucursal. | l10n_cl_edi_special_fields | 17.0.1.0.0 |
 | Agrega Campos adicionales en el modelo stock como chofer, etc. utilizando el modulo de flota. | l10n_cl_edi_stock_special_fields | 17.0.1.0.0 |
-| Ciertos clientes que usan SAP validan CdgVendedor y CdgIntRecep en la factura para identificar al proveedor y exigen que dicho campo no obligatorio esté en la factura. Este modulo resuelve ese gap. | l10n_cl_partner_extra_xml_identification | No Disponible |
+| Ciertos clientes que usan SAP validan CdgVendedor y CdgIntRecep en la factura para identificar al proveedor y exigen que dicho campo no obligatorio esté en la factura. Este modulo resuelve ese gap. | l10n_cl_partner_extra_xml_identification | 17.0.1.0.0 |
 | Permite ordenar los tipos de documentos de latinoamérica para dar prioridad a un documento por defecto | l10n_latam_default_document | 17.0.1.0.0 |
 | Agrega una posicion fiscal enlazada a los tipos de documentos. | l10n_latam_document_fiscal_position | 17.0.1.0.0 |
 |  | picking_from_xls | No Disponible |
