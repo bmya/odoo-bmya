@@ -43,14 +43,9 @@
     </template>
 
     <template id="report_invoice_cedible">
-        <t t-call="account.report_invoice">
-            <t t-set="cedible" t-value="1"/>
-            <t t-foreach="docs" t-as="o">
-                <t t-set="lang" t-value="o.partner_id.lang"/>
-                <t t-set="print_with_payments" t-value="True"/>
-                <t t-call="l10n_cl_report_invoice_cedible.report_invoice_transferable_table"/>
-            </t>
-        </t>
+        <t t-set="cedible" t-value="1"/>
+        <t t-set="print_with_payments" t-value="True"/>
+        <t t-call="account.report_invoice"/>
     </template>
 
     <record id="action_report_invoice_cedible" model="ir.actions.report">
