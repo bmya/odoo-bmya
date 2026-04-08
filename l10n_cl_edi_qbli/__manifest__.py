@@ -18,9 +18,10 @@ Adds QBLI to the invoice lines, according to requirements from some customers us
     ],
     'data': [
         'views/account_move_view.xml',
+        'views/report_invoice.xml',
         'template/dte_template.xml',
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
     'application': False,
 }
