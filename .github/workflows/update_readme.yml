@@ -3,9 +3,14 @@ name: Update README with Odoo Modules
 on:
   push:
     branches:
-      - "*"  # Se ejecuta en todas las ramas
+      - "15.0"
+      - "16.0"
+      - "17.0"
+      - "18.0"
+      - "19.0"
+      - "master"
     paths:
-      - "**/__manifest__.py"  # Solo cuando cambien los archivos __manifest__.py
+      - "**/__manifest__.py"
 
 jobs:
   update-readme:
