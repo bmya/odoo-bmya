@@ -5,9 +5,9 @@
 | Agrega un campo de selección basado en el campo oficial city_id a los clientes/proveedores para disponer de las comunas de Chile. Es compatible con l10n_cl y con l10n_cl_edi (facturación electrónica oficial) porque copia el valor de la comuna al campo city. | l10n_cl_counties | 19.0.1.1.0 |
 | Este modulo hace un hack, colocando las comunas como si fuesen regiones, con el objeto de poder usar las reglas originales de Odoo para determinar los transportes disponibles. No se recommienda usarlo si no se usa delivery | l10n_cl_counties_as_region | 19.0.1.0.0 |
 | Establece un tipo de documento por defecto basado en el tipo de contribuyente (consumidor final->boleta, 1ra o 2da categoria de ventas -> factura, extranjero -> factura de exportación. | l10n_cl_default_document_type | 19.0.1.0.0 |
-| Permite obtener datos tributarios de los clientes conectandose a www.documentosonline.cl. Requiere obtener una API de este sitio. Hay opción de uso gratuito. | l10n_cl_docsonline_partner | 19.0.1.1.0 |
+| Permite obtener datos tributarios de los clientes conectandose a www.documentosonline.cl. Requiere obtener una API de este sitio. Hay opción de uso gratuito. | l10n_cl_docsonline_partner | 19.0.1.1.1 |
 | Evita rechazos por parte del SII validando campos obligatorios | l10n_cl_edi_fix_validation | 19.0.1.0.0 |
-| Ciertos clientes que usan SAP requieren que el proveedor coloque en el XML de la factura un QBLI, que es un código en cada linea que identifica el ítem de la orden de compra de este cliente. | l10n_cl_edi_qbli | No Disponible |
+| Ciertos clientes que usan SAP requieren que el proveedor coloque en el XML de la factura un QBLI, que es un código en cada linea que identifica el ítem de la orden de compra de este cliente. | l10n_cl_edi_qbli | 19.0.1.0.0 |
 | Además permite que la deuda en el asiento contable se cargue a la empresa principal a pesar que se facture a una sucursal. | l10n_cl_edi_special_fields | No Disponible |
 | Agrega Campos adicionales en el modelo stock como chofer, etc. utilizando el modulo de flota. | l10n_cl_edi_stock_special_fields | 19.0.1.0.0 |
 | Ciertos clientes que usan SAP validan CdgVendedor y CdgIntRecep en la factura para identificar al proveedor y exigen que dicho campo no obligatorio esté en la factura. Este modulo resuelve ese gap. | l10n_cl_partner_extra_xml_identification | No Disponible |
