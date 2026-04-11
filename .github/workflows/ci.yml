@@ -1,0 +1,11 @@
+name: CI
+
+on:
+  pull_request:
+    branches: ['16.0', '17.0', '18.0', '19.0', 'master']
+
+jobs:
+  lint:
+    uses: bmya/bmya-infrastructure/.github/workflows/ci-lint.yml@master
+    with:
+      odoo_version: ${{ github.base_ref }}
