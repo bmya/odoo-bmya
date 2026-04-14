@@ -1,3 +1,5 @@
+# Runboat OCA CI dependency repos
+# Cloned by gitaggregate before tests run
 - url: https://${GITHUB_TOKEN}@github.com/bmya/odoo
   branch: "18.0"
   merges:
