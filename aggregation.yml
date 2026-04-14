@@ -1,0 +1,8 @@
+- url: https://${GITHUB_TOKEN}@github.com/bmya/odoo
+  branch: "17.0"
+  merges:
+    - "origin 17.0"
+- url: https://${GITHUB_TOKEN}@github.com/bmya/enterprise
+  branch: "17.0"
+  merges:
+    - "origin 17.0"
