@@ -7,6 +7,6 @@ on:
 
 jobs:
   lint:
-    uses: bmya/bmya-infrastructure/.github/workflows/ci-lint.yml@master
+    uses: bmya/bmya-ci/ci-lint.yml@main
     with:
       odoo_version: ${{ github.base_ref }}
