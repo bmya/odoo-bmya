@@ -7,7 +7,6 @@ class AccountMove(models.Model):
     @api.onchange('fiscal_position_id')
     def _onchange_fiscal_position(self):
         self.ensure_one()
-        # only line with taxes are adjusted
         for line in self.invoice_line_ids.filtered(lambda l: l.display_type == 'product' and l.tax_ids):
             if line.product_id:
                 account_id = line.account_id

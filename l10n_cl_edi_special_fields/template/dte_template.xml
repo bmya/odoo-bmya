@@ -13,7 +13,7 @@
                     </Extranjero>
                     <GiroRecep t-if="not move.partner_id._l10n_cl_is_foreign() and not move.l10n_latam_document_type_id._is_doc_type_export() and not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-out="format_length(move.partner_id.l10n_cl_activity_description or move.commercial_partner_id.l10n_cl_activity_description, 40)"/>
                     <Contacto t-out="format_length(move.partner_invoice_id.phone, 80)"/>
-                    <CorreoRecep t-if="(move.partner_invoice_id.email or move.commercial_partner_id.l10n_cl_dte_email or move.partner_id.email or move.partner_id.l10n_cl_dte_email) and not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-esc="move.commercial_partner_id.l10n_cl_dte_email or move.partner_id.l10n_cl_dte_email or move.commercial_partner_id.email or move.partner_id.email"/>
+                    <CorreoRecep t-if="(move.partner_invoice_id.email or move.commercial_partner_id.l10n_cl_dte_email or move.partner_id.email or move.partner_id.l10n_cl_dte_email) and not move.l10n_latam_document_type_id._is_doc_type_voucher()" t-out="move.commercial_partner_id.l10n_cl_dte_email or move.partner_id.l10n_cl_dte_email or move.commercial_partner_id.email or move.partner_id.email"/>
                     <DirRecep t-out="format_length((move.partner_invoice_id.street or move.commercial_partner_id.street or '') + ' ' + (move.partner_invoice_id.street2 or move.commercial_partner_id.street2 or ''), 70)"/>
                     <CmnaRecep t-out="move._l10n_cl_get_comuna_recep()"/>
                 </Receptor>

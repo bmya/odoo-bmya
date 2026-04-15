@@ -104,6 +104,7 @@ class PartnerDocumentsOnline(models.TransientModel):
         partner_values = self._fetch_docsonline_partner_data(nr.vat)
         self._update_partner_from_data(partner_values, protect_fields=True)
 
+
 class PartnerDocumentsOnLineData(models.TransientModel):
     _name = 'res.partner.docs.online.data'
     _description = 'DocsOnline Wizard Data'

@@ -1,4 +1,3 @@
-
 {
     "name": "Chile Localization Regions, Cities and Counties",
     "summary": "Este modulo hace un hack, colocando las comunas como si fuesen regiones, con el objeto de poder usar las reglas originales de Odoo para determinar los transportes disponibles. No se recommienda usarlo si no se usa delivery",

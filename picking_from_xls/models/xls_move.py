@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# from __future__ import print_function
 import logging
 from datetime import datetime
 
@@ -10,7 +9,6 @@ _logger = logging.getLogger(__name__)
 
 try:
     import xlrd
-    from xlrd.sheet import ctype_text
 except ImportError:
     pass
 

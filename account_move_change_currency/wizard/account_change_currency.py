@@ -1,7 +1,5 @@
 import logging
 
-from docutils.nodes import classifier
-
 from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 from odoo.tests import Form

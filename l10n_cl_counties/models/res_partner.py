@@ -11,7 +11,8 @@ class ResPartner(models.Model):
             return False
 
     country_id = fields.Many2one("res.country", default=_default_country)
-    state_id = fields.Many2one("res.country.state", compute='_change_state_province', store=True, readonly=False,
+    state_id = fields.Many2one(
+        "res.country.state", compute='_change_state_province', store=True, readonly=False,
         string='Ubication', domain="[('country_id', '=', country_id), ('type', '=', 'normal')]")
     real_city = fields.Char(compute='_change_real_city_province', string='City.')
     city = fields.Char(compute='_change_city_province', string='City', store=True, readonly=False)
