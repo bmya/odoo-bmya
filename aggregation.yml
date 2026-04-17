@@ -6,3 +6,11 @@
   branch: "19.0"
   merges:
     - "origin 19.0"
+- url: https://${GITHUB_TOKEN}@github.com/bmya/design-themes
+  branch: "19.0"
+  merges:
+    - "origin 19.0"
+- url: https://${GITHUB_TOKEN}@github.com/bmya/odoo-transbank
+  branch: "19.0"
+  merges:
+    - "origin 19.0"
