@@ -9,15 +9,6 @@ on:
       - '18.0'
       - '19.0'
 
-  pull_request:
-    types: [closed]
-    branches:
-      - '15.0'
-      - '16.0'
-      - '17.0'
-      - '18.0'
-      - '19.0'
-
   workflow_dispatch:
     inputs:
       target_branch:
