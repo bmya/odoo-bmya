@@ -6,3 +6,7 @@
   branch: "master"
   merges:
     - "origin master"
+- url: https://${GITHUB_TOKEN}@github.com/bmya/design-themes
+  branch: "master"
+  merges:
+    - "origin master"
