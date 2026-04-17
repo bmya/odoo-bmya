@@ -8,15 +8,6 @@ on:
       - '18.0'
       - '19.0'
 
-  # Solo trigger en merge de PR, no en push directo
-  pull_request:
-    types: [closed]
-    branches:
-      - '16.0'
-      - '17.0'
-      - '18.0'
-      - '19.0'
-
   # Permitir ejecución manual
   workflow_dispatch:
     inputs:
