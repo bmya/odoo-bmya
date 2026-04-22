@@ -81,17 +81,22 @@ class AccountChangeCurrency(models.TransientModel):
         else:
             previous_currency = self.currency_id
             rate = 1 / self.currency_rate
-        message = _("|| Original or Previous quotation in {0}. Rate: {1}").format(
-            previous_currency.name, formatLang(self.env, rate, currency_obj=move.company_id.currency_id))
+        rate_text = formatLang(self.env, rate, digits=2)
+        message = _("|| Original or Previous quotation in %(currency)s. Rate: %(rate)s") % {
+            'currency': previous_currency.name,
+            'rate': rate_text,
+        }
         if '||' in str(move.narration):
             move.narration = move.narration[:move.narration.find('||')] + message
         else:
             move.narration = '{0} {1}'.format(move.narration or '', message)
-        body = '{message1}. {message2}: {message3}'.format(
-            message1=message.split(". ")[1],
-            message2=_('Original or Previous Untaxed Amount'),
-            message3=formatLang(self.env, old_amount_untaxed, currency_obj=move.currency_id)
-        )
+        body = _("Original or Previous quotation in %(currency)s. Rate: %(rate)s") % {
+            'currency': previous_currency.name,
+            'rate': rate_text,
+        }
+        body += _('. Original or Previous Untaxed Amount: %(amount)s') % {
+            'amount': formatLang(self.env, old_amount_untaxed, currency_obj=move.currency_id),
+        }
         move.currency_id = self.currency_id
         body += Markup('<br />') + _('Calculated Untaxed Amount: {}').format(
             formatLang(self.env, move.amount_untaxed, currency_obj=move.currency_id))

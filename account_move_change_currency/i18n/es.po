@@ -138,6 +138,34 @@ msgid "Untaxed amount"
 msgstr "Monto Bruto"
 
 #. module: account_move_change_currency
+#. odoo-python
+#: code:addons/account_move_change_currency/wizard/account_change_currency.py:0
+#, python-format
+msgid "|| Original or Previous quotation in %(currency)s. Rate: %(rate)s"
+msgstr "|| Cotización original o previa en %(currency)s. Tasa: %(rate)s"
+
+#. module: account_move_change_currency
+#. odoo-python
+#: code:addons/account_move_change_currency/wizard/account_change_currency.py:0
+#, python-format
+msgid "Original or Previous quotation in %(currency)s. Rate: %(rate)s"
+msgstr "Cotización original o previa en %(currency)s. Tasa: %(rate)s"
+
+#. module: account_move_change_currency
+#. odoo-python
+#: code:addons/account_move_change_currency/wizard/account_change_currency.py:0
+#, python-format
+msgid ". Original or Previous Untaxed Amount: %(amount)s"
+msgstr ". Monto neto original o previo: %(amount)s"
+
+#. module: account_move_change_currency
+#. odoo-python
+#: code:addons/account_move_change_currency/wizard/account_change_currency.py:0
+#, python-format
+msgid "Calculated Untaxed Amount: {}"
+msgstr "Monto neto calculado: {}"
+
+#. module: account_move_change_currency
 #: model_terms:ir.ui.view,arch_db:account_move_change_currency.view_account_change_currency
 msgid "or"
 msgstr "ó"
