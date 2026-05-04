@@ -1,16 +1,16 @@
-- url: https://${GITHUB_TOKEN}@github.com/bmya/odoo
+- url: https://github.com/bmya/odoo
   branch: "19.0"
   merges:
     - "origin 19.0"
-- url: https://${GITHUB_TOKEN}@github.com/bmya/enterprise
+- url: https://github.com/bmya/enterprise
   branch: "19.0"
   merges:
     - "origin 19.0"
-- url: https://${GITHUB_TOKEN}@github.com/bmya/design-themes
+- url: https://github.com/bmya/design-themes
   branch: "19.0"
   merges:
     - "origin 19.0"
-- url: https://${GITHUB_TOKEN}@github.com/bmya/odoo-transbank
+- url: https://github.com/bmya/odoo-transbank
   branch: "19.0"
   merges:
     - "origin 19.0"
