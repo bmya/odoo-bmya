@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_complete_invoice_refund_tree_inherit_exempt_amount" model="ir.ui.view">
+        <field name="name">account.move.list.l10n.cl.exempt.amount</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="l10n_cl.view_complete_invoice_refund_tree"/>
+        <field name="arch" type="xml">
+            <field name="amount_untaxed_signed" position="after">
+                <field name="amount_exempt" string="Exento" sum="Total" optional="show"/>
+            </field>
+        </field>
+    </record>
+</odoo>
