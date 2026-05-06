@@ -29,7 +29,7 @@ class AccountMove(models.Model):
                 continue
 
             exempt_total_balance = 0.0
-            for line in move.invoice_line_ids.filtered(lambda l: not l.display_type):
+            for line in move.invoice_line_ids.filtered(lambda l: l.display_type in ['product', 'cogs']):
                 taxes = line.tax_ids.flatten_taxes_hierarchy().filtered(
                     lambda tax: tax.amount_type != "group"
                 )
