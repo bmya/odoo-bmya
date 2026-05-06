@@ -38,3 +38,7 @@ class AccountMove(models.Model):
 
             # line.balance is accounting-signed; invert to keep invoice amounts positive in lists.
             move.amount_exempt = -exempt_total_balance
+
+    def action_recompute_amount_exempt(self):
+        """Public method to trigger recomputation of amount_exempt on existing records."""
+        self._compute_amount_exempt()
