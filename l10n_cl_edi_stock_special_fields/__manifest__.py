@@ -1,16 +1,16 @@
 {
     "name": """Chile - Stock Special Fields """,
-    'version': '19.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Localization/Chile',
     'license': "LGPL-3",
     'sequence': 12,
-    'author':  'Blanco Martín & Asociados',
+    'author': 'Blanco Martín y Asociados SpA',
     'summary': 'Agrega Campos adicionales en el modelo stock como chofer, etc. utilizando el modulo de flota.',
     'description': """
 Agrega Campos Especiales en el modelo stock
 ===========================================
     """,
-    'website': 'http://blancomartin.cl',
+    'website': 'https://www.bmya.cl',
     'depends': [
         'l10n_cl_edi_stock',
         'stock_delivery',

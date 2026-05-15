@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
         <record model="res.groups" id="group_restrict_change_currency_exchange">

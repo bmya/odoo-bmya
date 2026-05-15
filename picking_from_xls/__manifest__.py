@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Picking from XLS File',
-    'author': 'Blanco Martín & Asociados',
+    'author': 'Blanco Martín y Asociados SpA',
     'category': 'Inventory',
     'depends': ['stock'],
     'external_dependencies': {
@@ -16,7 +16,7 @@
     'data': [
         'views/stock_picking_view.xml',
         ],
-    'version': '19.0.1.0.0',
+    'version': '1.0.0',
     'website': 'https://www.bmya.cl',
     'installable': False,
     'auto-install': False
