@@ -1,10 +1,10 @@
 {
     "name": """Chile - Add QBLI Field to invoices """,
-    'version': '19.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Localization/Chile',
     'license': 'LGPL-3',
     'sequence': 12,
-    'author':  'Blanco Martín & Asociados',
+    'author': 'Blanco Martín y Asociados SpA',
     'summary': 'Ciertos clientes que usan SAP requieren que el proveedor coloque en el XML de la factura un QBLI, que es un código en cada linea que identifica el ítem de la orden de compra de este cliente.',
     'description': """
 Adds QBLI to the invoice lines, according to requirements from some customers using SAP
@@ -12,7 +12,7 @@ Adds QBLI to the invoice lines, according to requirements from some customers us
 //CdgItem/TpoCodigo
 //CdgItem/VlrCodigo
     """,
-    'website': 'http://bmya.cl',
+    'website': 'https://www.bmya.cl',
     'depends': [
         'l10n_cl_edi',
     ],

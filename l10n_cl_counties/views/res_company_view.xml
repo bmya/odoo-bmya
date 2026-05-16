@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record model="ir.ui.view" id="view_company_city_inherit_form">
         <field name="name">res.company.city.form.inherit</field>
