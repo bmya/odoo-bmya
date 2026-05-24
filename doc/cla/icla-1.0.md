@@ -1,0 +1,77 @@
+# BMyA Individual Contributor License Agreement
+## BMyA ICLA v1.0
+Based on the Odoo ICLA v1.0, which is in turn based on the Apache Software Foundation Individual Contributor License Agreement v2.0, with modifications.
+
+The English version below is the legally binding one. The Spanish translation that follows is provided for reference.
+
+---
+
+## English version (legally binding)
+
+Thank you for your interest in a Blanco Martín y Asociados SpA ("BMyA", the "Project Leads") open source project. In order to clarify the intellectual property license granted with Contributions from any person or entity, the BMyA Project Leads must have a Contributor License Agreement (the "Agreement") on file that has been signed by each Contributor, indicating agreement to the license terms below. This license is for Your protection as a Contributor as well as the protection of the Project, its users, and the BMyA Project Leads; for Contributions to public repositories, it does not change Your rights to use Your own Contributions for any other purpose, while for Contributions to private repositories, Your rights are governed by the OPL-1 license.
+
+If You have not already done so, please complete and sign this Agreement by adding the corresponding signature files to the [`doc/cla/individual/`](individual/) directory of the `bmya/odoo-bmya` repository, following the instructions in the [README](README.md).
+
+**Please read this document carefully before signing and keep a copy for your records.**
+
+You accept and agree to the following terms and conditions for Your present and future Contributions submitted to the Project. Except for the license granted herein to the BMyA Project Leads and recipients of software distributed by the BMyA Project Leads, You reserve all right, title, and interest in and to Your Contributions.
+
+1. **Definitions.**
+   "You" (or "Your") shall mean the copyright owner or legal entity authorized by the copyright owner that is making this Agreement. For legal entities, the entity making a Contribution and all other entities that control, are controlled by, or are under common control with that entity are considered to be a single Contributor. For the purposes of this definition, "control" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.
+   "Contribution" shall mean any original work of authorship, including any modifications or additions to an existing work, that is intentionally submitted by You to the BMyA Project Leads for inclusion in, or documentation of, any of the products managed or maintained by the BMyA Project Leads (the "Work"). For the purposes of this definition, "submitted" means any form of electronic, verbal, or written communication sent to the BMyA Project Leads or their representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the BMyA Project Leads for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by You as "Not a Contribution."
+
+2. **Grant of Copyright License.** Subject to the terms and conditions of this Agreement, You hereby grant to the BMyA Project Leads and to recipients of software distributed by the BMyA Project Leads a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare derivative works of, publicly display, publicly perform, sublicense, and distribute Your Contributions and such derivative works.
+
+3. **Grant of Patent License.** Subject to the terms and conditions of this Agreement, You hereby grant to the BMyA Project Leads and to recipients of software distributed by the BMyA Project Leads a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by You that are necessarily infringed by Your Contribution(s) alone or by combination of Your Contribution(s) with the Work to which such Contribution(s) was submitted. If any entity institutes patent litigation against You or any other entity (including a cross-claim or counterclaim in a lawsuit) alleging that Your Contribution, or the Work to which You have contributed, constitutes direct or contributory patent infringement, then any patent licenses granted to that entity under this Agreement for that Contribution or Work shall terminate as of the date such litigation is filed.
+
+4. **Authorization.** You represent that You are legally entitled to grant the above license. If Your employer(s) has rights to intellectual property that You create that includes Your Contributions, You represent that You have received permission to make Contributions on behalf of that employer, that Your employer has waived such rights for Your Contributions to the BMyA Project Leads, or that Your employer has executed a separate Corporate Contributor License Agreement with the BMyA Project Leads.
+
+5. **Originality.** You represent that each of Your Contributions is Your original creation (see section 7 for submissions on behalf of others). You represent that Your Contribution submissions include complete details of any third-party license or other restriction (including, but not limited to, related patents and trademarks) of which You are personally aware and which are associated with any part of Your Contributions.
+
+6. **No Warranty / No Support.** You are not expected to provide support for Your Contributions, except to the extent You desire to provide support. You may provide support for free, for a fee, or not at all. Unless required by applicable law or agreed to in writing, You provide Your Contributions on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+
+7. **Third-party submissions.** Should You wish to submit work that is not Your original creation, You may submit it to the BMyA Project Leads separately from any Contribution, identifying the complete details of its source and of any license or other restriction (including, but not limited to, related patents, trademarks, and license agreements) of which You are personally aware, and conspicuously marking the work as "Submitted on behalf of a third-party: [named here]".
+
+8. **Notification of changes.** You agree to notify the BMyA Project Leads of any facts or circumstances of which You become aware that would make these representations inaccurate in any respect.
+
+9. **Ownership Clause for BMyA Employees and Contractors.**
+
+   Notwithstanding any other provision in this Agreement, if You are an employee of BMyA or a contractor providing services to BMyA under a written agreement, You expressly acknowledge and agree that **all Contributions** submitted to the Project (including those submitted to public repositories under LGPL, AGPL, or other licenses) are considered works made for hire and the copyright therein is **assigned exclusively and irrevocably to BMyA**.
+
+   While BMyA will respect the attribution and the right to use such Contributions externally as granted by the specific license of the repository to which they were submitted, the underlying ownership remains with BMyA.
+
+---
+
+## Versión en castellano (traducción de referencia)
+
+Gracias por tu interés en un proyecto open source de Blanco Martín y Asociados SpA ("BMyA", los "Líderes del Proyecto"). Para clarificar la licencia de propiedad intelectual otorgada con las Contribuciones de cualquier persona o entidad, los Líderes del Proyecto BMyA deben tener un Acuerdo de Licencia de Colaborador (el "Acuerdo") en archivo, firmado por cada Colaborador, indicando conformidad con los términos de licencia a continuación. Esta licencia es tanto para Tu protección como Colaborador como para la protección del Proyecto, sus usuarios y los Líderes del Proyecto BMyA; para Contribuciones a repositorios públicos, no modifica Tus derechos a usar Tus propias Contribuciones para cualquier otro propósito, mientras que para Contribuciones a repositorios privados, Tus derechos se rigen por la licencia OPL-1.
+
+Si aún no lo hiciste, por favor completa y firma este Acuerdo agregando los archivos de firma correspondientes al directorio [`doc/cla/individual/`](individual/) del repositorio `bmya/odoo-bmya`, siguiendo las instrucciones del [README](README.md).
+
+**Por favor lee este documento cuidadosamente antes de firmar y conserva una copia para tus registros.**
+
+Aceptas los siguientes términos y condiciones para Tus Contribuciones presentes y futuras enviadas al Proyecto. Excepto por la licencia otorgada aquí a los Líderes del Proyecto BMyA y a los destinatarios del software distribuido por los Líderes del Proyecto BMyA, Tú te reservas todos los derechos, títulos e intereses sobre Tus Contribuciones.
+
+1. **Definiciones.**
+   "Tú" (o "Tus") se refiere al titular del copyright o entidad legal autorizada por el titular que está celebrando este Acuerdo. Para entidades legales, la entidad que realiza una Contribución y todas las demás entidades que controlan, son controladas por, o están bajo control común con esa entidad se consideran un único Colaborador. A efectos de esta definición, "control" significa (i) el poder, directo o indirecto, de dirigir o gestionar dicha entidad, ya sea por contrato o de otra forma, o (ii) la propiedad del cincuenta por ciento (50%) o más de las acciones en circulación, o (iii) la propiedad beneficiaria de dicha entidad.
+   "Contribución" se refiere a cualquier trabajo original de autoría, incluidas modificaciones o adiciones a un trabajo existente, que sea enviado intencionalmente por Ti a los Líderes del Proyecto BMyA para inclusión en, o documentación de, cualquiera de los productos gestionados o mantenidos por los Líderes del Proyecto BMyA (el "Trabajo"). A efectos de esta definición, "enviado" significa cualquier forma de comunicación electrónica, verbal o escrita enviada a los Líderes del Proyecto BMyA o sus representantes, incluyendo entre otros la comunicación en listas electrónicas, sistemas de control de código fuente y sistemas de seguimiento de issues gestionados por o en nombre de los Líderes del Proyecto BMyA con el propósito de discutir y mejorar el Trabajo, excepto comunicación que esté conspicuamente marcada o de otra forma designada por escrito por Ti como "No es una Contribución".
+
+2. **Otorgamiento de Licencia de Copyright.** Sujeto a los términos y condiciones de este Acuerdo, por la presente otorgas a los Líderes del Proyecto BMyA y a los destinatarios del software distribuido por los Líderes del Proyecto BMyA una licencia de copyright perpetua, mundial, no exclusiva, sin cargo, libre de regalías e irrevocable para reproducir, preparar trabajos derivados de, mostrar públicamente, ejecutar públicamente, sublicenciar y distribuir Tus Contribuciones y dichos trabajos derivados.
+
+3. **Otorgamiento de Licencia de Patente.** Sujeto a los términos y condiciones de este Acuerdo, por la presente otorgas a los Líderes del Proyecto BMyA y a los destinatarios del software distribuido por los Líderes del Proyecto BMyA una licencia de patente perpetua, mundial, no exclusiva, sin cargo, libre de regalías e irrevocable (excepto como se indica en esta sección) para hacer, mandar hacer, usar, ofrecer en venta, vender, importar y de otra manera transferir el Trabajo, donde dicha licencia aplica sólo a aquellas reivindicaciones de patente licenciables por Ti que sean necesariamente infringidas por Tu(s) Contribución(es) sola(s) o en combinación con el Trabajo al cual dicha(s) Contribución(es) fue(ron) enviada(s). Si cualquier entidad inicia un litigio de patentes contra Ti o cualquier otra entidad (incluyendo una contra-reclamación o demanda reconvencional en un juicio) alegando que Tu Contribución, o el Trabajo al cual contribuiste, constituye infracción directa o contributiva de patente, entonces cualquier licencia de patente otorgada a esa entidad bajo este Acuerdo para esa Contribución o Trabajo terminará a la fecha en que se inicie dicho litigio.
+
+4. **Autorización.** Declaras que estás legalmente facultado para otorgar la licencia anterior. Si Tu(s) empleador(es) tiene(n) derechos sobre la propiedad intelectual que creas que incluya Tus Contribuciones, declaras que recibiste autorización para realizar Contribuciones en nombre de ese empleador, que Tu empleador ha renunciado a tales derechos para Tus Contribuciones a los Líderes del Proyecto BMyA, o que Tu empleador ha firmado un Acuerdo de Licencia de Colaborador Corporativo separado con los Líderes del Proyecto BMyA.
+
+5. **Originalidad.** Declaras que cada una de Tus Contribuciones es Tu creación original (ver sección 7 para envíos en nombre de otros). Declaras que Tus envíos de Contribución incluyen detalles completos de cualquier licencia de terceros u otra restricción (incluyendo, entre otros, patentes y marcas relacionadas) de la cual tengas conocimiento personal y que esté asociada con cualquier parte de Tus Contribuciones.
+
+6. **Sin garantía / Sin soporte.** No se espera que proveas soporte para Tus Contribuciones, excepto en la medida en que desees proveerlo. Puedes proveer soporte gratis, por una tarifa, o no proveerlo. Salvo que la ley aplicable lo exija o se acuerde por escrito, provees Tus Contribuciones "TAL CUAL", SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas, incluyendo, sin limitación, garantías o condiciones de TÍTULO, NO INFRACCIÓN, COMERCIABILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR.
+
+7. **Envíos de terceros.** Si quisieras enviar trabajo que no sea Tu creación original, puedes enviarlo a los Líderes del Proyecto BMyA por separado de cualquier Contribución, identificando los detalles completos de su fuente y de cualquier licencia u otra restricción (incluyendo, entre otros, patentes, marcas y acuerdos de licencia relacionados) de la cual tengas conocimiento personal, y marcando conspicuamente el trabajo como "Enviado en nombre de un tercero: [nombrado aquí]".
+
+8. **Notificación de cambios.** Aceptas notificar a los Líderes del Proyecto BMyA de cualquier hecho o circunstancia del cual tengas conocimiento que haría inexactas estas declaraciones en cualquier aspecto.
+
+9. **Cláusula de Propiedad para Empleados y Contratistas de BMyA.**
+
+   Sin perjuicio de cualquier otra disposición en este Acuerdo, si Tú eres un empleado de BMyA o un contratista que presta servicios a BMyA bajo un acuerdo escrito, reconoces y aceptas expresamente que **todas las Contribuciones** enviadas al Proyecto (incluyendo aquellas enviadas a repositorios públicos bajo licencias LGPL, AGPL u otras) se consideran trabajos realizados por encargo y el copyright sobre las mismas es **cedido exclusiva e irrevocablemente a BMyA**.
+
+   Si bien BMyA respetará la atribución y el derecho a usar dichas Contribuciones externamente según lo otorgado por la licencia específica del repositorio al cual fueron enviadas, la propiedad subyacente permanece en BMyA.
