@@ -1,0 +1,63 @@
+# Corporate CLA — machine-readable roster
+#
+# Copy this file to <company-slug>.yaml (lowercase, ASCII, hyphens for spaces)
+# and fill in the signatory data + the full list of authorized contributors.
+# The `legal/cla` CI check parses ONLY *.yaml files; the companion .md file
+# is the legally binding signed declaration.
+#
+# Copia este archivo a <slug-empresa>.yaml (minúsculas, ASCII, guiones para
+# espacios) y completa los datos del firmante + lista completa de contribuyentes
+# autorizados. El check de CI `legal/cla` parsea SOLO archivos *.yaml; el .md
+# acompañante es la declaración firmada legalmente vinculante.
+
+type: corporate
+
+# Company legal name, exactly as it appears in the signed .md file.
+# Nombre legal de la empresa, exactamente como aparece en el .md firmado.
+company: <COMPANY LEGAL NAME>
+
+# Authorized signatory — the person who signed the .md file and who is
+# entitled to add/remove contributors from this roster via subsequent PRs.
+# Firmante autorizado — la persona que firmó el .md y que está facultada
+# para agregar/remover contribuyentes de este listado vía PRs posteriores.
+signatory:
+  name: <SIGNATORY FULL NAME>
+  github: <signatory-github-login>
+  email: <signatory_email>
+
+# Authorized contributors. Each entry has:
+#   - name:    full name (for human reference)
+#   - github:  lowercase GitHub login (primary identity key)
+#   - emails:  list of all email addresses this contributor may commit with;
+#              the CI check requires the commit's author email to be in this list
+#
+# IMPORTANT: a given github login may appear in AT MOST one corporate roster
+# AND must NOT also exist in individual/. Duplicates fail the CI parser.
+#
+# Contribuyentes autorizados. Cada entrada tiene:
+#   - name:    nombre completo (para referencia humana)
+#   - github:  login de GitHub en minúsculas (clave de identidad primaria)
+#   - emails:  lista de todos los emails con los que este contribuyente puede
+#              commitear; el check de CI exige que el email del autor del
+#              commit esté en esta lista
+#
+# IMPORTANTE: un mismo github login puede aparecer en MÁXIMO un listado
+# corporate Y no debe existir también en individual/. Los duplicados rompen
+# el parser de CI.
+contributors:
+  - name: <CONTRIBUTOR 1 FULL NAME>
+    github: <contributor1-github-login>
+    emails:
+      - <contributor1_corporate@example.com>
+      # - <contributor1_alias@example.com>
+
+  - name: <CONTRIBUTOR 2 FULL NAME>
+    github: <contributor2-github-login>
+    emails:
+      - <contributor2_corporate@example.com>
+
+  # Add as many contributors as needed / Agrega tantos contribuyentes como sea necesario
+
+# Date the original .md was signed, in YYYY-MM-DD format.
+# Fecha en que se firmó el .md original, en formato YYYY-MM-DD.
+signed: <YYYY-MM-DD>
