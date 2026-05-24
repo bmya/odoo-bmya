@@ -1,0 +1,26 @@
+type: corporate
+company: Blanco Martín y Asociados SpA
+
+signatory:
+  name: Daniel Blanco
+  github: https://github.com/danisan
+  email: daniel@bmya.cl
+
+contributors:
+  - name: Daniel Blanco
+    github: https://github.com/danisan
+    emails:
+      - daniel@blancomartin.cl
+      - daniel@bmya.cl
+  - name: Héctor Aular Osorio
+    github: https://github.com/hea-bmya
+    emails:
+      - hector@bmya.cl
+      - hector@blancomartin.cl
+  - name: Luis Alfredo López Muñoz
+    github: https://github.com/lal-bmya
+    emails:
+      - luis@bmya.cl
+      - luis@blancomartin.cl
+
+signed: 2026-05-24
