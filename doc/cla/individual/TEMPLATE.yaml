@@ -1,0 +1,32 @@
+# Individual CLA — machine-readable roster entry
+#
+# Copy this file to <your-github-login>.yaml (lowercase) and fill in your data.
+# The `legal/cla` CI check parses ONLY *.yaml files; the companion .md file
+# is the legally binding signed declaration.
+#
+# Copia este archivo a <tu-login-github>.yaml (minúsculas) y completa tus datos.
+# El check de CI `legal/cla` parsea SOLO archivos *.yaml; el .md acompañante
+# es la declaración firmada legalmente vinculante.
+
+type: individual
+
+# GitHub login (lowercase). MUST match the filename of this yaml file (without
+# the .yaml extension) and the filename of the companion .md file.
+# Login de GitHub (minúsculas). DEBE coincidir con el filename de este yaml
+# (sin la extensión .yaml) y con el filename del .md acompañante.
+github: <your-github-login>
+
+# All email addresses you may commit with. The CI check requires that the
+# commit's author email is in this list. You may list as many as you want
+# (corporate, personal, alias). Add new ones via a follow-up PR.
+# Todas las direcciones de email con las que puedes commitear. El check de CI
+# requiere que el email del autor del commit esté en esta lista. Puedes listar
+# tantas como quieras (corporativa, personal, alias). Agrega nuevas vía un
+# PR posterior.
+emails:
+  - <your-primary-email@example.com>
+  # - <your-secondary-email@example.com>
+
+# Date you signed the CLA, in YYYY-MM-DD format.
+# Fecha en que firmaste el CLA, en formato YYYY-MM-DD.
+signed: <YYYY-MM-DD>
