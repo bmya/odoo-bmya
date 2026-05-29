@@ -22,5 +22,9 @@ contributors:
     emails:
       - luis@bmya.cl
       - luis@blancomartin.cl
+  - name: Forward Bot BMyA
+    github: https://github.com/fw-bot-bmya
+    emails:
+      - fw-bot-bmya@bmya.cl
 
 signed: 2026-05-24
