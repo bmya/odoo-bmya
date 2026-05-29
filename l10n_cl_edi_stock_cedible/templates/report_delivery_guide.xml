@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="delivery_guide_document_cedible_legend" inherit_id="l10n_cl_edi_stock.delivery_guide_document">
+        <xpath expr="//div[@class='col-7 text-justify']/.." position="after">
+            <div class="row" t-if="print_with_cedible and o.partner_id.country_code == 'CL'">
+                <div name="footer_right_column" class="col-4 offset-8">
+                    <div class="border border-1 border-dark w-100">
+                        <div class="pt-4 ps-2 pe-2">
+                            <div>NOMBRE:</div>
+                            <div class="d-flex justify-content-start">
+                                <div class="w-50">RUT:</div>
+                                <div>FECHA:</div>
+                            </div>
+                            <div class="d-flex justify-content-start">
+                                <div class="w-50">RECINTO:</div>
+                                <div>FIRMA:</div>
+                            </div>
+                            <p class="small">
+                                El acuse de recibo que se declara
+                                en este acto, de acuerdo a lo
+                                dispuesto en la letra b) del Artículo 4°, y
+                                la letra c) del Artículo 5° de la Ley 19.983, acredita que
+                                la entrega de mercaderías o servicio(s) prestado(s)
+                                ha(n) sido recibido(s).
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-100 text-center fw-bold">
+                        CEDIBLE CON SU FACTURA
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="delivery_guide_document_with_cedible">
+        <t t-call="l10n_cl_edi_stock.delivery_guide_document">
+            <t t-set="print_with_cedible" t-value="True"/>
+        </t>
+    </template>
+
+    <record id="action_delivery_guide_report_pdf_cedible" model="ir.actions.report">
+        <field name="name">Cedible</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_cl_edi_stock_cedible.delivery_guide_document_with_cedible</field>
+        <field name="report_file">l10n_cl_edi_stock_cedible.delivery_guide_document_with_cedible</field>
+        <field name="print_report_name">'GDE Guide SII Cedible - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
