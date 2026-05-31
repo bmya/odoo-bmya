@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0+e\n"
+"Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-17 14:24+0000\n"
-"PO-Revision-Date: 2024-03-17 14:24+0000\n"
+"POT-Creation-Date: 2025-11-29 19:41+0000\n"
+"PO-Revision-Date: 2025-11-29 19:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,18 +30,6 @@ msgid ""
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
-msgid ""
-"<span class=\"o_form_label\">Read Chilean partners data from "
-"documentosonline.cl</span>"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
-msgid "<span class=\"o_form_label\">What to do if partner exists?</span>"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__l10n_cl_activity_description
 msgid "Activity Description"
 msgstr ""
@@ -49,6 +37,31 @@ msgstr ""
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.view_update_button_form
 msgid "Actualizar desde DocumentosOnline"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
+msgid "Add main Partner and Branches"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
+msgid "Add the main partner and create all branches as child contacts."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__bmya_support_service_installed
+msgid "BMyA Support Service Installed"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_token_auth
+msgid "BMyA Support Service Token"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_url
+msgid "BMyA Support Service URL"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -84,7 +97,7 @@ msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
-msgid "Confirm Without Overwrite Name or Address"
+msgid "Confirm Without Overwrite of Protected Fields"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -94,18 +107,7 @@ msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__contact
 msgid "Contact"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__country_id
-msgid "Country"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__city_id
-msgid "County"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -121,34 +123,33 @@ msgid "Created on"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__l10n_cl_dte_email
-msgid "DTE Email"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__display_name
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__docs_online_data_ids
+msgid "Docs Online Data"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online
+msgid "DocsOnline Wizard"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online_data
+msgid "DocsOnline Wizard Data"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_token
-msgid "Documentos Online Token"
+msgid "DocumentosOnline Token"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__3
-msgid "End Consumer"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__2
-msgid "Fees Receipt Issuer (2nd category)"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__4
-msgid "Foreigner"
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_url
+msgid "DocumentosOnline URL"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -163,8 +164,43 @@ msgid "ID"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__invoice
-msgid "Invoice Address"
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_restrict_token_access
+msgid ""
+"If checked, only users with specific permissions can view or modify the API "
+"token."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_email
+msgid ""
+"If checked, the partner's DTE email will be overwritten with data from "
+"DocumentosOnline when updating."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_activity
+msgid ""
+"If checked, the partner's activity description will be overwritten with data"
+" from DocumentosOnline when updating."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_street
+msgid ""
+"If checked, the partner's address fields will be overwritten with data from "
+"DocumentosOnline when updating."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_name
+msgid ""
+"If checked, the partner's name will be overwritten with data from "
+"DocumentosOnline when updating."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__bmya_support_service_installed
+msgid "Indicates if the BMyA Support Service module is installed."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -185,14 +221,19 @@ msgid "Lines"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__display_name
+msgid "List Name"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__name
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__name
 msgid "Name"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__other
-msgid "Other Address"
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
+msgid "Overwrite all partner data with selected DocsOnline data."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -206,20 +247,10 @@ msgid "Partners Token"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__private
-msgid "Private Address"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__state_id
-msgid "Province"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid ""
-"Put here your free API token to get the fiscal data.\n"
-"                                    Visit https://documentosonline.cl to register."
+"Put here your free API token to get the fiscal data. Please register in "
+"https://www.documentosonline.cl."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -229,21 +260,53 @@ msgid "RUT"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_street
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "Read Chilean partners data from documentosonline.cl"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "Replace Activity"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "Replace Address"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_email
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "Replace Email"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_name
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "Replace Name"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_activity
+msgid "Replace Partner Activity"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_street
+msgid "Replace Partner Address"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_email
+msgid "Replace Partner Email"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_replace_name
+msgid "Replace Partner Name"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_restrict_token_access
+msgid "Restrict Token Access"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
@@ -254,46 +317,56 @@ msgid ""
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__type__delivery
-msgid "Shipping Address"
-msgstr ""
-
-#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__street
 msgid "Street"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__street2
-msgid "Street2"
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_token_auth
+msgid "The authentication token for accessing the BMyA Support Service API."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__l10n_cl_sii_taxpayer_type
-msgid "Taxpayer Type"
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_token
+msgid ""
+"The authentication token for accessing the DocumentosOnline API. Keep this "
+"secure and do not share it publicly."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__type
-msgid "Type of Address"
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_url
+msgid "The base URL for the BMyA Support Service API."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model.fields.selection,name:l10n_cl_docsonline_partner.selection__res_partner_docs_online_data__l10n_cl_sii_taxpayer_type__1
-msgid "VAT Affected (1st Category)"
+#: model:ir.model.fields,help:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_url
+msgid ""
+"The base URL for the DocumentosOnline API. Leave empty to use the default "
+"provided by the system."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "URL Docsonline taxpayer search"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.actions.server,name:l10n_cl_docsonline_partner.action_partner_multiple_update_docsonline
+msgid "Update from DocumentosOnline"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
-msgid "or"
+msgid ""
+"Update partner data respecting configuration settings for protected fields."
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online
-msgid "www.documentosonline.cl wizard"
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "What to do if partner exists?"
 msgstr ""
 
 #. module: l10n_cl_docsonline_partner
-#: model:ir.model,name:l10n_cl_docsonline_partner.model_res_partner_docs_online_data
-msgid "www.documentosonline.cl wizard #2"
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
+msgid "https://www.documentosonline.cl"
 msgstr ""

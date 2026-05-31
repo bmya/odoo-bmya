@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Server Action for Multiple Update from DocsOnline -->
+        <record id="action_partner_multiple_update_docsonline" model="ir.actions.server">
+            <field name="name">Update from DocumentosOnline</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="binding_model_id" ref="base.model_res_partner"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+if records:
+    records.multiple_update()
+            </field>
+        </record>
+    </data>
+</odoo>

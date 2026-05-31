@@ -1,0 +1,11 @@
+[flake8]
+max-line-length = 120
+extend-ignore = E501,W503,W504,E203
+exclude =
+    __manifest__.py,
+    .git,
+    __pycache__,
+    migrations,
+    .venv
+per-file-ignores =
+    __init__.py:F401

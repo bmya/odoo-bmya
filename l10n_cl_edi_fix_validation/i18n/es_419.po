@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_cl_edi_fix_validation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-25 13:43+0000\n"
+"PO-Revision-Date: 2025-08-25 09:57-0400\n"
+"Last-Translator: Daniel Blanco <daniel@blancomartin.cl>\n"
+"Language-Team: \n"
+"Language: es_419\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. module: l10n_cl_edi_fix_validation
+#. odoo-python
+#: code:l10n_cl_edi_fix_validation/models/account_move.py:0
+msgid ""
+"%(company_type)s %(partner)s has not a comune or city defined. This is "
+"mandatory for electronic invoicing. Please edit the contact and set one."
+msgstr ""
+"%(company_type)s %(partner)s no tiene una comuna o ciudad definida. "
+"Esto es mandatorio para facturación electrónica. Por favor edite el "
+"contacto y establezca una."
+
+#. module: l10n_cl_edi_fix_validation
+#. odoo-python
+#: code:l10n_cl_edi_fix_validation/models/account_move.py:0
+msgid ""
+"Your company has not a comune or city defined. This is mandatory for "
+"electronic invoicing. Please go to your company data, and set the correct "
+"one."
+msgstr ""
+"Su compañía no tiene una comuna o ciudad definida. Esto es mandatorio para "
+"facturación electrónica. Por favor, vaya a la configuración de los datos "
+"de su compañía y establezca la correcta."
+
+#. module: l10n_cl_edi_fix_validation
+#. odoo-python
+#: code:l10n_cl_edi_fix_validation/models/account_move.py:0
+msgid ""
+"The company"
+msgstr ""
+"La empresa"
+
+#. module: l10n_cl_edi_fix_validation
+#. odoo-python
+#: code:l10n_cl_edi_fix_validation/models/account_move.py:0
+msgid ""
+"The person"
+msgstr ""
+"El contacto"

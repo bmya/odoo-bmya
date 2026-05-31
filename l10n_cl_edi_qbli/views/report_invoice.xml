@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_invoice_document_qbli" inherit_id="l10n_cl.report_invoice_document">
+
+        <xpath expr="//th[@name='th_description']" position="before">
+            <th name="th_qbli" t-if="any(l.qbli for l in o.invoice_line_ids)" class="text-start">
+                <span>QBLI</span>
+            </th>
+        </xpath>
+
+        <xpath expr="//td[@name='account_invoice_line_name']" position="before">
+            <td name="td_qbli" t-if="any(l.qbli for l in o.invoice_line_ids)" class="text-start">
+                <span t-out="line.qbli"/>
+            </td>
+        </xpath>
+
+    </template>
+
+</odoo>
