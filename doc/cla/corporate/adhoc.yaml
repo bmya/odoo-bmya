@@ -1,0 +1,41 @@
+type: corporate
+company: ADHOC SA
+
+signatory:
+  name: Juan José Scarafía
+  github: https://github.com/jjscarafia
+  email: jjs@adhoc.inc
+
+contributors:
+  - name: Juan José Scarafía
+    github: https://github.com/jjscarafia
+    emails:
+      - jjs@adhoc.inc
+      - jjs@adhoc.com.ar
+  - name: Pablo Montenegro
+    github: https://github.com/pablohmontenegro
+    emails:
+      - pam@adhoc.inc
+      - pam@adhoc.com.ar
+  - name: Julia Elizondo
+    github: https://github.com/jue-adhoc
+    emails:
+      - jue@adhoc.inc
+      - jue@adhoc.com.ar
+  - name: Victoria Halac
+    github: https://github.com/hav-adhoc
+    emails:
+      - hav@adhoc.inc
+      - hav@adhoc.com.ar
+  - name: Martín Quinteros
+    github: https://github.com/maq-adhoc
+    emails:
+      - maq@adhoc.inc
+      - maq@adhoc.com.ar
+  - name: Katherine Zaoral
+    github: https://github.com/zaoral
+    emails:
+      - kz@adhoc.inc
+      - kz@adhoc.com.ar
+
+signed: 2026-06-03
