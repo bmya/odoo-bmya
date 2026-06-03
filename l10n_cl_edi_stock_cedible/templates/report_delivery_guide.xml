@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <template id="delivery_guide_document_cedible_legend" inherit_id="l10n_cl_edi_stock.delivery_guide_document">
-        <xpath expr="//div[@class='col-7 text-justify']/.." position="after">
+        <xpath expr="//div[hasclass('col-7') and hasclass('text-justify')]/.." position="after">
             <div class="row" t-if="print_with_cedible and o.partner_id.country_code == 'CL'">
                 <div name="footer_right_column" class="col-4 offset-8">
                     <div class="border border-1 border-dark w-100">
