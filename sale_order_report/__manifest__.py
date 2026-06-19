@@ -4,9 +4,9 @@
 {
     'name': 'Sale Order Report',
     'summary': """Este modulo modifica el formato de las ordenes de venta para adaptarse a los formatos chilenos (recuadro margen superior derecho).""",
-    'version': '19.0.1.0.0',
+    'version': '1.0.0',
     'license': 'LGPL-3',
-    'author': 'Blanco Martín & Asociados',
+    'author': 'Blanco Martín y Asociados SpA',
     'website': 'https://www.bmya.cl',
     'depends': [
         'sale',

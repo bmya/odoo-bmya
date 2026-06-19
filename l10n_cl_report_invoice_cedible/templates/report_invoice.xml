@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="report_invoice_transferable_table" inherit_id="l10n_cl.report_invoice_document">
         <xpath expr="//div[@name='transferable-table']" position="attributes">

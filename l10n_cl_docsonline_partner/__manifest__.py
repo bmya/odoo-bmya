@@ -1,10 +1,10 @@
 {
     "name": """Chile get customer data from www.documentosonline.cl""",
-    'version': '19.0.1.1.1',
+    'version': '1.1.1',
     'category': 'Localization/Chile',
     'sequence': 12,
-    'author':  'Blanco Martín & Asociados',
-    'website': 'http://blancomartin.cl',
+    'author': 'Blanco Martín y Asociados SpA',
+    'website': 'https://www.bmya.cl',
     'license': 'LGPL-3',
     'summary': 'Permite obtener datos tributarios de los clientes conectandose a www.documentosonline.cl. Requiere obtener una API de este sitio. Hay opción de uso gratuito.',
     'depends': [

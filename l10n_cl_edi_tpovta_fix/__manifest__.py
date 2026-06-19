@@ -1,11 +1,11 @@
 {
     'name': 'Chile - EDI TpoTranVenta Fix',
-    'version': '19.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Localization/Chile',
     'license': 'LGPL-3',
     'icon': '/account/static/description/l10n.png',
     'sequence': 12,
-    'author': 'Blanco Martín y Asociados',
+    'author': 'Blanco Martín y Asociados SpA',
     'summary': 'Agrega el campo TpoTranVenta al DTE según el tipo de actividad de venta.',
     'description': """
     Agrega el tag <TpoTranVenta> al XML del DTE para documentos que no son boletas ni exportaciones.
@@ -14,7 +14,7 @@
     - 2: Ventas de activo fijo
     - 3: Otras ventas
     """,
-    'website': 'http://www.bmya.cl',
+    'website': 'https://www.bmya.cl',
     'depends': [
         'l10n_cl_edi',
     ],
