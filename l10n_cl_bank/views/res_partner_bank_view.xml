@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_res_partner_bank_bmya_form">
+        <field name='name'>view.res.partner.bank.bmya.form</field>
+        <field name='model'>res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name='type'>form</field>
+        <field name='arch' type='xml'>
+            <xpath expr="//sheet/group/group/field[@name='currency_id']" position="after">
+                <field name="l10n_cl_account_type"/>
+                <field name="bmya_preferred_payment_journal_id" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
