@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.l10n.cl.edi.fix.validation</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="l10n_cl.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='l10n_cl_section']" position="after">
+                <block title="Electronic Invoicing Extra Validations" id="l10n_cl_edi_fix_validation_section"
+                       invisible="country_code != 'CL'">
+                    <setting id="l10n_cl_edi_fix_validation_self_invoice_setting"
+                             help="Blocks documents where the issuer RUT matches the receiver RUT">
+                        <field name="l10n_cl_block_self_invoice"/>
+                    </setting>
+                    <setting id="l10n_cl_edi_fix_validation_period_setting"
+                             help="Blocks documents dated in a tax period already closed at the SII">
+                        <div class="content-group">
+                            <div class="row">
+                                <field name="l10n_cl_block_period_closed" style="width: 10% !important;"/>
+                                <label for="l10n_cl_block_period_closed" class="col-lg-10 o_light_label"/>
+                            </div>
+                            <div class="row" invisible="not l10n_cl_block_period_closed">
+                                <label string="Closing day" for="l10n_cl_period_closing_day"
+                                       class="col-lg-4 o_light_label"/>
+                                <field name="l10n_cl_period_closing_day"/>
+                            </div>
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>
