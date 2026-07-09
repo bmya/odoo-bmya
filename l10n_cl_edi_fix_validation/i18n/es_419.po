@@ -55,3 +55,81 @@ msgid ""
 "The person"
 msgstr ""
 "El contacto"
+
+#. module: l10n_cl_edi_fix_validation
+#. odoo-python
+#: code:l10n_cl_edi_fix_validation/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot issue an electronic document to yourself. The issuer RUT "
+"%(vat)s is the same as the receiver RUT."
+msgstr ""
+"No puede emitir un documento electrónico a sí mismo. El RUT emisor "
+"%(vat)s es el mismo que el RUT receptor."
+
+#. module: l10n_cl_edi_fix_validation
+#. odoo-python
+#: code:l10n_cl_edi_fix_validation/models/account_move.py:0
+#, python-format
+msgid ""
+"The tax period for %(date)s is already closed at the SII (closing day: "
+"%(day)s of the following month). Please use the current period or adjust "
+"the invoice date."
+msgstr ""
+"El período tributario de %(date)s ya está cerrado en el SII (día de "
+"cierre: %(day)s del mes siguiente). Por favor use el período actual o "
+"ajuste la fecha del documento."
+
+#. module: l10n_cl_edi_fix_validation
+#: model:ir.model.fields,field_description:l10n_cl_edi_fix_validation.field_res_config_settings__l10n_cl_block_self_invoice
+msgid "Block self-invoicing"
+msgstr "Bloquear auto-facturación"
+
+#. module: l10n_cl_edi_fix_validation
+#: model:ir.model.fields,help:l10n_cl_edi_fix_validation.field_res_config_settings__l10n_cl_block_self_invoice
+msgid "Prevent issuing an electronic document where the issuer and receiver have the same RUT."
+msgstr "Impide emitir un documento electrónico cuando el emisor y el receptor tienen el mismo RUT."
+
+#. module: l10n_cl_edi_fix_validation
+#: model:ir.model.fields,field_description:l10n_cl_edi_fix_validation.field_res_config_settings__l10n_cl_block_period_closed
+msgid "Block documents from a closed SII period"
+msgstr "Bloquear documentos de un período cerrado en el SII"
+
+#. module: l10n_cl_edi_fix_validation
+#: model:ir.model.fields,help:l10n_cl_edi_fix_validation.field_res_config_settings__l10n_cl_block_period_closed
+msgid ""
+"Prevent issuing electronic documents dated in a month already closed at "
+"the SII, even if the accounting period itself is not locked."
+msgstr ""
+"Impide emitir documentos electrónicos con fecha en un mes ya cerrado en "
+"el SII, aunque el período contable no esté bloqueado."
+
+#. module: l10n_cl_edi_fix_validation
+#: model:ir.model.fields,field_description:l10n_cl_edi_fix_validation.field_res_config_settings__l10n_cl_period_closing_day
+msgid "SII period closing day"
+msgstr "Día de cierre de período SII"
+
+#. module: l10n_cl_edi_fix_validation
+#: model:ir.model.fields,help:l10n_cl_edi_fix_validation.field_res_config_settings__l10n_cl_period_closing_day
+msgid "Day of the month on which the SII closes the previous month's tax period."
+msgstr "Día del mes en que el SII cierra el período tributario del mes anterior."
+
+#. module: l10n_cl_edi_fix_validation
+#: model_terms:ir.ui.view,arch_db:l10n_cl_edi_fix_validation.res_config_settings_view_form
+msgid "Electronic Invoicing Extra Validations"
+msgstr "Validaciones adicionales de facturación electrónica"
+
+#. module: l10n_cl_edi_fix_validation
+#: model_terms:ir.ui.view,arch_db:l10n_cl_edi_fix_validation.res_config_settings_view_form
+msgid "Blocks documents where the issuer RUT matches the receiver RUT"
+msgstr "Bloquea documentos donde el RUT emisor coincide con el RUT receptor"
+
+#. module: l10n_cl_edi_fix_validation
+#: model_terms:ir.ui.view,arch_db:l10n_cl_edi_fix_validation.res_config_settings_view_form
+msgid "Blocks documents dated in a tax period already closed at the SII"
+msgstr "Bloquea documentos con fecha en un período tributario ya cerrado en el SII"
+
+#. module: l10n_cl_edi_fix_validation
+#: model_terms:ir.ui.view,arch_db:l10n_cl_edi_fix_validation.res_config_settings_view_form
+msgid "Closing day"
+msgstr "Día de cierre"
