@@ -1,9 +1,10 @@
 import logging
 
-from odoo import fields, models, api, _
+from markupsafe import Markup
+
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.misc import formatLang
-from markupsafe import Markup
 
 _logger = logging.getLogger(__name__)
 
@@ -72,11 +73,16 @@ class AccountChangeCurrency(models.TransientModel):
         old_amount_untaxed = move.amount_untaxed
         if self.currency_id == move.currency_id:
             return {'type': 'ir.actions.act_window_close'}
-        for line in move.invoice_line_ids:
-            line.price_unit = line.price_unit * self.currency_rate
-            line.currency_id = self.currency_id
+        old_currency = move.currency_id
+        move.write({
+            'currency_id': self.currency_id.id,
+            'invoice_line_ids': [
+                Command.update(line.id, {'price_unit': line.price_unit * self.currency_rate})
+                for line in move.invoice_line_ids
+            ],
+        })
         if self.currency_rate >= 1:
-            previous_currency = move.currency_id
+            previous_currency = old_currency
             rate = self.currency_rate
         else:
             previous_currency = self.currency_id
@@ -90,9 +96,8 @@ class AccountChangeCurrency(models.TransientModel):
         body = '{message1}. {message2}: {message3}'.format(
             message1=message.split(". ")[1],
             message2=_('Original or Previous Untaxed Amount'),
-            message3=formatLang(self.env, old_amount_untaxed, currency_obj=move.currency_id)
+            message3=formatLang(self.env, old_amount_untaxed, currency_obj=old_currency)
         )
-        move.currency_id = self.currency_id
         body += Markup('<br />') + _('Calculated Untaxed Amount: {}').format(
             formatLang(self.env, move.amount_untaxed, currency_obj=move.currency_id))
         move.message_post(body=body)
