@@ -1,9 +1,10 @@
 import logging
 
-from odoo import fields, models, api, _
+from markupsafe import Markup
+
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.misc import formatLang
-from markupsafe import Markup
 
 _logger = logging.getLogger(__name__)
 
@@ -74,10 +75,21 @@ class AccountChangeCurrency(models.TransientModel):
 
         if self.currency_id == move.currency_id:
             return {'type': 'ir.actions.act_window_close'}
+<<<<<<< HEAD
 
         # Store previous currency info for message
+=======
+        old_currency = move.currency_id
+        move.write({
+            'currency_id': self.currency_id.id,
+            'invoice_line_ids': [
+                Command.update(line.id, {'price_unit': line.price_unit * self.currency_rate})
+                for line in move.invoice_line_ids
+            ],
+        })
+>>>>>>> 348d16e ([FIX] account_move_change_currency: evita asiento no balanceado al ca… (#115))
         if self.currency_rate >= 1:
-            previous_currency = move.currency_id
+            previous_currency = old_currency
             rate = self.currency_rate
         else:
             previous_currency = self.currency_id
