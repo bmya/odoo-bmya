@@ -1,6 +1,6 @@
 {
     'name': 'Chile - EDI TpoTranVenta Fix',
-    'version': '19.0.1.0.0',
+    'version': '20.0.1.0.0',
     'category': 'Localization/Chile',
     'license': 'LGPL-3',
     'icon': '/account/static/description/l10n.png',
@@ -21,7 +21,7 @@
     'data': [
         'template/dte_template.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }

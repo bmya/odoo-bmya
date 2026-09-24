@@ -1,6 +1,6 @@
 {
     "name": """Chile - Stock Special Fields """,
-    'version': '19.0.1.0.0',
+    'version': '20.0.1.0.0',
     'category': 'Localization/Chile',
     'license': "LGPL-3",
     'sequence': 12,
@@ -19,7 +19,7 @@ Agrega Campos Especiales en el modelo stock
     'data': [
         'views/stock_picking.xml'
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }

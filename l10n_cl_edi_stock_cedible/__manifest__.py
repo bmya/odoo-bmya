@@ -1,7 +1,7 @@
 {
     'name': 'Chile - E-Invoicing Delivery Guide Cedible',
     'icon': '/l10n_cl/static/description/icon.png',
-    'version': '19.0.1.0.0',
+    'version': '20.0.1.0.0',
     'category': 'Accounting/Localizations/Reporting',
     'author': 'Blanco Martín y Asociados SpA',
     'summary': 'Módulo que permite la impresión de la guía de despacho cedible como un documento separado.',
@@ -14,7 +14,7 @@
     'data': [
         'templates/report_delivery_guide.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
     'website': 'https://www.bmya.cl',
     'license': "LGPL-3",

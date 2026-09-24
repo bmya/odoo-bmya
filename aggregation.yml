@@ -1,16 +1,16 @@
 - url: https://github.com/bmya/odoo
-  branch: "19.0"
+  branch: "20.0"
   merges:
-    - "origin 19.0"
+    - "origin 20.0"
 - url: https://github.com/bmya/enterprise
-  branch: "19.0"
+  branch: "20.0"
   merges:
-    - "origin 19.0"
+    - "origin 20.0"
 - url: https://github.com/bmya/design-themes
-  branch: "19.0"
+  branch: "20.0"
   merges:
-    - "origin 19.0"
+    - "origin 20.0"
 - url: https://github.com/bmya/odoo-transbank
-  branch: "19.0"
+  branch: "20.0"
   merges:
-    - "origin 19.0"
+    - "origin 20.0"
