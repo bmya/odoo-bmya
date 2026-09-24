@@ -1,7 +1,7 @@
 {
     'name': 'Chile - Delivery Guide Tax Rounding',
     'icon': '/l10n_cl/static/description/icon.png',
-    'version': '19.0.1.0.0',
+    'version': '20.0.1.0.0',
     'category': 'Accounting/Localizations/EDI',
     'author': 'Blanco Martín y Asociados SpA, ADHOC SA',
     'website': 'https://www.bmya.cl',
@@ -19,7 +19,7 @@ cuando la compañía está configurada para redondear globalmente.
     'depends': [
         'l10n_cl_edi_stock',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
     'license': 'OPL-1',
 }

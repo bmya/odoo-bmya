@@ -1,6 +1,6 @@
 {
     "name": """Chile get customer data from www.documentosonline.cl""",
-    'version': '19.0.1.1.1',
+    'version': '20.0.1.0.0',
     'category': 'Localization/Chile',
     'sequence': 12,
     'author':  'Blanco Martín & Asociados',
@@ -20,7 +20,7 @@
         'views/res_config_settings.xml',
         'wizard/data_docsonline_view.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }
