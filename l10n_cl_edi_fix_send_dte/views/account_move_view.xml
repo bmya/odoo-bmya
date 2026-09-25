@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="invoice_status_form_cl_send_dte" model="ir.ui.view">
+        <field name="name">account.move.invoice.status.form.send.dte</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="l10n_cl_edi.invoice_status_form_cl"/>
+        <field name="arch" type="xml">
+            <button name="l10n_cl_verify_dte_status" position="before">
+                <button name="l10n_cl_send_dte_to_sii" type="object" invisible="l10n_cl_dte_status != 'not_sent'" string="⇒ Send Now to SII" class="oe_inline oe_link" groups="base.group_user"/>
+            </button>
+        </field>
+    </record>
+
+</odoo>
