@@ -11,4 +11,14 @@
         <field name="active" eval="True"/>
     </record>
 
+    <record id="ir_cron_send_dte_to_partner" model="ir.cron">
+        <field name="name">Chile EDI: Send accepted delivery guides to the partner</field>
+        <field name="interval_number" eval="1"/>
+        <field name="interval_type">hours</field>
+        <field name="model_id" ref="stock.model_stock_picking"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_l10n_cl_send_dte_to_partner()</field>
+        <field name="active" eval="True"/>
+    </record>
+
 </odoo>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 20.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 19:03+0000\n"
-"PO-Revision-Date: 2026-09-25 19:03+0000\n"
+"POT-Creation-Date: 2026-09-27 13:56+0000\n"
+"PO-Revision-Date: 2026-09-27 13:56+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_419\n"
@@ -28,6 +28,9 @@ msgid ""
 "\"not sent\" (facturas, notas de crédito y débito, facturas de compra y, con\n"
 "l10n_cl_edi_factoring, las cesiones), y la factura recupera el botón de envío manual.\n"
 "\n"
+"Además envía al email DTE del cliente los DTE aceptados con reparos, que el cron de\n"
+"l10n_cl_edi no manda: solo manda los aceptados.\n"
+"\n"
 "Las guías de despacho las cubre l10n_cl_edi_stock_fix_send_dte, que se instala solo\n"
 "cuando también está l10n_cl_edi_stock.\n"
 msgstr ""
@@ -36,6 +39,11 @@ msgstr ""
 #: model:ir.module.module,shortdesc:base.module_l10n_cl_edi_fix_send_dte
 msgid "Chile - EDI Send DTE to SII"
 msgstr "Chile - Envío de DTE al SII"
+
+#. module: l10n_cl_edi_fix_send_dte
+#: model:ir.actions.server,name:l10n_cl_edi_fix_send_dte.ir_cron_send_dte_to_partner_ir_actions_server
+msgid "Chile EDI: Send DTEs accepted with objections to the partner"
+msgstr "Chile EDI: Enviar al cliente los DTE aceptados con reparos"
 
 #. module: l10n_cl_edi_fix_send_dte
 #: model:ir.actions.server,name:l10n_cl_edi_fix_send_dte.ir_cron_send_dte_to_sii_ir_actions_server
