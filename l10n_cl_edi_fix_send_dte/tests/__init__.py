@@ -1,1 +1,1 @@
-from . import test_cron_send_dte_to_sii
+from . import test_cron_send_dte_to_partner, test_cron_send_dte_to_sii

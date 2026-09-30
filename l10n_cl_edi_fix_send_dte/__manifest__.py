@@ -1,7 +1,7 @@
 {
     'name': 'Chile - EDI Send DTE to SII',
     'icon': '/l10n_cl/static/description/icon.png',
-    'version': '20.0.1.0.0',
+    'version': '20.0.1.1.0',
     'category': 'Accounting/Localizations/EDI',
     'author': 'Blanco Martín y Asociados SpA',
     'website': 'https://www.bmya.cl',
@@ -14,6 +14,9 @@ contabilizada y el SII no la recibe.
 Este módulo vuelve a enviar esos DTE: un cron horario recorre los asientos en estado
 "not sent" (facturas, notas de crédito y débito, facturas de compra y, con
 l10n_cl_edi_factoring, las cesiones), y la factura recupera el botón de envío manual.
+
+Además envía al email DTE del cliente los DTE aceptados con reparos, que el cron de
+l10n_cl_edi no manda: solo manda los aceptados.
 
 Las guías de despacho las cubre l10n_cl_edi_stock_fix_send_dte, que se instala solo
 cuando también está l10n_cl_edi_stock.

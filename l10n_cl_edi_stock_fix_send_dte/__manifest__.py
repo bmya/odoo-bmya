@@ -1,7 +1,7 @@
 {
     'name': 'Chile - EDI Send Delivery Guides to SII',
     'icon': '/l10n_cl/static/description/icon.png',
-    'version': '20.0.1.0.0',
+    'version': '20.0.1.1.0',
     'category': 'Accounting/Localizations/EDI',
     'author': 'Blanco Martín y Asociados SpA',
     'website': 'https://www.bmya.cl',
@@ -12,6 +12,9 @@ que alguien usa el botón del formulario.
 
 Este módulo suma a l10n_cl_edi_fix_send_dte un cron horario que envía esas guías. Se
 instala solo cuando están los dos, l10n_cl_edi_fix_send_dte y l10n_cl_edi_stock.
+
+Otro cron envía al email DTE del cliente las guías que el SII aceptó: el cron de
+l10n_cl_edi_stock verifica su estado pero no las manda.
 """,
     'license': 'LGPL-3',
     'depends': [
