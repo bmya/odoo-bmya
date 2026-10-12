@@ -6,14 +6,14 @@
     'name': 'Account Move Change Currency',
     'data': [
         'security/security.xml',
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'wizard/account_change_currency_view.xml',
         'views/move_view.xml',
     ],
-    'version': '20.0.1.1.0',
+    'version': '20.0.1.1.1',
     'website': 'https://www.bmya.cl',
     'license': 'LGPL-3',
-    'installable': False,
+    'installable': True,
     'application': False,
 }
 
