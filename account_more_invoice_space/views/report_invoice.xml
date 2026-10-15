@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- In 19.0 the invoice body wrapper no longer has mt-5 and the external
+         layouts no longer have pt-5, so only the font size is kept. -->
+    <template id="report_invoice_document_font_size_80_percent" inherit_id="account.report_invoice_document">
+        <div class="clearfix invoice_main" position="attributes">
+            <attribute name="style">font-size: 0.8em;</attribute>
+        </div>
+    </template>
+</odoo>
