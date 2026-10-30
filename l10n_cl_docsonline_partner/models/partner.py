@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import json
 import logging
-import requests
 import time
 import urllib
+
+import requests
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-
 
 _logger = logging.getLogger(__name__)
 
@@ -544,9 +545,28 @@ class ResPartner(models.Model):
             dict: Dictionary with API URL and token.
         """
         conf = self.env['ir.config_parameter'].sudo()
+
+        # Check if bmya_support_service is installed
+        if self.env['ir.module.module'].search([
+            ('name', '=', 'bmya_support_service'),
+            ('state', '=', 'installed')
+        ], limit=1):
+            # Use token from bmya_support_service (company-level for multi-company support).
+            # Con ese módulo, Ajustes oculta docsonline.token y solo deja editar el
+            # token de la compañía: leer el parámetro usaba un valor que nadie ve ni
+            # puede corregir, y la búsqueda respondía "Invalid token".
+            company = self.env.company
+            url = conf.get_param('docsonline.url') or conf.get_param('bmya_support_service.url') or 'https://www.documentosonline.cl'
+            token = company.docs_online_token_auth or conf.get_param('bmya_support_service.token') or conf.get_param('docsonline.token')
+        else:
+            # Fallback to config parameters (l10n_cl_docsonline_partner standalone)
+            url = conf.get_param('docsonline.url') or 'https://www.documentosonline.cl'
+            token = conf.get_param('docsonline.token')
+        if not url or not token:
+            raise UserError(_('DocsOnline: URL or token not configured'))
         return {
-            'url': conf.get_param('docsonline.url'),
-            'token': conf.get_param('docsonline.token'),
+            'url': url,
+            'token': token,
         }
 
     def call_wizard(self):

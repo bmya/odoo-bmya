@@ -1,43 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <data>
-        <record id="view_update_button_form" model="ir.ui.view">
-            <field name="name">view.update.button.form</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//form/sheet/div/field[@name='company_type']" position="after">
+    <record id="view_update_button_form" model="ir.ui.view">
+        <field name="name">view.update.button.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div/field[@name='company_type']" position="after">
 
-                    <button name="press_to_update" type="object" class="btn-link"
-                            help="Actualizar desde DocumentosOnline"
-                            invisible="not vat or country_code != 'CL' or company_country_code != 'CL'">
-                        <i title="Actualizar" role="img" aria-label="Actualizar" class="fa fa-address-card"/>
-                    </button>
+                <button name="press_to_update" type="object" class="btn-link"
+                        help="Actualizar desde DocumentosOnline"
+                        invisible="not vat or country_code != 'CL' or company_country_code != 'CL'">
+                    <i title="Actualizar" role="img" aria-label="Actualizar" class="fa fa-address-card"/>
+                </button>
 
-                    <button name="call_wizard" type="object" class="btn-link"
-                            help="Buscar en DocumentosOnline"
-                            invisible="vat or country_code != 'CL' or company_country_code != 'CL'">
-                        <i title="Buscar" role="img" aria-label="Buscar" class="fa fa-address-card-o"/>
-                    </button>
+                <button name="call_wizard" type="object" class="btn-link"
+                        help="Buscar en DocumentosOnline"
+                        invisible="vat or country_code != 'CL' or company_country_code != 'CL'">
+                    <i title="Buscar" role="img" aria-label="Buscar" class="fa fa-address-card-o"/>
+                </button>
 
-                </xpath>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_search_vat" model="ir.ui.view">
+        <field name="name">view_search_vat</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+
+            <field name="name" position="after">
+                <field string="RUT" name="vat"/>
             </field>
-        </record>
 
-        <record id="view_search_vat" model="ir.ui.view">
-            <field name="name">view_search_vat</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_res_partner_filter"/>
-            <field name="arch" type="xml">
+        </field>
+    </record>
 
-                <field name="name" position="after">
-                    <field string="RUT" name="vat"/>
-                </field>
-
-            </field>
-        </record>
-
-    </data>
 </odoo>
 
 
