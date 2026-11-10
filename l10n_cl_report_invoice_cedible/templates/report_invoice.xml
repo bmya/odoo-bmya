@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="report_invoice_transferable_table" inherit_id="l10n_cl.report_invoice_document">
         <xpath expr="//div[@name='transferable-table']" position="attributes">
@@ -58,7 +59,6 @@
         <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">l10n_cl_report_invoice_cedible.report_invoice_cedible</field>
-        <field name="report_file">l10n_cl_report_invoice_cedible.report_invoice_cedible</field>
         <field name="print_report_name">'Cedible - %s' % (object.name)</field>
         <field name="binding_model_id" ref="account.model_account_move"/>
         <field name="binding_type">report</field>
