@@ -1,6 +1,5 @@
 from odoo import fields, models
 from odoo.exceptions import UserError
-from odoo.tools import str2bool
 from odoo.tools.translate import _
 
 
@@ -15,7 +14,7 @@ class AccountMove(models.Model):
                     _(
                         '%(company_type)s %(partner)s has not a comune or city defined. This is mandatory for '
                         'electronic invoicing. Please edit the contact and set one.',
-                        company_type=_('The company') if self.partner_id.company_type == 'company' else _('The person'),
+                        company_type=_('The company') if self.partner_id.is_company else _('The person'),
                         partner=self.partner_id.name,
                     )
                 )
@@ -25,7 +24,7 @@ class AccountMove(models.Model):
                 'invoicing. Please go to your company data, and set the correct one.'))
 
         icp = self.env['ir.config_parameter'].sudo()
-        if str2bool(icp.get_param('l10n_cl_edi_fix_validation.block_self_invoice', 'True')):
+        if icp.get_bool('l10n_cl_edi_fix_validation.block_self_invoice', True):
             company_vat = self.company_id.vat
             partner_vat = self.commercial_partner_id.vat
             if company_vat and partner_vat and (
@@ -34,8 +33,8 @@ class AccountMove(models.Model):
                     'You cannot issue an electronic document to yourself. The issuer RUT '
                     '%(vat)s is the same as the receiver RUT.', vat=company_vat))
 
-        if str2bool(icp.get_param('l10n_cl_edi_fix_validation.block_period_closed', 'True')):
-            closing_day = int(icp.get_param('l10n_cl_edi_fix_validation.period_closing_day', '20'))
+        if icp.get_bool('l10n_cl_edi_fix_validation.block_period_closed', True):
+            closing_day = icp.get_int('l10n_cl_edi_fix_validation.period_closing_day', 20)
             today = fields.Date.context_today(self)
             months_diff = (today.year - self.invoice_date.year) * 12 + (today.month - self.invoice_date.month)
             if months_diff >= 2 or (months_diff == 1 and today.day >= closing_day):
