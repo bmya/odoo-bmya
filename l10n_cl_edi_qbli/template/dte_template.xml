@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <data>
-        <template id="dte_subtemplate" inherit_id="l10n_cl_edi.dte_subtemplate">
-            <CdgItem t-if="line.product_id.default_code" position="replace">
-                <CdgItem t-if="line.qbli">
-                    <TpoCodigo>QBLI</TpoCodigo>
-                    <VlrCodigo t-esc="line.qbli"/>
-                </CdgItem>
-                <CdgItem t-elif="line.product_id.default_code">
-                    <TpoCodigo>INT1</TpoCodigo>
-                    <VlrCodigo t-esc="line.product_id.default_code"/>
-                </CdgItem>
+    <template id="dte_subtemplate" inherit_id="l10n_cl_edi.dte_subtemplate">
+        <CdgItem t-if="line.product_id.default_code" position="replace">
+            <CdgItem t-if="line.qbli">
+                <TpoCodigo>QBLI</TpoCodigo>
+                <VlrCodigo t-out="line.qbli"/>
             </CdgItem>
-        </template>
-    </data>
+            <CdgItem t-elif="line.product_id.default_code">
+                <TpoCodigo>INT1</TpoCodigo>
+                <VlrCodigo t-out="line.product_id.default_code"/>
+            </CdgItem>
+        </CdgItem>
+    </template>
 </odoo>
