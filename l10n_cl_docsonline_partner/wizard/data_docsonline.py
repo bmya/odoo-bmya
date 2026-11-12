@@ -1,5 +1,6 @@
 import logging
-from odoo import api, fields, models, _
+
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -50,21 +51,20 @@ class PartnerDocumentsOnline(models.TransientModel):
             config_params = self.env['ir.config_parameter'].sudo()
             update_vals = {
                 'vat': partner_odoo_data['vat'],
-                'l10n_latam_identification_type_id': partner_odoo_data['l10n_latam_identification_type_id'],
                 'l10n_cl_sii_taxpayer_type': partner_odoo_data['l10n_cl_sii_taxpayer_type'],
             }
-            if config_params.get_param('docsonline.replace_name', False):
+            if config_params.get_bool('docsonline.replace_name'):
                 update_vals['name'] = partner_odoo_data['name']
-            if config_params.get_param('docsonline.replace_street', False):
+            if config_params.get_bool('docsonline.replace_street'):
                 update_vals.update({
                     'street': partner_odoo_data['street'],
                     'street2': partner_odoo_data['street2'],
                     'city': partner_odoo_data['city'],
                     'city_id': partner_odoo_data['city_id'],
                 })
-            if config_params.get_param('docsonline.replace_email', False):
+            if config_params.get_bool('docsonline.replace_email'):
                 update_vals['l10n_cl_dte_email'] = partner_odoo_data['l10n_cl_dte_email']
-            if config_params.get_param('docsonline.replace_activity', False):
+            if config_params.get_bool('docsonline.replace_activity'):
                 update_vals['l10n_cl_activity_description'] = partner_odoo_data['l10n_cl_activity_description']
             self.partner_id.update(update_vals)
         else:
@@ -114,6 +114,7 @@ class PartnerDocumentsOnline(models.TransientModel):
         nr = self.docs_online_data_ids[0]
         partner_values = self._fetch_docsonline_partner_data(nr.vat)
         self._update_partner_from_data(partner_values, protect_fields=True)
+
 
 class PartnerDocumentsOnLineData(models.TransientModel):
     _name = 'res.partner.docs.online.data'
