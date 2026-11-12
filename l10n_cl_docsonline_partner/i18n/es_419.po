@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-29 19:41+0000\n"
-"PO-Revision-Date: 2025-11-29 18:02-0300\n"
+"POT-Creation-Date: 2026-11-12 13:11+0000\n"
+"PO-Revision-Date: 2026-11-12 13:11+0000\n"
 "Last-Translator: Daniel Blanco <daniel@blancomartin.cl>\n"
 "Language-Team: \n"
 "Language: es_419\n"
@@ -18,22 +18,69 @@ msgstr ""
 "X-Generator: Poedit 3.8\n"
 
 #. module: l10n_cl_docsonline_partner
-#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.view_update_button_form
+#: model:ir.module.module,description:base.module_l10n_cl_docsonline_partner
 msgid ""
-"<i title=\"Actualizar\" role=\"img\" aria-label=\"Actualizar\" class=\"fa fa-"
-"address-card\"/>"
+".. image:: https://img.shields.io/badge/licence-LGPL--3-blue.png\n"
+"   :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html\n"
+"   :alt: License: LGPL-3\n"
+"\n"
+"\n"
+"==========================\n"
+"l10n_cl_docsonline_partner\n"
+"==========================\n"
+"\n"
+"Módulo de Integración con Documentos Online\n"
+"-------------------------------------------\n"
+"\n"
+"Este módulo de integración permite a los usuarios acceder a información de contacto desde el sitio web Documentos Online (https://www.documentosonline.cl/). \n"
+"La integración proporciona una forma de importar y utilizar datos de contactos directamente desde la plataforma Documentos Online en su aplicación.\n"
+"\n"
+"Documentos Online Integration Module\n"
+"------------------------------------\n"
+"\n"
+"This integration module allows users to access contact information from the Documentos Online website (https://www.documentosonline.cl/). \n"
+"The integration provides a way to import and utilize contact data directly from the Documentos Online platform in your application.\n"
+"\n"
+"=======\n"
+"Credits\n"
+"=======\n"
+"\n"
+"Authors:\n"
+"Blanco Martín & Asociados\n"
+"\n"
+"\n"
+"Contributors\n"
+"------------\n"
+"\n"
+"* BMyA Development Task Force: <dev@blancomartin.cl>\n"
+"* Daniel Blanco <daniel@blancomartin.cl>\n"
+"\n"
+"Maintainer\n"
+"----------\n"
+"\n"
+".. image:: https://blancomartin.cl/logo.png\n"
+"   :alt: Blanco Martin y Asociados' logo\n"
+"   :target: https://blancomartin.cl\n"
+"\n"
+"\n"
+"This module is maintained by Blanco Martín & Asociados.\n"
+"\n"
+"To contribute to this module, please visit https://blancomartin.cl.\n"
 msgstr ""
-"<i title=\"Actualizar\" role=\"img\" aria-label=\"Actualizar\" class=\"fa fa-"
-"address-card\"/>"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.view_update_button_form
 msgid ""
-"<i title=\"Buscar\" role=\"img\" aria-label=\"Buscar\" class=\"fa fa-address-"
-"card-o\"/>"
+"<i title=\"Actualizar\" role=\"img\" aria-label=\"Actualizar\" class=\"oi "
+"oi-filled\" data-icon=\"contact_mail\"/>"
 msgstr ""
-"<i title=\"Buscar\" role=\"img\" aria-label=\"Buscar\" class=\"fa fa-address-"
-"card-o\"/>"
+
+#. module: l10n_cl_docsonline_partner
+#: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.view_update_button_form
+msgid ""
+"<i title=\"Buscar\" role=\"img\" aria-label=\"Buscar\" class=\"oi\" data-"
+"icon=\"contact_mail\"/>"
+msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__l10n_cl_activity_description
@@ -87,6 +134,11 @@ msgstr "Buscar en DocumentosOnline"
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
 msgid "Cancel"
 msgstr "Anular"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.module.module,shortdesc:base.module_l10n_cl_docsonline_partner
+msgid "Chile get customer data from www.documentosonline.cl"
+msgstr "Chile: obtener datos del cliente desde www.documentosonline.cl"
 
 #. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__city
@@ -151,14 +203,62 @@ msgid "DocsOnline Wizard Data"
 msgstr "Lista del Asistente de DocumentosOnline"
 
 #. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid "DocsOnline: Invalid response format"
+msgstr "DocsOnline: formato de respuesta inválido"
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid "DocsOnline: URL or token not configured"
+msgstr "DocsOnline: URL o token sin configurar"
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_token
 msgid "DocumentosOnline Token"
 msgstr "Token de DocumentosOnline"
 
 #. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/res_config_settings.py:0
+msgid "DocumentosOnline Token cannot be empty or consist only of whitespace."
+msgstr "El token de DocumentosOnline no puede estar vacío ni contener solo espacios."
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_url
 msgid "DocumentosOnline URL"
 msgstr "URL de DocumentosOnline"
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/res_config_settings.py:0
+msgid "DocumentosOnline URL cannot be empty after the protocol."
+msgstr "La URL de DocumentosOnline no puede quedar vacía después del protocolo."
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/res_config_settings.py:0
+msgid "DocumentosOnline URL must start with 'http://' or 'https://'."
+msgstr "La URL de DocumentosOnline debe empezar con 'http://' o 'https://'."
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid "DocumentosOnline: %s"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid "El contacto %(name)s no se actualizó: es un contacto de %(parent)s"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid "Falló la actualización de la empresa %(name)s: %(error)s"
+msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
@@ -222,6 +322,24 @@ msgid "Indicates if the BMyA Support Service module is installed."
 msgstr "Indica si el Token de Servicio de Soporte BMyA está instalado o no."
 
 #. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid "La Empresa %(name)s no se actualizó: no es de Chile"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid "La empresa %(name)s no se actualizó: es una sucursal de of %(parent)s"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid "La empresa %(name)s se actualizó con éxito"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online__write_uid
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_partner_docs_online_data__write_uid
 msgid "Last Updated by"
@@ -250,6 +368,14 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid ""
+"No se encontraron datos para el RUT %s. Intente buscar en "
+"www.documentosonline.cl"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.tree_docsonline_partners_view
 msgid "Overwrite all partner data with selected DocsOnline data."
 msgstr "Sobreescribe todos los datos con los datos de DocumentosOnline."
@@ -263,6 +389,20 @@ msgstr "Empresa"
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "Partners Token"
 msgstr "API token de partners"
+
+#. module: l10n_cl_docsonline_partner
+#: model:ir.module.module,summary:base.module_l10n_cl_docsonline_partner
+msgid ""
+"Permite obtener datos tributarios de los clientes conectandose a "
+"www.documentosonline.cl. Requiere obtener una API de este sitio. Hay opción "
+"de uso gratuito."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/wizard/data_docsonline.py:0
+msgid "Por favor, seleccione un socio de la lista antes de confirmar."
+msgstr ""
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
@@ -328,6 +468,42 @@ msgstr "Reemplaza Nombre del Cliente o Proveedor"
 #: model:ir.model.fields,field_description:l10n_cl_docsonline_partner.field_res_config_settings__docs_online_partner_restrict_token_access
 msgid "Restrict Token Access"
 msgstr "Restringe el acceso al token"
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/wizard/data_docsonline.py:0
+msgid "Se agregaron %s sucursales."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid "Se encontraron coincidencias. Seleccione una de la lista"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/wizard/data_docsonline.py:0
+msgid "Se están agregando %s sucursales. Por favor espere..."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/wizard/data_docsonline.py:0
+msgid "Se están buscando sucursales en DocumentosOnline. Por favor espere..."
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid "Se requiere el RUT o el Nombre para actualizar desde DocumentosOnline"
+msgstr ""
+
+#. module: l10n_cl_docsonline_partner
+#. odoo-python
+#: code:addons/l10n_cl_docsonline_partner/models/partner.py:0
+msgid "Select a partner from a list"
+msgstr "Seleccionar una empresa de una lista"
 
 #. module: l10n_cl_docsonline_partner
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
@@ -398,15 +574,3 @@ msgstr "¿Que hacer si un contacto existe?"
 #: model_terms:ir.ui.view,arch_db:l10n_cl_docsonline_partner.res_config_settings
 msgid "https://www.documentosonline.cl"
 msgstr "https://www.documentosonline.cl"
-
-#~ msgid "Partner %(name)s not updated: is not from Chile"
-#~ msgstr "Empresa %(name)s no actualizada: no es de Chile"
-
-#~ msgid "Partner %(name)s not updated: is a contact of %(parent)s"
-#~ msgstr "Empresa %(name)s no actualizada: es un contacto de %(parent)s"
-
-#~ msgid "Partner %(name)s not updated: is a branch of %(parent)s"
-#~ msgstr "Empresa %(name)s no actualizada: es una sucursal de %(parent)s"
-
-#~ msgid "Partner %(name)s successfully updated"
-#~ msgstr "Empresa %(name)s actualizada con éxito"
